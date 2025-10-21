@@ -22,8 +22,9 @@ function [Vehicle, VehicleData] = sm_car_read_database(workbookFile, exclsheetNa
 %% Input handling
 
 % If no excluded sheet is specified, read all sheets
-if nargin == 1 || isempty(sheetName)
-    sheetName = 1;
+sheets = sheetnames(workbookFile);
+if nargin == 1 || ~isempty(exclsheetName)
+    sheets = erase(sheets,exclsheetName);
 end
 
 % If row start and end points are not specified, define defaults
@@ -32,12 +33,12 @@ if nargin <= 3
     endRow = 250;  % Ensure longer than entire table
 end
 %% Setup the Import Options
-max_width = 30;
+max_width = 26;
 opts = spreadsheetImportOptions("NumVariables", max_width);
 
 % Specify sheet and range
-opts.Sheet = sheetName;
-opts.DataRange = "A" + startRow(1) + ":" + string(xlscol(max_width)) + endRow(1);
+opts.Sheet = sheets;
+opts.DataRange = "A" + startRow(1) + ":" + "Z" + endRow(1);
 
 % Specify column names and types
 %opts.VariableNames = ["Subsystem", "Part", "Quantity", "Units", "Comments", "x", "y", "z", "VarName9", "VarName10", "VarName11", "VarName12", "VarName13", "VarName14", "VarName15", "VarName16", "VarName17", "VarName18", "VarName19", "VarName20", "VarName21", "VarName22", "VarName23", "VarName24", "VarName25", "VarName26", "VarName27", "VarName28"];
@@ -53,7 +54,7 @@ opts = setvaropts(opts, 1:max_width, "EmptyFieldRule", "auto");
 VehicleData = readtable(workbookFile, opts, "UseExcel", false);
 
 for idx = 1:length(startRow)
-    opts.DataRange = "A" + startRow(idx) + ":" + string(xlscol(max_width)) + endRow(idx);
+    opts.DataRange = "A" + startRow(idx) + ":" + "Z" + endRow(idx);
     tb = readtable(workbookFile, opts, "UseExcel", false);
     VehicleData = [VehicleData; tb]; %#ok<AGROW>
 end
@@ -62,3 +63,24 @@ end
 VehicleData = table2cell(VehicleData);
 numIdx = cellfun(@(x) ~isnan(str2double(x)), VehicleData);
 VehicleData(numIdx) = cellfun(@(x) {str2double(x)}, VehicleData(numIdx));
+
+
+%% testing ways to read tables easier as structs
+vehicle_data_file_list = dir('**/sm_car_ARTTU_*.xlsx');
+[~, idx]=sort({vehicle_data_file_list(1:end).name});
+for i=1: size(vehicle_data_file_list,1)
+data_file_name=sort({vehicle_data_file_list(idx(i)).name});
+data_file_categ=erase(erase(data_file_name,'sm_car_ARTTU_'),'.xlsx');
+Vehicle.(data_file_categ{1})=struct();
+temp=readtable(data_file_name,'Range','A1:E5');
+end
+
+test=readtable("ARTTU_Brakes.xlsx",'Range','A5:E100');
+test(all(ismissing(test), 2), :) = [];
+for i=1:size(test,1)
+if ~isempty(test.Var1{i})
+temp=test.Var1{i};
+else
+test.Var1{i}=temp;
+end
+end

@@ -63,3 +63,31 @@ end
 VehicleData = table2cell(VehicleData);
 numIdx = cellfun(@(x) ~isnan(str2double(x)), VehicleData);
 VehicleData(numIdx) = cellfun(@(x) {str2double(x)}, VehicleData(numIdx));
+
+
+%% Most likely only keep this but keep everything for now
+
+% Find vehicle data files
+
+vehicle_data_file_list = dir('**/sm_car_ARTTU_*.xlsx');
+
+% Go through files to get file names and category and initialize Vehicle
+% struct
+for i=1: size(vehicle_data_file_list,1)
+data_file_name(i)=sort({vehicle_data_file_list(i).name});
+data_file_categ(i)=erase(erase(data_file_name(i),'sm_car_ARTTU_'),'.xlsx');
+Vehicle.(data_file_categ{i})=struct();
+end
+
+%% Read files
+
+
+test=readtable("ARTTU_Brakes.xlsx",'Range','A5:E100');
+test(all(ismissing(test), 2), :) = [];
+for i=1:size(test,1)
+if ~isempty(test.Var1{i})
+temp=test.Var1{i};
+else
+test.Var1{i}=temp;
+end
+end
