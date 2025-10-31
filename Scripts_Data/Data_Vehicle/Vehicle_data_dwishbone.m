@@ -223,7 +223,7 @@ Vehicle.Chassis.Body.Passenger.Instance = 'None';
 clear hrdPtRr hrdPtFr;
 %% Front Suspension
 hrdPt=read_excel(filename,'HardpointsFr','UseRowNames',true)./1000;
-hrdPt.X=-hrdPt.X;
+% hrdPt.X=hrdPt.X;
 Vehicle.Chassis.SuspA1 = struct;
 Vehicle.Chassis.SuspA1.Linkage = struct;
 Vehicle.Chassis.SuspA1.Linkage.class = struct;
@@ -286,11 +286,11 @@ Vehicle.Chassis.SuspA1.Linkage.Upright.m.Value = 1;
 Vehicle.Chassis.SuspA1.Linkage.Upright.aToe = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upright.aToe.Units = 'deg';
 Vehicle.Chassis.SuspA1.Linkage.Upright.aToe.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Upright.aToe.Value = -1;
+Vehicle.Chassis.SuspA1.Linkage.Upright.aToe.Value = 0;
 Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber.Units = 'deg';
 Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber.Value = -2;
+Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber.Value = 0;
 Vehicle.Chassis.SuspA1.Linkage.Upright.xAxle = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upright.xAxle.Units = 'm';
 Vehicle.Chassis.SuspA1.Linkage.Upright.xAxle.Comments = 'Axle length';
@@ -364,7 +364,7 @@ Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K = str
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K.Units = ...
   'N/mm';
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K.Value = 2000;
+Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K.Value = 2e4;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Table = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Table.x = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Table.x.Units = ...
@@ -434,7 +434,7 @@ Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K = stru
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K.Units = ...
   'N/mm';
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K.Value = 2000;
+Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K.Value = 2e4;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialSpring.Table = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialSpring.Table.x = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialSpring.Table.x.Units = ...
@@ -492,7 +492,7 @@ Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K = str
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K.Units = ...
   'N/mm';
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K.Value = 2000;
+Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K.Value = 2e4;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Table = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Table.x = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Table.x.Units = ...
@@ -562,7 +562,7 @@ Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K = stru
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K.Units = ...
   'N/mm';
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K.Value = 2000;
+Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K.Value = 2e4;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialSpring.Table = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialSpring.Table.x = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialSpring.Table.x.Units = ...
@@ -605,10 +605,10 @@ Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.Type = ...
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.Instance = ...
   'Bushing_Sedan_LA';
 Vehicle.Chassis.SuspA1.Linkage.Pushrod = struct;
-Vehicle.Chassis.SuspA1.Linkage.Pushrod.sUpperArm = struct;
-Vehicle.Chassis.SuspA1.Linkage.Pushrod.sUpperArm.Units = 'm';
-Vehicle.Chassis.SuspA1.Linkage.Pushrod.sUpperArm.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Pushrod.sUpperArm.Value = ...
+Vehicle.Chassis.SuspA1.Linkage.Pushrod.sLowerArm = struct;
+Vehicle.Chassis.SuspA1.Linkage.Pushrod.sLowerArm.Units = 'm';
+Vehicle.Chassis.SuspA1.Linkage.Pushrod.sLowerArm.Comments = '';
+Vehicle.Chassis.SuspA1.Linkage.Pushrod.sLowerArm.Value = ...
     hrdPt{'PushrodOut',:};
 Vehicle.Chassis.SuspA1.Linkage.Pushrod.sBellcrank = struct;
 Vehicle.Chassis.SuspA1.Linkage.Pushrod.sBellcrank.Units = 'm';
@@ -676,7 +676,7 @@ clear ARBcoef;
 %% Steering
 Vehicle.Chassis.SuspA1.Steer = struct;
 Vehicle.Chassis.SuspA1.Steer.class = struct;
-Vehicle.Chassis.SuspA1.Steer.class.Value = 'WheelDrivenRack1UJoint';
+Vehicle.Chassis.SuspA1.Steer.class.Value = 'WheelDrivenRack1UJoint1';
 Vehicle.Chassis.SuspA1.Steer.Rack = struct;
 Vehicle.Chassis.SuspA1.Steer.Rack.sMount = struct;
 Vehicle.Chassis.SuspA1.Steer.Rack.sMount.Units = 'm';
@@ -697,11 +697,11 @@ Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Comments = '';
 Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Value = ...
   hrdPt{'steerWheel',:};
-Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol = struct;
-Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Units = 'm';
-Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Value = ...
-  hrdPt{'upperCol',:};
+% Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol = struct;
+% Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Units = 'm';
+% Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Comments = '';
+% % Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Value = ...
+% %   hrdPt{'upperCol',:};
 Vehicle.Chassis.SuspA1.Steer.Wheel.m = struct;
 Vehicle.Chassis.SuspA1.Steer.Wheel.m.Units = 'kg';
 Vehicle.Chassis.SuspA1.Steer.Wheel.m.Comments = 'Mass';
@@ -726,7 +726,7 @@ Vehicle.Chassis.SuspA1.Steer.Pinion = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value = 0.01275;
+Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value = 0.015;
 
 pinionIncl=(acos(Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value/norm(hrdPt{"steerWheel",:}-hrdPt{"steerRack",:}))-atan2(hrdPt{"steerWheel","Z"}-hrdPt{"steerRack","Z"},hrdPt{"steerRack","X"}-hrdPt{"steerWheel","X"}));
 
@@ -795,7 +795,7 @@ Vehicle.Chassis.SuspA1.Steer.DriverHuman.Instance = 'None';
 clear hrdPt;
 %% Rear Suspension
 hrdPt=read_excel(filename,'HardpointsRr','UseRowNames',true)./1000;
-hrdPt.X=-hrdPt.X;
+hrdPt.X=hrdPt.X+1.575;
 Vehicle.Chassis.SuspA2 = struct;
 Vehicle.Chassis.SuspA2.Linkage = struct;
 Vehicle.Chassis.SuspA2.Linkage.class = struct;
@@ -862,7 +862,7 @@ Vehicle.Chassis.SuspA2.Linkage.Upright.aToe.Value = 0;
 Vehicle.Chassis.SuspA2.Linkage.Upright.aCamber = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upright.aCamber.Units = 'deg';
 Vehicle.Chassis.SuspA2.Linkage.Upright.aCamber.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Upright.aCamber.Value = -1;
+Vehicle.Chassis.SuspA2.Linkage.Upright.aCamber.Value = 0;
 Vehicle.Chassis.SuspA2.Linkage.Upright.xAxle = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upright.xAxle.Units = 'm';
 Vehicle.Chassis.SuspA2.Linkage.Upright.xAxle.Comments = 'Axle length';
@@ -939,7 +939,7 @@ Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K = str
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K.Units = ...
   'N/mm';
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K.Value = 2000;
+Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Linear.K.Value = 2e4;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Table = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Table.x = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Table.x.Units = ...
@@ -1009,7 +1009,7 @@ Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K = stru
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K.Units = ...
   'N/mm';
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K.Value = 2000;
+Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialSpring.Linear.K.Value = 2e4;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialSpring.Table = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialSpring.Table.x = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialSpring.Table.x.Units = ...
@@ -1067,7 +1067,7 @@ Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K = str
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K.Units = ...
   'N/mm';
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K.Value = 2000;
+Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Linear.K.Value = 2e4;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Table = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Table.x = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Table.x.Units = ...
@@ -1137,7 +1137,7 @@ Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K = stru
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K.Units = ...
   'N/mm';
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K.Value = 2000;
+Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialSpring.Linear.K.Value = 2e4;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialSpring.Table = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialSpring.Table.x = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialSpring.Table.x.Units = ...
@@ -1180,10 +1180,10 @@ Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.Type = ...
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.Instance = ...
   'Bushing_Sedan_LA';
 Vehicle.Chassis.SuspA2.Linkage.Pushrod = struct;
-Vehicle.Chassis.SuspA2.Linkage.Pushrod.sUpperArm = struct;
-Vehicle.Chassis.SuspA2.Linkage.Pushrod.sUpperArm.Units = 'm';
-Vehicle.Chassis.SuspA2.Linkage.Pushrod.sUpperArm.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Pushrod.sUpperArm.Value = ...
+Vehicle.Chassis.SuspA2.Linkage.Pushrod.sLowerArm = struct;
+Vehicle.Chassis.SuspA2.Linkage.Pushrod.sLowerArm.Units = 'm';
+Vehicle.Chassis.SuspA2.Linkage.Pushrod.sLowerArm.Comments = '';
+Vehicle.Chassis.SuspA2.Linkage.Pushrod.sLowerArm.Value = ...
     hrdPt{'PushrodOut',:};
 Vehicle.Chassis.SuspA2.Linkage.Pushrod.sBellcrank = struct;
 Vehicle.Chassis.SuspA2.Linkage.Pushrod.sBellcrank.Units = 'm';
@@ -1308,7 +1308,7 @@ Vehicle.Chassis.Spring.Axle2.K.Value = coef{'Rate','Rear'};
 Vehicle.Chassis.Spring.Axle2.xPreload = struct;
 Vehicle.Chassis.Spring.Axle2.xPreload.Units = 'm';
 Vehicle.Chassis.Spring.Axle2.xPreload.Comments = '';
-Vehicle.Chassis.Spring.Axle2.xPreload.Value = coef{'Preload','Rear'}+0.0059;
+Vehicle.Chassis.Spring.Axle2.xPreload.Value = coef{'Preload','Rear'}+0.0039;
 Vehicle.Chassis.Spring.Axle2.Type = 'Spring';
 Vehicle.Chassis.Spring.Axle2.Instance = 'FSAE_Achilles_DW_Linear_A2';
 Vehicle.Chassis.Spring.Type = 'Springs';
