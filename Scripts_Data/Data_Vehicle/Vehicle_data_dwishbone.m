@@ -351,7 +351,7 @@ Vehicle.Chassis.SuspA1.Linkage.Endstop.xMin.Value = -0.056/2;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.class = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.class.Value = ...
-  'Bushing_AxRad';
+  'Rigid_1Rev';
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Law = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialSpring.Law.Units = '';
@@ -409,7 +409,7 @@ Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d = str
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d.Units = ...
   'N/(m/s)';
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d.Value = 2000;
+Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d.Value = 2e4;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialDamper.Table = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialDamper.Table.v = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.RadialDamper.Table.v.Units = ...
@@ -459,7 +459,7 @@ Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d = stru
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d.Units = ...
   'N/(m/s)';
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d.Value = 2000;
+Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d.Value = 2e4;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialDamper.Table = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialDamper.Table.v = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.AxialDamper.Table.v.Units = ...
@@ -479,7 +479,7 @@ Vehicle.Chassis.SuspA1.Linkage.Upper_Arm_to_Subframe.Instance = ...
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.class = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.class.Value = ...
-  'Bushing_AxRad';
+  'Rigid_1Rev';
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Law = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialSpring.Law.Units = '';
@@ -537,7 +537,7 @@ Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d = str
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d.Units = ...
   'N/(m/s)';
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d.Value = 2000;
+Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d.Value = 2e4;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialDamper.Table = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialDamper.Table.v = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.RadialDamper.Table.v.Units = ...
@@ -587,7 +587,7 @@ Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d = stru
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d.Units = ...
   'N/(m/s)';
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d.Value = 2000;
+Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d.Value = 2e4;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialDamper.Table = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialDamper.Table.v = struct;
 Vehicle.Chassis.SuspA1.Linkage.Lower_Arm_to_Subframe.AxialDamper.Table.v.Units = ...
@@ -926,7 +926,7 @@ Vehicle.Chassis.SuspA2.Linkage.Endstop.xMin.Value = -0.0635/2;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.class = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.class.Value = ...
-  'Bushing_AxRad';
+  'Rigid_1Rev';
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Law = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialSpring.Law.Units = '';
@@ -984,7 +984,7 @@ Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d = str
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d.Units = ...
   'N/(m/s)';
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d.Value = 2000;
+Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialDamper.Linear.d.Value = 2e4;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialDamper.Table = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialDamper.Table.v = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.RadialDamper.Table.v.Units = ...
@@ -1034,7 +1034,7 @@ Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d = stru
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d.Units = ...
   'N/(m/s)';
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d.Value = 50;
+Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialDamper.Linear.d.Value = 2e4;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialDamper.Table = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialDamper.Table.v = struct;
 Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.AxialDamper.Table.v.Units = ...
@@ -1054,7 +1054,7 @@ Vehicle.Chassis.SuspA2.Linkage.Upper_Arm_to_Subframe.Instance = ...
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.class = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.class.Value = ...
-  'Bushing_AxRad';
+  'Rigid_1Rev';
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Law = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialSpring.Law.Units = '';
@@ -1112,7 +1112,7 @@ Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d = str
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d.Units = ...
   'N/(m/s)';
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d.Value = 2000;
+Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialDamper.Linear.d.Value = 2e4;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialDamper.Table = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialDamper.Table.v = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.RadialDamper.Table.v.Units = ...
@@ -1162,7 +1162,7 @@ Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d = stru
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d.Units = ...
   'N/(m/s)';
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d.Comments = '';
-Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d.Value = 2000;
+Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialDamper.Linear.d.Value = 2e4;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialDamper.Table = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialDamper.Table.v = struct;
 Vehicle.Chassis.SuspA2.Linkage.Lower_Arm_to_Subframe.AxialDamper.Table.v.Units = ...
