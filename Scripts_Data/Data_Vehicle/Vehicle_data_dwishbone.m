@@ -10,6 +10,7 @@ hrdPtFr.X=-hrdPtFr.X;
 
 hrdPtRr=read_excel(filename,'HardpointsRr','UseRowNames',true)./1000;
 hrdPtRr.X=-hrdPtRr.X;
+%% Body
 Vehicle = struct;
 Vehicle.Chassis = struct;
 Vehicle.Chassis.Body = struct;
@@ -56,7 +57,6 @@ Vehicle.Chassis.Body.TrackRear = struct;
 Vehicle.Chassis.Body.TrackRear.Units = 'm';
 Vehicle.Chassis.Body.TrackRear.Comments = 'Wheel Center Y*2+0.2';
 Vehicle.Chassis.Body.TrackRear.Value = hrdPtRr{"wheelCenter",'Y'}*2 ;
-%
 Vehicle.Chassis.Body.m = struct;
 Vehicle.Chassis.Body.m.Units = 'kg';
 Vehicle.Chassis.Body.m.Comments = '';
@@ -74,17 +74,17 @@ Vehicle.Chassis.Body.BodyGeometry.sOffset = struct;
 Vehicle.Chassis.Body.BodyGeometry.sOffset.Units = 'm';
 Vehicle.Chassis.Body.BodyGeometry.sOffset.Comments = '';
 Vehicle.Chassis.Body.BodyGeometry.sOffset.Value = ...
-  [-0.5375 0 0];
+    [-0.5375 0 0];
 Vehicle.Chassis.Body.BodyGeometry.aOffset = struct;
 Vehicle.Chassis.Body.BodyGeometry.aOffset.Units = 'Yaw-Pitch-Roll';
 Vehicle.Chassis.Body.BodyGeometry.aOffset.Comments = '';
 Vehicle.Chassis.Body.BodyGeometry.aOffset.Value = ...
-  [0 0 0];
+    [0 0 0];
 Vehicle.Chassis.Body.BodyGeometry.Color = struct;
 Vehicle.Chassis.Body.BodyGeometry.Color.Units = '[RGB]';
 Vehicle.Chassis.Body.BodyGeometry.Color.Comments = '';
 Vehicle.Chassis.Body.BodyGeometry.Color.Value = ...
-  [0.1 0.5 0.9];
+    [0.1 0.5 0.9];
 Vehicle.Chassis.Body.BodyGeometry.Opacity = struct;
 Vehicle.Chassis.Body.BodyGeometry.Opacity.Units = '(0-1)';
 Vehicle.Chassis.Body.BodyGeometry.Opacity.Comments = '';
@@ -93,7 +93,7 @@ Vehicle.Chassis.Body.BodyGeometry.AeroColor = struct;
 Vehicle.Chassis.Body.BodyGeometry.AeroColor.Units = '[RGB]';
 Vehicle.Chassis.Body.BodyGeometry.AeroColor.Comments = '';
 Vehicle.Chassis.Body.BodyGeometry.AeroColor.Value = ...
-  [0.095 0.2 0.3];
+    [0.095 0.2 0.3];
 Vehicle.Chassis.Body.BodyGeometry.AeroOpacity = struct;
 Vehicle.Chassis.Body.BodyGeometry.AeroOpacity.Units = '(0-1)';
 Vehicle.Chassis.Body.BodyGeometry.AeroOpacity.Comments = '';

@@ -1,4 +1,4 @@
-%% Simscape Vehicle Library, KnC Tests, Quarter Car Testrig
+c%% Simscape Vehicle Library, KnC Tests, Quarter Car Testrig
 %
 % This quarter car model is used to perform kinematics and compliance tests on
 % a single corner of a vehicle. Loading different dataset selects different 
