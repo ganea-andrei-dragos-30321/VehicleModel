@@ -411,7 +411,7 @@ if(showPlots)
     plot(-[strAxisPt_des(2) strAxisPt_des(2)],[simlog_pxTire(1) strAxisPt_des(1)],'r--','DisplayName','Hub Offset, Longitudinal')
     plot(-[strAxisPt_des(2) simlog_pyTire(1)-scrubRadius/1000],[strAxisPt_des(1) simlog_pxTire(1)+casterTrail/1000],'r-.s','DisplayName','Steering Axis')
     plot(-[simlog_pyTire(1)-scrubRadius/1000 simlog_pyTire(1)-scrubRadius/1000],[simlog_pxTire(1) simlog_pxTire(1)+casterTrail/1000],'g--','DisplayName','Caster Trail')
-    plot(-[simlog_pyTire(1) simlog_pyTire(1)-scrubRadius/1000],[simlog_pxTire(1)+casterTrail/1000 simlog_pxTire(1)+casterTrail/1000],'k--','DisplayName','Scrub Radius')
+    plot(-[simlog_pyTire(1) simlog_pyTire(1)-scrubRadius/1000],[simlog_pxTire(1)+casterTrail/1000 simlog_pxTire(1)+casterTrail/1000],'m--','DisplayName','Scrub Radius')
     hold off
     title('Top View, Left Wheel')
     axis equal
