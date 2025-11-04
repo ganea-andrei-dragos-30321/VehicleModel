@@ -73,7 +73,7 @@ ylabel('Target Speed (m/s)');
 title('Target Speed Along Trajectory');
 
 % Calculate target yaw angle (rad)
-yaw_interval = 1; % 10
+yaw_interval = 2; % 10
 aYaw_new = atan2(...
     y_new(yaw_interval+1:end)-y_new(1:end-yaw_interval),...
     x_new(yaw_interval+1:end)-x_new(1:end-yaw_interval));

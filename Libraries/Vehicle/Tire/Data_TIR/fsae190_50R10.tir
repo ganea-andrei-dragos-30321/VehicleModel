@@ -21,11 +21,11 @@ ROAD_INCREMENT           = 0.01              $Increment in road sampling
 ROAD_DIRECTION           = 1                 $Direction of travelled distance 
 $-----------------------------------------------------------dimensions
 [DIMENSION]
-UNLOADED_RADIUS          = 0.23323           $Free tyre radius         
-WIDTH                    = 0.1905            $Nominal section width of the tyre         
-RIM_RADIUS               = 0.1333            $Nominal rim radius
-RIM_WIDTH                = 0.1905            $Rim width         
-ASPECT_RATIO             = 0.525             $Nominal aspect ratio
+UNLOADED_RADIUS          = 0.2603            $Free tire radius
+WIDTH                    = 0.1778            $Nominal section width of the tire
+ASPECT_RATIO             = 0.536             $Nominal aspect ratio
+RIM_RADIUS               = 0.1651            $Nominal rim radius
+RIM_WIDTH                = 0.2032            $Rim width
 $-------------------------------------------------operating conditions
 [OPERATING_CONDITIONS]
 INFLPRES                 = 220000            $Tyre inflation pressure

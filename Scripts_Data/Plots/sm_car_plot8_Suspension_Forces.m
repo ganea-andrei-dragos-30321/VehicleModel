@@ -120,8 +120,14 @@ TUpr = struct2table(Upr_MinMax);
 TPush = struct2table(Pushrod_MinMax);
 TTrack = struct2table(Trackrod_MinMax);
 
-filename = strcat(Maneuver,'_Forces.xlsx');
+% === Create directory if it doesn't exist ===
+sdlreportsDir = fullfile(pwd, 'sdlreports');
+if ~exist(sdlreportsDir, 'dir')
+    mkdir(sdlreportsDir);
+end
 
+% === Define full path for the Excel file ===
+filename = fullfile(sdlreportsDir, strcat(Maneuver, '_Forces.xlsx'));
 writetable(TAarm, filename, 'Sheet', 'AarmForces');
 writetable(TUpr, filename, 'Sheet', 'UprForces');
 writetable(TPush, filename, 'Sheet', 'PushrodForces');

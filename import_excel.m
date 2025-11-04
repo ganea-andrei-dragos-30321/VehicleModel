@@ -80,6 +80,13 @@ for subsystem=1:length(sheets)
     
             DataBus.(currentSheet).(sheetData.Var1{i})=import_excel(filename,sheetData.Var3(i));
         % another case for tables to read data that cannot be put in one cell
+        elseif strcmp(sheetData.Var5{i},'TABLE')
+            % Read the table data and store it in the DataBus struct
+            tableData = readmatrix({heetData.Var3{i}}); 
+            DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
+                struct('Value',tableData,'Unit',sheetData.Var4(i),'Comments',sheetData.Var5(i));
+    
+
         else
 
             val = sheetData.Var3{i};
@@ -97,6 +104,10 @@ for subsystem=1:length(sheets)
                 
             end
             clear txt;
+                if contains(stsheetData.Var5(i),'DO NOT CHANGE HERE')
+                    % Avoids excel comment for hardpoints
+                    erase(stsheetData.Var5(i),'( DO NOT CHANGE HERE )');
+                end
             DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
                 struct('Value',val,'Unit',sheetData.Var4(i),'Comments',sheetData.Var5(i));
     

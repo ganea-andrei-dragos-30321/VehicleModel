@@ -105,121 +105,7 @@ Vehicle.Chassis.Body.BodyLoad.class = struct;
 Vehicle.Chassis.Body.BodyLoad.class.Value = 'None';
 Vehicle.Chassis.Body.BodyLoad.Type = 'BodyLoad';
 Vehicle.Chassis.Body.BodyLoad.Instance = 'None';
-Vehicle.Chassis.Body.Passenger = struct;
-Vehicle.Chassis.Body.Passenger.FL = struct;
-Vehicle.Chassis.Body.Passenger.FL.class = struct;
-Vehicle.Chassis.Body.Passenger.FL.class.Value = 'None';
-Vehicle.Chassis.Body.Passenger.FL.s = struct;
-Vehicle.Chassis.Body.Passenger.FL.s.Units = 'm';
-Vehicle.Chassis.Body.Passenger.FL.s.Comments = '';
-Vehicle.Chassis.Body.Passenger.FL.s.Value = ...
-  [-1.26656038245259 0.376762948446593 0.62577262194717];
-Vehicle.Chassis.Body.Passenger.FL.a = struct;
-Vehicle.Chassis.Body.Passenger.FL.a.Units = 'deg';
-Vehicle.Chassis.Body.Passenger.FL.a.Comments = ...
-  'Roll-Pitch-Yaw, applied Y->P->R';
-Vehicle.Chassis.Body.Passenger.FL.a.Value = ...
-  [0 0 0];
-Vehicle.Chassis.Body.Passenger.FL.rho = struct;
-Vehicle.Chassis.Body.Passenger.FL.rho.Units = 'kg/m^3';
-Vehicle.Chassis.Body.Passenger.FL.rho.Comments = ...
-  'Use to adjust passenger mass';
-Vehicle.Chassis.Body.Passenger.FL.rho.Value = 1000;
-Vehicle.Chassis.Body.Passenger.FL.Color = struct;
-Vehicle.Chassis.Body.Passenger.FL.Color.Units = '[RGB] (0-1)';
-Vehicle.Chassis.Body.Passenger.FL.Color.Comments = '[RGB]';
-Vehicle.Chassis.Body.Passenger.FL.Color.Value = ...
-  [0.7921 0.8196 0.9333];
-Vehicle.Chassis.Body.Passenger.FL.Opacity = struct;
-Vehicle.Chassis.Body.Passenger.FL.Opacity.Units = '(0-1)';
-Vehicle.Chassis.Body.Passenger.FL.Opacity.Comments = '';
-Vehicle.Chassis.Body.Passenger.FL.Opacity.Value = 1;
-Vehicle.Chassis.Body.Passenger.FR = struct;
-Vehicle.Chassis.Body.Passenger.FR.class = struct;
-Vehicle.Chassis.Body.Passenger.FR.class.Value = 'None';
-Vehicle.Chassis.Body.Passenger.FR.s = struct;
-Vehicle.Chassis.Body.Passenger.FR.s.Units = 'm';
-Vehicle.Chassis.Body.Passenger.FR.s.Comments = '';
-Vehicle.Chassis.Body.Passenger.FR.s.Value = ...
-  [-1.26656038245259 -0.38719771557762 0.62577262194717];
-Vehicle.Chassis.Body.Passenger.FR.a = struct;
-Vehicle.Chassis.Body.Passenger.FR.a.Units = 'deg';
-Vehicle.Chassis.Body.Passenger.FR.a.Comments = ...
-  'Roll-Pitch-Yaw, applied Y->P->R';
-Vehicle.Chassis.Body.Passenger.FR.a.Value = ...
-  [0 0 0];
-Vehicle.Chassis.Body.Passenger.FR.rho = struct;
-Vehicle.Chassis.Body.Passenger.FR.rho.Units = 'kg/m^3';
-Vehicle.Chassis.Body.Passenger.FR.rho.Comments = ...
-  'Use to adjust passenger mass';
-Vehicle.Chassis.Body.Passenger.FR.rho.Value = 1000;
-Vehicle.Chassis.Body.Passenger.FR.Color = struct;
-Vehicle.Chassis.Body.Passenger.FR.Color.Units = '[RGB] (0-1)';
-Vehicle.Chassis.Body.Passenger.FR.Color.Comments = '';
-Vehicle.Chassis.Body.Passenger.FR.Color.Value = ...
-  [0.7921 0.8196 0.9333];
-Vehicle.Chassis.Body.Passenger.FR.Opacity = struct;
-Vehicle.Chassis.Body.Passenger.FR.Opacity.Units = '(0-1)';
-Vehicle.Chassis.Body.Passenger.FR.Opacity.Comments = '';
-Vehicle.Chassis.Body.Passenger.FR.Opacity.Value = 1;
-Vehicle.Chassis.Body.Passenger.RL = struct;
-Vehicle.Chassis.Body.Passenger.RL.class = struct;
-Vehicle.Chassis.Body.Passenger.RL.class.Value = 'None';
-Vehicle.Chassis.Body.Passenger.RL.s = struct;
-Vehicle.Chassis.Body.Passenger.RL.s.Units = 'm';
-Vehicle.Chassis.Body.Passenger.RL.s.Comments = '';
-Vehicle.Chassis.Body.Passenger.RL.s.Value = ...
-  [-2.21744610520936 0.39084784238996 0.59505169501587];
-Vehicle.Chassis.Body.Passenger.RL.a = struct;
-Vehicle.Chassis.Body.Passenger.RL.a.Units = 'deg';
-Vehicle.Chassis.Body.Passenger.RL.a.Comments = ...
-  'Roll-Pitch-Yaw, applied Y->P->R';
-Vehicle.Chassis.Body.Passenger.RL.a.Value = ...
-  [0 0 0];
-Vehicle.Chassis.Body.Passenger.RL.rho = struct;
-Vehicle.Chassis.Body.Passenger.RL.rho.Units = 'kg/m^3';
-Vehicle.Chassis.Body.Passenger.RL.rho.Comments = ...
-  'Use to adjust passenger mass';
-Vehicle.Chassis.Body.Passenger.RL.rho.Value = 1000;
-Vehicle.Chassis.Body.Passenger.RL.Color = struct;
-Vehicle.Chassis.Body.Passenger.RL.Color.Units = '[RGB] (0-1)';
-Vehicle.Chassis.Body.Passenger.RL.Color.Comments = '[RGB]';
-Vehicle.Chassis.Body.Passenger.RL.Color.Value = ...
-  [0.7921 0.8196 0.9333];
-Vehicle.Chassis.Body.Passenger.RL.Opacity = struct;
-Vehicle.Chassis.Body.Passenger.RL.Opacity.Units = '(0-1)';
-Vehicle.Chassis.Body.Passenger.RL.Opacity.Comments = '';
-Vehicle.Chassis.Body.Passenger.RL.Opacity.Value = 1;
-Vehicle.Chassis.Body.Passenger.RR = struct;
-Vehicle.Chassis.Body.Passenger.RR.class = struct;
-Vehicle.Chassis.Body.Passenger.RR.class.Value = 'None';
-Vehicle.Chassis.Body.Passenger.RR.s = struct;
-Vehicle.Chassis.Body.Passenger.RR.s.Units = 'm';
-Vehicle.Chassis.Body.Passenger.RR.s.Comments = '';
-Vehicle.Chassis.Body.Passenger.RR.s.Value = ...
-  [-2.21427676686812 -0.38719771557762 0.5935293728628];
-Vehicle.Chassis.Body.Passenger.RR.a = struct;
-Vehicle.Chassis.Body.Passenger.RR.a.Units = 'deg';
-Vehicle.Chassis.Body.Passenger.RR.a.Comments = ...
-  'Roll-Pitch-Yaw, applied Y->P->R';
-Vehicle.Chassis.Body.Passenger.RR.a.Value = ...
-  [0 0 0];
-Vehicle.Chassis.Body.Passenger.RR.rho = struct;
-Vehicle.Chassis.Body.Passenger.RR.rho.Units = 'kg/m^3';
-Vehicle.Chassis.Body.Passenger.RR.rho.Comments = ...
-  'Use to adjust passenger mass';
-Vehicle.Chassis.Body.Passenger.RR.rho.Value = 1000;
-Vehicle.Chassis.Body.Passenger.RR.Color = struct;
-Vehicle.Chassis.Body.Passenger.RR.Color.Units = '[RGB] (0-1)';
-Vehicle.Chassis.Body.Passenger.RR.Color.Comments = '';
-Vehicle.Chassis.Body.Passenger.RR.Color.Value = ...
-  [0.7921 0.8196 0.9333];
-Vehicle.Chassis.Body.Passenger.RR.Opacity = struct;
-Vehicle.Chassis.Body.Passenger.RR.Opacity.Units = '(0-1)';
-Vehicle.Chassis.Body.Passenger.RR.Opacity.Comments = '';
-Vehicle.Chassis.Body.Passenger.RR.Opacity.Value = 1;
-Vehicle.Chassis.Body.Passenger.Type = 'Passenger';
-Vehicle.Chassis.Body.Passenger.Instance = 'None';
+
 clear hrdPtRr hrdPtFr;
 %% Front Suspension
 hrdPt=read_excel(filename,'HardpointsFr','UseRowNames',true)./1000;
@@ -290,7 +176,7 @@ Vehicle.Chassis.SuspA1.Linkage.Upright.aToe.Value = 0;
 Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber.Units = 'deg';
 Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber.Comments = '';
-Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber.Value = 0;
+Vehicle.Chassis.SuspA1.Linkage.Upright.aCamber.Value = -1;
 Vehicle.Chassis.SuspA1.Linkage.Upright.xAxle = struct;
 Vehicle.Chassis.SuspA1.Linkage.Upright.xAxle.Units = 'm';
 Vehicle.Chassis.SuspA1.Linkage.Upright.xAxle.Comments = 'Axle length';
@@ -674,6 +560,7 @@ Vehicle.Chassis.SuspA1.AntiRollBar.Instance = ...
   'Droplink_FSAE_Achilles_f';
 clear ARBcoef;
 %% Steering
+pinionIncl=-atan((hrdPt{'upperCol','X'}-hrdPt{'steerRack','X'})/(hrdPt{'upperCol','Z'}-hrdPt{'steerRack','Z'}));
 Vehicle.Chassis.SuspA1.Steer = struct;
 Vehicle.Chassis.SuspA1.Steer.class = struct;
 Vehicle.Chassis.SuspA1.Steer.class.Value = 'WheelDrivenRack1UJoint1';
@@ -686,7 +573,7 @@ Vehicle.Chassis.SuspA1.Steer.Rack.sMount.Value = ...
 Vehicle.Chassis.SuspA1.Steer.Rack.m = struct;
 Vehicle.Chassis.SuspA1.Steer.Rack.m.Units = 'kg';
 Vehicle.Chassis.SuspA1.Steer.Rack.m.Comments = 'Mass';
-Vehicle.Chassis.SuspA1.Steer.Rack.m.Value = 0.5;
+Vehicle.Chassis.SuspA1.Steer.Rack.m.Value = 1.8;
 Vehicle.Chassis.SuspA1.Steer.Rack.fActuatorCutoff = struct;
 Vehicle.Chassis.SuspA1.Steer.Rack.fActuatorCutoff.Units = 'Hz';
 Vehicle.Chassis.SuspA1.Steer.Rack.fActuatorCutoff.Comments = '';
@@ -697,22 +584,27 @@ Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Comments = '';
 Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Value = ...
   hrdPt{'steerWheel',:};
-% Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol = struct;
-% Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Units = 'm';
-% Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Comments = '';
-% % Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Value = ...
-% %   hrdPt{'upperCol',:};
+Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol = struct;
+Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Units = 'm';
+Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Comments = '';
+Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Value = ...
+  hrdPt{'upperCol',:};
+Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis = struct;
+Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Units = 'rad';
+Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Comments = '';
+Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Value = ...
+ -atan((hrdPt{'steerWheel','Z'}-hrdPt{'upperCol','Z'})/(hrdPt{'steerWheel','X'}-hrdPt{'upperCol','X'}));
 Vehicle.Chassis.SuspA1.Steer.Wheel.m = struct;
 Vehicle.Chassis.SuspA1.Steer.Wheel.m.Units = 'kg';
 Vehicle.Chassis.SuspA1.Steer.Wheel.m.Comments = 'Mass';
-Vehicle.Chassis.SuspA1.Steer.Wheel.m.Value = 0.4;
+Vehicle.Chassis.SuspA1.Steer.Wheel.m.Value = 0.7;
 Vehicle.Chassis.SuspA1.Steer.Wheel.class = struct;
 Vehicle.Chassis.SuspA1.Steer.Wheel.class.Value = 'FSAE';
 Vehicle.Chassis.SuspA1.Steer.Shaft_Upper = struct;
 Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m = struct;
 Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Units = 'kg';
 Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Value = 0.2;
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Value = 0.4;
 Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength = struct;
 Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength.Comments = '';
@@ -721,15 +613,12 @@ Vehicle.Chassis.SuspA1.Steer.Shaft_Lower = struct;
 Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m = struct;
 Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Units = 'kg';
 Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Value = 0.2;
+Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Value = 0.4;
 Vehicle.Chassis.SuspA1.Steer.Pinion = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value = 0.015;
-
-pinionIncl=(acos(Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value/norm(hrdPt{"steerWheel",:}-hrdPt{"steerRack",:}))-atan2(hrdPt{"steerWheel","Z"}-hrdPt{"steerRack","Z"},hrdPt{"steerRack","X"}-hrdPt{"steerWheel","X"}));
-
+Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value = 0.01365;
 Vehicle.Chassis.SuspA1.Steer.Pinion.sMount = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Comments = '';
@@ -739,11 +628,6 @@ Vehicle.Chassis.SuspA1.Steer.Pinion.m = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.m.Units = 'kg';
 Vehicle.Chassis.SuspA1.Steer.Pinion.m.Comments = '';
 Vehicle.Chassis.SuspA1.Steer.Pinion.m.Value = 0.05;
-Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis = struct;
-Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Units = 'rad';
-Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Value = ...
- atan2((-hrdPt{'steerWheel','X'}+Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Value(1)),(hrdPt{'steerWheel','Z'}-Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Value(3)));
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table = struct;
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.aWheel = struct;
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.aWheel.Units = 'rad';
