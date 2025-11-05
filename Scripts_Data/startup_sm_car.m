@@ -16,11 +16,11 @@ evalin('base','Vehicle_data_dwishbone')
 
 %% Load Initial Vehicle state database
 sm_car_gen_init_database;
-evalin('base','Init = IDatabase.Skidpad.FSAE_Achilles')
+evalin('base','Init = IDatabase.Skidpad.FSAE_Achilles;')
 
 %% Load Maneuver database
 sm_car_import_maneuver_data;
-evalin('base','Maneuver = MDatabase.Skidpad.FSAE_Achilles')
+evalin('base','Maneuver = MDatabase.Skidpad.FSAE_Achilles;')
 
 %% Load Driver database
 sm_car_gen_driver_database;
