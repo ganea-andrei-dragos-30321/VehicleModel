@@ -1,10 +1,29 @@
 function [DataBus]=import_excel(filename,sheets)
-DataBus=struct();
-% Ignore sheets for hardpoints
+% Function to read excel sheets INFO
+% Reads the data inside an Excel sheet by sheet and assigns to the output
+%   value and orgaznize the structure the same way that is in excel, with the sheet name as the
+%   first field name of the structure, then the first and second collumns
+% The function contatins 2 exceptions: 'Info' and hardpoint sheets (specific for this application)
+% Can be used with or without the sheets argument
+% - [DataBus]=import_excel(filename) -> goes through all the sheets in a
+%       file and creates a struct containing all sheets 
+% - [DataBus]=import_excel(filename,sheets) -> goes through the specified
+%       sheets 
+% Specific features
+% - the 'Value' field from excel supports multiple formats
+    % - scalar
+    % - vector - must be specified within square brackets (eg:[1 2 3])
+    % - table - must be specified in 'Comments' field that the value is a
+    %           table "TABLE", and there must exist a sheet with the same name as the value
+    % - sheet - must be specified in 'Unit' that the value is a sheet, "SHEET", and there must 
+    %           exist a sheet with the same name as the value
+%% Gets all sheet names if sheet to read is not specified
 if nargin == 1 || isempty(sheets)
     sheets = sheetnames(filename);
 end
+allSheets = sheets;
 
+%% Ignore hardpoint and Info sheets
 if nargin == 1 & ~isempty(sheets(sheets=='HardpointsFr'))
    sheets= setdiff(sheets,'HardpointsFr');
 end
@@ -15,31 +34,33 @@ if nargin == 1 & ~isempty(sheets(sheets=='Info'))
     sheets= setdiff(sheets,'Info');
 end
 
-allSheets = sheets;
-referencedSheets = string([]);
-
-for s = 1:numel(allSheets)
-    currentSheet = allSheets{s};
-    opts = detectImportOptions(filename, 'Sheet', currentSheet, 'Range', 'A5:E100');
-    opts.VariableNames = ["Var1", "Var2", "Var3", "Var4", "Var5"];
-    opts = setvartype(opts, opts.VariableNames, 'string');
-    opts = setvaropts(opts, opts.VariableNames, 'FillValue', "");
-    sheetData = readtable(filename, opts);
-
-    % Collect sheets referenced as 'SHEET'
-    referencedSheets = [referencedSheets; sheetData.Var3(sheetData.Var4 == "SHEET")];
+%% Initializizations
+DataBus=struct();
+if nargin == 1
+    referencedSheets = string([]);
+    
+    %% Get list of sheets that are referenced to ignore when reading
+    for s = 1:numel(allSheets)
+        currentSheet = allSheets{s};
+        opts = detectImportOptions(filename, 'Sheet', currentSheet, 'Range', 'A5:E100');
+        opts.VariableNames = ["Var1", "Var2", "Var3", "Var4", "Var5"];
+        opts = setvartype(opts, opts.VariableNames, 'string');
+        opts = setvaropts(opts, opts.VariableNames, 'FillValue', "");
+        sheetData = readtable(filename, opts);
+    
+        % Collect sheets referenced as 'SHEET'
+        referencedSheets = [referencedSheets; sheetData.Var3(sheetData.Var4 == "SHEET")];
+    end
+    
+    % ✅ Clean referenced list
+    referencedSheets = unique(strtrim(referencedSheets));
+    referencedSheets = referencedSheets(referencedSheets ~= "");
+    referencedSheets = rmmissing(referencedSheets);
+    
+    % ✅ Remove them from the main list
+    sheets = setdiff(sheets, referencedSheets);
 end
-
-% ✅ Clean referenced list
-referencedSheets = unique(strtrim(referencedSheets));
-referencedSheets = referencedSheets(referencedSheets ~= "");
-referencedSheets = rmmissing(referencedSheets);
-
-% ✅ Remove them from the main list
-sheets = setdiff(sheets, referencedSheets);
-
-%figure out how to read sheets
-% 
+%% Reading sheets
 for subsystem=1:length(sheets)
 
     % Read the current sheet type, instance and class 
@@ -72,57 +93,65 @@ for subsystem=1:length(sheets)
     end
     clear temp;
 
-    % Add data from sheet to DataBus struct
+    %% Add data from sheet to DataBus struct
     for i=1:size(sheetData,1)
     
         % Recursive way to read struct inside structs
-        if  strcmp(sheetData.Var4{i},'SHEET')
-    
-            DataBus.(currentSheet).(sheetData.Var1{i})=import_excel(filename,sheetData.Var3(i));
-        % another case for tables to read data that cannot be put in one cell
+        if strcmp(sheetData.Var4{i},'SHEET')
+            try
+                DataBus.(currentSheet).(sheetData.Var1{i}) = import_excel(filename, {sheetData.Var3{i}});
+            catch ME
+                error('File "%s" sheet name specified in "%s" row "%d" cannot be found: %s', filename, currentSheet, i, ME.message);
+            end
         elseif strcmp(sheetData.Var5{i},'TABLE')
             % Read the table data and store it in the DataBus struct
-            tableData = readmatrix({heetData.Var3{i}}); 
-            DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
+            try
+                tableData = readmatrix({sheetData.Var3{i}}); 
+                DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
                 struct('Value',tableData,'Unit',sheetData.Var4(i),'Comments',sheetData.Var5(i));
-    
+            catch ME
+                error('File "%s" table name specified in "%s" row "%d" cannot be found: %s',filename ,currentSheet, i, ME.message);
+            end
+
 
         else
-
+            %% Checks for patterns (vector values and 'do not change' comment)
             val = sheetData.Var3{i};
         
             if isstring(val) || ischar(val)
-            txt = strtrim(val);   % remove leading/trailing spaces
+                txt = strtrim(val);   % remove leading/trailing spaces
         
             % Check for [ ... ] pattern
-            if startsWith(txt, "[") && endsWith(txt, "]")
-                txt = extractBetween(txt, "[", "]");  % get inner text
-                txt = strrep(txt, ",", ".");          % replace commas with dots for safety
-  
-            end
-                val=str2num(txt);
+                if startsWith(txt, "[") && endsWith(txt, "]")
+                    txt = extractBetween(txt, "[", "]");  % get inner text
+                    txt = strrep(txt, ",", ".");          % replace commas with dots for safety
+                    val = str2num(txt);
+                end
+
+            % Avoids excel comment for hardpoints
+                if contains(txt,'DO NOT CHANGE HERE')
+                    erase(txt,'( DO NOT CHANGE HERE )');
+                    val = txt;
+                end
                 
             end
             clear txt;
-                if contains(stsheetData.Var5(i),'DO NOT CHANGE HERE')
-                    % Avoids excel comment for hardpoints
-                    erase(stsheetData.Var5(i),'( DO NOT CHANGE HERE )');
-                end
+            %% Add contents to DataBus
+
+            if strcmp(sheetData.Var2{i},'class')
+                %% if clause to allow for small structures without additional sheets (only class value)
+
+                DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
+                struct('Value',val);
+            else
+                 %% Normal allocation of structures
+
             DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
                 struct('Value',val,'Unit',sheetData.Var4(i),'Comments',sheetData.Var5(i));
-    
+            end
         
         end
     end
 
 end
 end
-% test=readtable("sm_car_ARTTU_Brakes.xlsx",'Range','A5:E100','Sheet',sheets);
-% test(all(ismissing(test), 2), :) = [];
-% for i=1:size(test,1)
-% if ~isempty(test.Var1{i})
-% temp=test.Var1{i};
-% else
-% test.Var1{i}=temp;
-% end
-% end
