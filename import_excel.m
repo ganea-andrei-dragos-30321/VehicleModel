@@ -33,7 +33,9 @@ end
 if nargin == 1 & ~isempty(sheets(sheets=='Info'))
     sheets= setdiff(sheets,'Info');
 end
-
+if nargin == 1 & ~isempty(sheets(sheets=='TrqSpd'))
+    sheets= setdiff(sheets,'TrqSpd');
+end
 %% Initializizations
 DataBus=struct();
 if nargin == 1
@@ -101,7 +103,7 @@ for subsystem=1:length(sheets)
             try
                 DataBus.(currentSheet).(sheetData.Var1{i}) = import_excel(filename, {sheetData.Var3{i}});
             catch ME
-                error('File "%s" sheet name specified in "%s" row "%d" cannot be found: %s', filename, currentSheet, i, ME.message);
+                error('File "%s" sheet name specified in "%s" row "%d" cannot be found: %s', filename, currentSheet, i, ME);
             end
         elseif strcmp(sheetData.Var5{i},'TABLE')
             % Read the table data and store it in the DataBus struct
@@ -110,7 +112,7 @@ for subsystem=1:length(sheets)
                 DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
                 struct('Value',tableData,'Unit',sheetData.Var4(i),'Comments',sheetData.Var5(i));
             catch ME
-                error('File "%s" table name specified in "%s" row "%d" cannot be found: %s',filename ,currentSheet, i, ME.message);
+                error('File "%s" table name specified in "%s" row "%d" cannot be found: %s',filename ,currentSheet, i, ME);
             end
 
 

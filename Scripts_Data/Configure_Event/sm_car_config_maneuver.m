@@ -87,7 +87,7 @@ switch maneuver_str
         set_param(drive_h,'popup_driver_type','Open Loop');
         set_param(modelname,'StopTime','40');
         sm_car_config_road(modelname,'Plane Grid');
-        sm_car_config_solver(modelname,'variable step'); % Default only
+        sm_car_config_solver(modelname,'variab0le step'); % Default only
         
     % --- Wide open throttle then braking
     case 'wot braking'

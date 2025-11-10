@@ -32,8 +32,8 @@ mcg=Vehicle.Chassis.Body.m.Value;                           % mass at center of 
 L=-Vehicle.Chassis.Body.sAxle2.Value(1);                    % wheelbase 
 a=-Vehicle.Chassis.Body.sCG.Value(1);                       % distance from front axle to CoG
 b=L-a;
-c_alpha_f=Vehicle.Chassis.TireA1.CornerringStiffnes.Value;
-c_alpha_r=Vehicle.Chassis.TireA2.CornerringStiffnes.Value  ;
+c_alpha_f=25000;
+c_alpha_r=27000;
 Gr=1/Vehicle.Powertrain.Driveline.GearboxR2.ratio.Value;    % gear ratio for torque
 H=Vehicle.Chassis.Body.sCG.Value(3);                        % CoG height
 tr=Vehicle.Chassis.Body.TrackRear.Value;                    % rear track width
@@ -51,8 +51,8 @@ control_param.Mass=mcg;
 control_param.TrackFrontToCG=a;
 control_param.Height=H;
 control_param.g=9.81;
-control_param.MotorTrq=Vehicle.Powertrain.Power.MotorL2.TorqueSpd.trq.Value;
-control_param.MotorW=Vehicle.Powertrain.Power.MotorL2.TorqueSpd.w.Value;
+control_param.MotorTrq=Vehicle.Powertrain.Power.Motor.TorqueSpd.trq.Value;
+control_param.MotorW=Vehicle.Powertrain.Power.Motor.TorqueSpd.w.Value;
 
 % Slip Control Coefficients
 control_param.Correction.Inc=1.001;

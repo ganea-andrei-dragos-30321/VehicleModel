@@ -618,7 +618,7 @@ Vehicle.Chassis.SuspA1.Steer.Pinion = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value = 0.01365;
+Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value = 0.015;
 Vehicle.Chassis.SuspA1.Steer.Pinion.sMount = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Comments = '';
@@ -638,7 +638,7 @@ Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack = struct;
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Comments = ...
   'Rack Displacement - reference only--Modify to get value form table';
-Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Value = linspace(-0.032,0.032,21);
+Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Value = linspace(-0.035,0.035,21);
 Vehicle.Chassis.SuspA1.Steer.Type = 'Steer';
 Vehicle.Chassis.SuspA1.Steer.Instance = ...
   'WheelDrivenRack1UJoint_Ch2_Achilles';
@@ -1266,48 +1266,48 @@ Vehicle.Chassis.Damper.Type = 'Dampers';
 Vehicle.Chassis.Damper.Instance = 'Axle2_Independent';
 clear coef;
 %% Tire 
-Vehicle.Chassis.TireA1 = struct;
-Vehicle.Chassis.TireA1.class = struct;
-Vehicle.Chassis.TireA1.class.Value = 'MFMbody';
-Vehicle.Chassis.TireA1.tirFile = struct;
-Vehicle.Chassis.TireA1.tirFile.Units = '';
-Vehicle.Chassis.TireA1.tirFile.Comments = '';
-Vehicle.Chassis.TireA1.tirFile.Value = 'which(''Hoosier_20p5x7_13_R20.tir'')';
-Vehicle.Chassis.TireA1.Mass = struct;
-Vehicle.Chassis.TireA1.Mass.Units = '';
-Vehicle.Chassis.TireA1.Mass.Comments = '';
-Vehicle.Chassis.TireA1.Mass.Value = 10;
-Vehicle.Chassis.TireA1.Inertia = struct;
-Vehicle.Chassis.TireA1.Inertia.Units = '';
-Vehicle.Chassis.TireA1.Inertia.Comments = '';
-Vehicle.Chassis.TireA1.Inertia.Value = ...
+Vehicle.Chassis.Tire = struct;
+Vehicle.Chassis.Tire.class = struct;
+Vehicle.Chassis.Tire.class.Value = 'MFMbody';
+Vehicle.Chassis.Tire.tirFile = struct;
+Vehicle.Chassis.Tire.tirFile.Units = '';
+Vehicle.Chassis.Tire.tirFile.Comments = '';
+Vehicle.Chassis.Tire.tirFile.Value = 'which(''Hoosier_20p5x7_13_R20.tir'')';
+Vehicle.Chassis.Tire.Mass = struct;
+Vehicle.Chassis.Tire.Mass.Units = '';
+Vehicle.Chassis.Tire.Mass.Comments = '';
+Vehicle.Chassis.Tire.Mass.Value = 10;
+Vehicle.Chassis.Tire.Inertia = struct;
+Vehicle.Chassis.Tire.Inertia.Units = '';
+Vehicle.Chassis.Tire.Inertia.Comments = '';
+Vehicle.Chassis.Tire.Inertia.Value = ...
   [1 2];
-Vehicle.Chassis.TireA1.roadFile = struct;
-Vehicle.Chassis.TireA1.roadFile.Units = '';
-Vehicle.Chassis.TireA1.roadFile.Comments = '';
-Vehicle.Chassis.TireA1.roadFile.Value = 'which(''TNO_FlatRoad.rdf'')';
-Vehicle.Chassis.TireA1.CornerringStiffnes = struct;
-Vehicle.Chassis.TireA1.CornerringStiffnes.Units = 'N/rad';
-Vehicle.Chassis.TireA1.CornerringStiffnes.Comments = 'Value taken manually from the excel';
-Vehicle.Chassis.TireA1.CornerringStiffnes.Value = 25000;
-Vehicle.Chassis.TireA1.fContactPoint = struct;
-Vehicle.Chassis.TireA1.fContactPoint.Units = 'sec';
-Vehicle.Chassis.TireA1.fContactPoint.Comments = ...
+Vehicle.Chassis.Tire.roadFile = struct;
+Vehicle.Chassis.Tire.roadFile.Units = '';
+Vehicle.Chassis.Tire.roadFile.Comments = '';
+Vehicle.Chassis.Tire.roadFile.Value = 'which(''TNO_FlatRoad.rdf'')';
+Vehicle.Chassis.Tire.CornerringStiffnes = struct;
+Vehicle.Chassis.Tire.CornerringStiffnes.Units = 'N/rad';
+Vehicle.Chassis.Tire.CornerringStiffnes.Comments = 'Value taken manually from the excel';
+Vehicle.Chassis.Tire.CornerringStiffnes.Value = 25000;
+Vehicle.Chassis.Tire.fContactPoint = struct;
+Vehicle.Chassis.Tire.fContactPoint.Units = 'sec';
+Vehicle.Chassis.Tire.fContactPoint.Comments = ...
   ['Break algebraic loop between tire center position and contact point' ...
    ' position and orientation'];
-Vehicle.Chassis.TireA1.fContactPoint.Value = 0.01;
-Vehicle.Chassis.TireA1.Type = 'Tire';
-Vehicle.Chassis.TireA1.Instance = 'MFMbody_190_50R10';
-Vehicle.Chassis.TireA1.TireBody = struct;
-Vehicle.Chassis.TireA1.TireBody.class = struct;
-Vehicle.Chassis.TireA1.TireBody.class.Value = 'Parameterized';
-Vehicle.Chassis.TireA1.TireBody.sOffset = struct;
-Vehicle.Chassis.TireA1.TireBody.sOffset.Units = 'm';
-Vehicle.Chassis.TireA1.TireBody.sOffset.Comments = '';
-Vehicle.Chassis.TireA1.TireBody.sOffset.Value = ...
+Vehicle.Chassis.Tire.fContactPoint.Value = 0.01;
+Vehicle.Chassis.Tire.Type = 'Tire';
+Vehicle.Chassis.Tire.Instance = 'MFMbody_190_50R10';
+Vehicle.Chassis.Tire.TireBody = struct;
+Vehicle.Chassis.Tire.TireBody.class = struct;
+Vehicle.Chassis.Tire.TireBody.class.Value = 'Parameterized';
+Vehicle.Chassis.Tire.TireBody.sOffset = struct;
+Vehicle.Chassis.Tire.TireBody.sOffset.Units = 'm';
+Vehicle.Chassis.Tire.TireBody.sOffset.Comments = '';
+Vehicle.Chassis.Tire.TireBody.sOffset.Value = ...
   [0 0 0];
-Vehicle.Chassis.TireA1.TireBody.Type = 'TireBody';
-Vehicle.Chassis.TireA1.TireBody.Instance = 'Parameterized';
+Vehicle.Chassis.Tire.TireBody.Type = 'TireBody';
+Vehicle.Chassis.Tire.TireBody.Instance = 'Parameterized';
 Vehicle.Chassis.TireA2 = struct;
 Vehicle.Chassis.TireA2.class = struct;
 Vehicle.Chassis.TireA2.class.Value = 'MFMbody';
@@ -1368,40 +1368,40 @@ Vehicle.Powertrain.Power.TAmbient.Value = 293;
 %% Motors
 filename='ARTTU.xlsx';
 motor_data=read_excel(filename,'Motor');
-Vehicle.Powertrain.Power.MotorL2 = struct;
-Vehicle.Powertrain.Power.MotorL2.TorqueConstant = struct;
-Vehicle.Powertrain.Power.MotorL2.TorqueConstant.Units = 'N*m/A';
-Vehicle.Powertrain.Power.MotorL2.TorqueConstant.Comments = 'only 220V value';
-Vehicle.Powertrain.Power.MotorL2.TorqueConstant.Value = 0.4839;
-Vehicle.Powertrain.Power.MotorL2.TorqueSpd = struct;
-Vehicle.Powertrain.Power.MotorL2.TorqueSpd.w = struct;
-Vehicle.Powertrain.Power.MotorL2.TorqueSpd.w.Units = 'rpm';
-Vehicle.Powertrain.Power.MotorL2.TorqueSpd.w.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.TorqueSpd.w.Value = motor_data.EngineSpeed_rpm_;
-Vehicle.Powertrain.Power.MotorL2.TorqueSpd.trq = struct;
-Vehicle.Powertrain.Power.MotorL2.TorqueSpd.trq.Units = 'N*m';
-Vehicle.Powertrain.Power.MotorL2.TorqueSpd.trq.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.TorqueSpd.trq.Value = motor_data.Torque_Nm_;
-Vehicle.Powertrain.Power.MotorL2.fActuatorCutoff = struct;
-Vehicle.Powertrain.Power.MotorL2.fActuatorCutoff.Units = 'Hz';
-Vehicle.Powertrain.Power.MotorL2.fActuatorCutoff.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.fActuatorCutoff.Value = 50;
-Vehicle.Powertrain.Power.MotorL2.LossTable = struct;
-Vehicle.Powertrain.Power.MotorL2.LossTable.w = struct;
-Vehicle.Powertrain.Power.MotorL2.LossTable.w.Units = 'rpm';
-Vehicle.Powertrain.Power.MotorL2.LossTable.w.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.LossTable.w.Value = ...
+Vehicle.Powertrain.Power.Motor = struct;
+Vehicle.Powertrain.Power.Motor.TorqueConstant = struct;
+Vehicle.Powertrain.Power.Motor.TorqueConstant.Units = 'N*m/A';
+Vehicle.Powertrain.Power.Motor.TorqueConstant.Comments = 'only 220V value';
+Vehicle.Powertrain.Power.Motor.TorqueConstant.Value = 0.4839;
+Vehicle.Powertrain.Power.Motor.TorqueSpd = struct;
+Vehicle.Powertrain.Power.Motor.TorqueSpd.w = struct;
+Vehicle.Powertrain.Power.Motor.TorqueSpd.w.Units = 'rpm';
+Vehicle.Powertrain.Power.Motor.TorqueSpd.w.Comments = '';
+Vehicle.Powertrain.Power.Motor.TorqueSpd.w.Value = motor_data.EngineSpeed_rpm_;
+Vehicle.Powertrain.Power.Motor.TorqueSpd.trq = struct;
+Vehicle.Powertrain.Power.Motor.TorqueSpd.trq.Units = 'N*m';
+Vehicle.Powertrain.Power.Motor.TorqueSpd.trq.Comments = '';
+Vehicle.Powertrain.Power.Motor.TorqueSpd.trq.Value = motor_data.Torque_Nm_;
+Vehicle.Powertrain.Power.Motor.fActuatorCutoff = struct;
+Vehicle.Powertrain.Power.Motor.fActuatorCutoff.Units = 'Hz';
+Vehicle.Powertrain.Power.Motor.fActuatorCutoff.Comments = '';
+Vehicle.Powertrain.Power.Motor.fActuatorCutoff.Value = 50;
+Vehicle.Powertrain.Power.Motor.LossTable = struct;
+Vehicle.Powertrain.Power.Motor.LossTable.w = struct;
+Vehicle.Powertrain.Power.Motor.LossTable.w.Units = 'rpm';
+Vehicle.Powertrain.Power.Motor.LossTable.w.Comments = '';
+Vehicle.Powertrain.Power.Motor.LossTable.w.Value = ...
   [0 1666.6667 3333.3333 4774.6371 5000 6666.6667 8333.3333 10000 11666.6667 ...
    13333.3333 15000 16666.6667 18333.3333 20000];
-Vehicle.Powertrain.Power.MotorL2.LossTable.trq = struct;
-Vehicle.Powertrain.Power.MotorL2.LossTable.trq.Units = 'N*m';
-Vehicle.Powertrain.Power.MotorL2.LossTable.trq.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.LossTable.trq.Value = ...
+Vehicle.Powertrain.Power.Motor.LossTable.trq = struct;
+Vehicle.Powertrain.Power.Motor.LossTable.trq.Units = 'N*m';
+Vehicle.Powertrain.Power.Motor.LossTable.trq.Comments = '';
+Vehicle.Powertrain.Power.Motor.LossTable.trq.Value = ...
   [0 20 40 60 80 100 120 140 160 180 200];
-Vehicle.Powertrain.Power.MotorL2.LossTable.efficiency = struct;
-Vehicle.Powertrain.Power.MotorL2.LossTable.efficiency.Units = '';
-Vehicle.Powertrain.Power.MotorL2.LossTable.efficiency.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.LossTable.efficiency.Value = ...
+Vehicle.Powertrain.Power.Motor.LossTable.efficiency = struct;
+Vehicle.Powertrain.Power.Motor.LossTable.efficiency.Units = '';
+Vehicle.Powertrain.Power.Motor.LossTable.efficiency.Comments = '';
+Vehicle.Powertrain.Power.Motor.LossTable.efficiency.Value = ...
   [85 85 85 85 85 85 85 85 85 85 85;
    85 85 90 90 90 90 90 90 90 90 88;
    85 85 92 92 92 92 92 92 92 92 92;
@@ -1416,19 +1416,19 @@ Vehicle.Powertrain.Power.MotorL2.LossTable.efficiency.Value = ...
    85 85 90 92 93 93 93 93 93 93 93;
    85 85 90 92 93 93 93 93 93 93 93;
    85 85 90 92 93 93 93 93 93 93 93];
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss = struct;
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.T1 = struct;
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.T1.Units = 'degC';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.T1.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.T1.Value = 25;
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.T2 = struct;
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.T2.Units = 'degC';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.T2.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.T2.Value = 100;
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.efficiency = struct;
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.efficiency.Units = '';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.efficiency.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.efficiency.Value = ...
+Vehicle.Powertrain.Power.Motor.ThermalLoss = struct;
+Vehicle.Powertrain.Power.Motor.ThermalLoss.T1 = struct;
+Vehicle.Powertrain.Power.Motor.ThermalLoss.T1.Units = 'degC';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.T1.Comments = '';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.T1.Value = 25;
+Vehicle.Powertrain.Power.Motor.ThermalLoss.T2 = struct;
+Vehicle.Powertrain.Power.Motor.ThermalLoss.T2.Units = 'degC';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.T2.Comments = '';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.T2.Value = 100;
+Vehicle.Powertrain.Power.Motor.ThermalLoss.efficiency = struct;
+Vehicle.Powertrain.Power.Motor.ThermalLoss.efficiency.Units = '';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.efficiency.Comments = '';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.efficiency.Value = ...
   [90 90 90 90 90 90 90 90 90 90 90;
    90 90 90 90 90 90 90 90 90 90 90;
    90 90 90 90 90 90 90 90 90 90 90;
@@ -1443,19 +1443,19 @@ Vehicle.Powertrain.Power.MotorL2.ThermalLoss.efficiency.Value = ...
    90 90 90 90 90 90 90 90 90 90 90;
    90 90 90 90 90 90 90 90 90 90 90;
    90 90 90 90 90 90 90 90 90 90 90];
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.mThermal = struct;
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.mThermal.Units = 'J/K';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.mThermal.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.mThermal.Value = 800;
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.Tinit = struct;
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.Tinit.Units = 'degK';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.Tinit.Comments = '';
-Vehicle.Powertrain.Power.MotorL2.ThermalLoss.Tinit.Value = 300;
-Vehicle.Powertrain.Power.MotorL2.J = struct;
-Vehicle.Powertrain.Power.MotorL2.J.Units = 'kg*m^2';
-Vehicle.Powertrain.Power.MotorL2.J.Comments = ...
+Vehicle.Powertrain.Power.Motor.ThermalLoss.mThermal = struct;
+Vehicle.Powertrain.Power.Motor.ThermalLoss.mThermal.Units = 'J/K';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.mThermal.Comments = '';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.mThermal.Value = 800;
+Vehicle.Powertrain.Power.Motor.ThermalLoss.Tinit = struct;
+Vehicle.Powertrain.Power.Motor.ThermalLoss.Tinit.Units = 'degK';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.Tinit.Comments = '';
+Vehicle.Powertrain.Power.Motor.ThermalLoss.Tinit.Value = 300;
+Vehicle.Powertrain.Power.Motor.J = struct;
+Vehicle.Powertrain.Power.Motor.J.Units = 'kg*m^2';
+Vehicle.Powertrain.Power.Motor.J.Comments = ...
   'Must be 0 for fast initialization';
-Vehicle.Powertrain.Power.MotorL2.J.Value = 0;
+Vehicle.Powertrain.Power.Motor.J.Value = 0;
 Vehicle.Powertrain.Power.MotorR2 = struct;
 Vehicle.Powertrain.Power.MotorR2.TorqueSpd = struct;
 Vehicle.Powertrain.Power.MotorR2.TorqueSpd.w = struct;

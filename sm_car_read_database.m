@@ -28,13 +28,13 @@ end
 %% Help functions for assembly
 
 % Subframe connections assembly
+Vehicle = sm_car_assemble_Subframe(Vehicle, 'Rigid_1Rev');
 
 % Steering assembly ( Temporarry )
+filename = data_file_name(contains(data_file_name, 'Chassis'));
+Vehicle = sm_car_assemble_Steering(filename, Vehicle);
 
-% Mirror tires front and rear
-
-% Mirror motor left and right
-
-% CHANGE TO 1 TYPE OR TIRE AND MOTOR
+% Set derived files from within Vehicle data structure
+Vehicle = addfieldVehicleDW(Vehicle);
 
 end

@@ -5,7 +5,7 @@ control_param.Name = 'NoIMU';
 
 
 % Copy motor lookup table exactly
-motor = evalin('base','Vehicle.Powertrain.Power.MotorL2');
+motor = evalin('base','Vehicle.Powertrain.Power.Motor');
 control_param.Tmax=max(motor.TorqueSpd.trq.Value);
 control_param.CurrentTrqConst= motor.TorqueConstant.Value; % change to our value once motors are placed or for export
 

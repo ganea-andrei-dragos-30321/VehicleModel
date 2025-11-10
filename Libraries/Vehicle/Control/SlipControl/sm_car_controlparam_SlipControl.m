@@ -30,8 +30,8 @@ rwheel=tire_param.DIMENSION.UNLOADED_RADIUS;
 
 control_param.WheelRad=rwheel;
 control_param.GearRatio=Vehicle.Powertrain.Driveline.GearboxL2.ratio.Value;
-control_param.MotorTrq=Vehicle.Powertrain.Power.MotorL2.TorqueSpd.trq.Value;
-control_param.MotorW=Vehicle.Powertrain.Power.MotorL2.TorqueSpd.w.Value;
+control_param.MotorTrq=Vehicle.Powertrain.Power.Motor.TorqueSpd.trq.Value;
+control_param.MotorW=Vehicle.Powertrain.Power.Motor.TorqueSpd.w.Value;
 
 % Slip Control Coefficients
 control_param.Correction.Inc=1.001;

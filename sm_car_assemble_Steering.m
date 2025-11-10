@@ -1,4 +1,4 @@
-function [outputArg1,outputArg2] = sm_car_assemble_Steering(inputArg1,inputArg2)
+function Vehicle = sm_car_assemble_Steering(filename,Vehicle)
 
 % Temporary until steering will be fixed
 hrdPt=read_excel(filename,'HardpointsFr','UseRowNames',true)./1000;

@@ -7,8 +7,8 @@ control_param.trq_ratio_front = 0.5;
 
 % Copy motor lookup tables exactly
 Vehicle = evalin('base','Vehicle');
-control_param.MotorL2 = Vehicle.Powertrain.Power.MotorL2;
-control_param.MotorR2 = Vehicle.Powertrain.Power.MotorR2;
+control_param.MotorL2 = Vehicle.Powertrain.Power.Motor;
+control_param.MotorR2 = Vehicle.Powertrain.Power.Motor;
 
 control_param.vx_enable          = 2.5; % m/s
 control_param.aSteerWheel_enable = 4*pi/180; % m/s
