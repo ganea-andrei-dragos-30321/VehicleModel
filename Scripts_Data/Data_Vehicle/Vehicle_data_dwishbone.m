@@ -1135,6 +1135,8 @@ Vehicle.Chassis.SuspA2.Steer.class = struct;
 Vehicle.Chassis.SuspA2.Steer.class.Value = 'None';
 Vehicle.Chassis.SuspA2.Steer.Type = 'Steer';
 Vehicle.Chassis.SuspA2.Steer.Instance = 'None_default';
+
+
 clear hrdPt ARBcoef;
 %% Aero
 Vehicle.Chassis.Aero = struct;

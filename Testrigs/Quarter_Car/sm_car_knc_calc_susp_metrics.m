@@ -628,9 +628,9 @@ PzMax     = min(max(PzPzUp),max(PzPzDn));
 PzMin     = max(min(PzPzUp),min(PzPzDn));
 
 % Sample testrig post force for test phases with increasing and decreasing post height
-PzSamplePts = linspace(PzMin,PzMax,100);
-FzPzUpSamp = interp1(PzPzUp,FzROUp,PzSamplePts);
-FzPzDnSamp = interp1(PzPzDn,FzRODn,PzSamplePts);
+% PzSamplePts = linspace(PzMin,PzMax,100);
+% FzPzUpSamp = interp1(PzPzUp,FzROUp,PzSamplePts);
+% FzPzDnSamp = interp1(PzPzDn,FzRODn,PzSamplePts);
 
 % Average both curves to obtain testrig post force without hysteresis
 FzAvgRO = mean([FzPzUpSamp;FzPzDnSamp]);
