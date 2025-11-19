@@ -20,8 +20,11 @@ function [DataBus]=import_excel(filename,sheets)
 %% Gets all sheet names if sheet to read is not specified
 if nargin == 1 || isempty(sheets)
     sheets = sheetnames(filename);
+    ref=0;
+else
+    ref=1;
 end
-allSheets = sheets;
+sheets = string(sheets);
 
 %% Ignore hardpoint and Info sheets
 if nargin == 1 & ~isempty(sheets(sheets=='HardpointsFr'))
@@ -42,9 +45,9 @@ if nargin == 1
     referencedSheets = string([]);
     
     %% Get list of sheets that are referenced to ignore when reading
-    for s = 1:numel(allSheets)
-        currentSheet = allSheets{s};
-        opts = detectImportOptions(filename, 'Sheet', currentSheet, 'Range', 'A5:E100');
+    for s = 1:numel(sheets)
+        currentSheet = sheets{s};
+        opts = detectImportOptions(filename, 'Sheet', currentSheet);
         opts.VariableNames = ["Var1", "Var2", "Var3", "Var4", "Var5"];
         opts = setvartype(opts, opts.VariableNames, 'string');
         opts = setvaropts(opts, opts.VariableNames, 'FillValue', "");
@@ -52,6 +55,7 @@ if nargin == 1
     
         % Collect sheets referenced as 'SHEET'
         referencedSheets = [referencedSheets; sheetData.Var3(sheetData.Var4 == "SHEET")];
+        referencedSheets = [referencedSheets; sheetData.Var3(sheetData.Var5 == "TABLE")];
     end
     
     % ✅ Clean referenced list
@@ -72,7 +76,10 @@ for subsystem=1:length(sheets)
     
     % Write type, instance, class in DataBus struct
     for i=1:length(field)
-    DataBus.(currentSheet).(field{i}).Value=cell2mat(type{i,3});
+            if ~ismissing(type{i,3})  % Check if there is a value for the type and it's not empty
+            DataBus.(currentSheet).(field{i}).Value = cell2mat(type{i,3});
+            end
+
     end
 
     % Read additional data from the current sheet
@@ -101,14 +108,14 @@ for subsystem=1:length(sheets)
         % Recursive way to read struct inside structs
         if strcmp(sheetData.Var4{i},'SHEET')
             try
-                DataBus.(currentSheet).(sheetData.Var1{i}) = import_excel(filename, {sheetData.Var3{i}});
+                DataBus.(currentSheet).(sheetData.Var1{i}) = import_excel(filename, sheetData.Var3{i});
             catch ME
-                error('File "%s" sheet name specified in "%s" row "%d" cannot be found: %s', filename, currentSheet, i, ME);
+                 error('File "%s" sheet name specified in "%s" row "%d" cannot be found: %s', filename, currentSheet, i, ME);
             end
         elseif strcmp(sheetData.Var5{i},'TABLE')
             % Read the table data and store it in the DataBus struct
             try
-                tableData = readmatrix({sheetData.Var3{i}}); 
+                tableData = readmatrix(filename,'Sheet',sheetData.Var3{i}); 
                 DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
                 struct('Value',tableData,'Unit',sheetData.Var4(i),'Comments',sheetData.Var5(i));
             catch ME
@@ -128,16 +135,22 @@ for subsystem=1:length(sheets)
                     txt = extractBetween(txt, "[", "]");  % get inner text
                     txt = strrep(txt, ",", ".");          % replace commas with dots for safety
                     val = str2num(txt);
+                elseif isempty(str2num(val))                 
+                    val = strtrim(txt); % Ensure any leading/trailing spaces are removed
+                else
+                    val = str2num(txt);
                 end
-
+            
+            
             % Avoids excel comment for hardpoints
                 if contains(txt,'DO NOT CHANGE HERE')
                     erase(txt,'( DO NOT CHANGE HERE )');
                     val = txt;
                 end
-                
+
             end
             clear txt;
+
             %% Add contents to DataBus
 
             if strcmp(sheetData.Var2{i},'class')
@@ -145,15 +158,27 @@ for subsystem=1:length(sheets)
 
                 DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
                 struct('Value',val);
+            elseif strcmp(sheetData.Var1{i},'class')
+                %% if clause to allow for small structures without additional sheets (only class value)
+
+                DataBus.(currentSheet).(sheetData.Var1{i}) = ...
+                struct('Value',val);
+            elseif isempty(sheetData.Var2{i})
+                
+                DataBus.(currentSheet).(sheetData.Var1{i}) = ...
+                struct('Value',val,'Unit',sheetData.Var4(i),'Comments',sheetData.Var5(i));
             else
                  %% Normal allocation of structures
 
             DataBus.(currentSheet).(sheetData.Var1{i}).(sheetData.Var2{i}) = ...
                 struct('Value',val,'Unit',sheetData.Var4(i),'Comments',sheetData.Var5(i));
             end
-        
+            
+            
         end
     end
-
+    if ref==1
+       DataBus = DataBus.(currentSheet);
+    end
 end
 end

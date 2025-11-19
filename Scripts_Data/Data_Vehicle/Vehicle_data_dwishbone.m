@@ -1477,8 +1477,7 @@ Vehicle.Powertrain.Power.MotorR2.LossTable.w = struct;
 Vehicle.Powertrain.Power.MotorR2.LossTable.w.Units = 'rpm';
 Vehicle.Powertrain.Power.MotorR2.LossTable.w.Comments = '';
 Vehicle.Powertrain.Power.MotorR2.LossTable.w.Value = ...
-  [0 1666.6667 3333.3333 4774.6371 5000 6666.6667 8333.3333 10000 11666.6667 ...
-   13333.3333 15000 16666.6667 18333.3333 20000];
+  [0 1666.6667 3333.3333 4774.6371 5000 6666.6667 8333.3333 10000 11666.6667 13333.3333 15000 16666.6667 18333.3333 20000];
 Vehicle.Powertrain.Power.MotorR2.LossTable.trq = struct;
 Vehicle.Powertrain.Power.MotorR2.LossTable.trq.Units = 'N*m';
 Vehicle.Powertrain.Power.MotorR2.LossTable.trq.Comments = '';

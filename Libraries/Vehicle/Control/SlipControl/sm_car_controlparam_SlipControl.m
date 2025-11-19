@@ -29,7 +29,7 @@ tire_param = simscape.multibody.tirread(eval('which(''fsae190_50R10.tir'')'));
 rwheel=tire_param.DIMENSION.UNLOADED_RADIUS; 
 
 control_param.WheelRad=rwheel;
-control_param.GearRatio=Vehicle.Powertrain.Driveline.GearboxL2.ratio.Value;
+control_param.GearRatio=Vehicle.Powertrain.Driveline.Gearbox.ratio.Value;
 control_param.MotorTrq=Vehicle.Powertrain.Power.Motor.TorqueSpd.trq.Value;
 control_param.MotorW=Vehicle.Powertrain.Power.Motor.TorqueSpd.w.Value;
 

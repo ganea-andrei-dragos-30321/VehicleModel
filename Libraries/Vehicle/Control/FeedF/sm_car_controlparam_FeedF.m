@@ -34,13 +34,13 @@ a=-Vehicle.Chassis.Body.sCG.Value(1);                       % distance from fron
 b=L-a;
 c_alpha_f=25000;
 c_alpha_r=27000;
-Gr=1/Vehicle.Powertrain.Driveline.GearboxR2.ratio.Value;    % gear ratio for torque
+Gr=1/Vehicle.Powertrain.Driveline.Gearbox.ratio.Value;    % gear ratio for torque
 tr=Vehicle.Chassis.Body.TrackRear.Value;                    % rear track width
  
 
 control_param.RearTrack=Vehicle.Chassis.Body.TrackRear.Value;
 control_param.WheelRad=rwheel;
-control_param.GearRatio=Vehicle.Powertrain.Driveline.GearboxL2.ratio.Value;
+control_param.GearRatio=Vehicle.Powertrain.Driveline.Gearbox.ratio.Value;
 control_param.StrWheelRatio=0.165;
 control_param.UndersteerGradient= mcg / L * (b / c_alpha_f - a / c_alpha_r);
 control_param.Wheelbase=L;

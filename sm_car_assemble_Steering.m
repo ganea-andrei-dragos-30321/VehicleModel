@@ -118,5 +118,11 @@ Vehicle.Chassis.SuspA1.Steer.DriverHuman.Opacity.Comments = '';
 Vehicle.Chassis.SuspA1.Steer.DriverHuman.Opacity.Value = 1;
 Vehicle.Chassis.SuspA1.Steer.DriverHuman.Type = 'DriverHuman';
 Vehicle.Chassis.SuspA1.Steer.DriverHuman.Instance = 'None';
+Vehicle.Chassis.SuspA2.Steer = struct;
+Vehicle.Chassis.SuspA2.Steer.class = struct;
+Vehicle.Chassis.SuspA2.Steer.class.Value = 'None';
+Vehicle.Chassis.SuspA2.Steer.Type = 'Steer';
+Vehicle.Chassis.SuspA2.Steer.Instance = 'None_default';
+
 
 end

@@ -5,7 +5,7 @@ function [tire_radius, tireFields] = sm_car_vehcfg_getTireRadius(Vehicle)
 
 % Find fieldnames for tires
 chassis_fnames = fieldnames(Vehicle.Chassis);
-fname_inds_tire = startsWith(chassis_fnames,'Tire');
+fname_inds_tire = strcmp(chassis_fnames,'Tire');
 tireFields = chassis_fnames(fname_inds_tire);
 tireFields = sort(tireFields); % Order important for copying Body sAxle values
 
@@ -37,8 +37,8 @@ for axle_i = 1:length(tireFields)
     
     % Get tire radius
     if(~startsWith(tir_file{axle_i},'check_tire_radius'))
-        tir_file{axle_i} = strrep(tir_file{axle_i},'which(''','');
-        tir_file{axle_i} = strrep(tir_file{axle_i},''')','');
+        tir_file{axle_i} = erase(tir_file{axle_i},"which(''");
+        tir_file{axle_i} = erase(tir_file{axle_i},"'')");
         temptirparams = mfeval.readTIR(which(tir_file{axle_i}));
         tire_radius(axle_i) = temptirparams.UNLOADED_RADIUS;
     else

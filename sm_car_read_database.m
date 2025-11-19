@@ -26,13 +26,15 @@ for i=1: size(vehicle_data_file_list,1)
 end
 
 %% Help functions for assembly
-
+Vehicle.config = 'Achilles_DWishbone';
 % Subframe connections assembly
 Vehicle = sm_car_assemble_Subframe(Vehicle, 'Rigid_1Rev');
 
 % Steering assembly ( Temporarry )
-filename = data_file_name(contains(data_file_name, 'Chassis'));
-Vehicle = sm_car_assemble_Steering(filename, Vehicle);
+Vehicle = sm_car_assemble_Steering('ARTTU.xlsx', Vehicle);
+
+Vehicle = sm_car_assemble_Misc(Vehicle);
+Vehicle.Brakes = Vehicle.Brakes.Brakes;
 
 % Set derived files from within Vehicle data structure
 Vehicle = addfieldVehicleDW(Vehicle);
