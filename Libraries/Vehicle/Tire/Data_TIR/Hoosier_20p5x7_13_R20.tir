@@ -34,7 +34,7 @@ TURNSLIP                 = 'true'            $Turnslip
 VXLOW                    = 1                 $Lower boundary of slip calculation
 $------------------------------------------------------------dimension
 [DIMENSION]
-UNLOADED_RADIUS          = 0.2603            $Free tire radius
+UNLOADED_RADIUS          = 0.267361            $Free tire radius
 WIDTH                    = 0.1778            $Nominal section width of the tire
 ASPECT_RATIO             = 0.536             $Nominal aspect ratio
 RIM_RADIUS               = 0.1651            $Nominal rim radius
