@@ -45,8 +45,8 @@ for axle_i = 1:length(tireFields)
     
     % Get tire radius
     if(~startsWith(tir_file{axle_i},'check_tire_radius'))
-        tir_file{axle_i} = strrep(tir_file{axle_i},'which(''','');
-        tir_file{axle_i} = strrep(tir_file{axle_i},''')','');
+        tir_file{axle_i} = erase(tir_file{axle_i},"which('");
+        tir_file{axle_i} = erase(tir_file{axle_i},"')");
         temptirparams = simscape.multibody.tirread(which(tir_file{axle_i}));
         %tire_radius(axle_i) = temptirparams.UNLOADED_RADIUS;
         tireK(axle_i) = temptirparams.VERTICAL.VERTICAL_STIFFNESS;

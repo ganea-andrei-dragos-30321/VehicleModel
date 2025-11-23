@@ -11,7 +11,7 @@ for i=1:length(Instance_List)
     mdata.(Instance).Type                  = maneuver_type;
     mdata.(Instance).Instance              = Instance;
 
-    mdata.(Instance).Brake.t.Value          = [0.00	11.00	11.20	190.00	191.00	200.00];
+    mdata.(Instance).Brake.t.Value          = [0.00	7.00	7.20	190.00	191.00	200.00];
     mdata.(Instance).Brake.t.Units    = 'sec';
     mdata.(Instance).Brake.t.Comments = '';
 
@@ -27,7 +27,7 @@ for i=1:length(Instance_List)
     mdata.(Instance).Steer.aWheel.Units    = 'rad';
     mdata.(Instance).Steer.aWheel.Comments = '';
 
-    mdata.(Instance).Accel.t.Value               = [0.00	1.00	1.20	10.00	10.20	200.00];
+    mdata.(Instance).Accel.t.Value               = [0.00	1.00	1.20	6.00	6.20	200.00];
     mdata.(Instance).Accel.t.Units         = 'sec';
     mdata.(Instance).Accel.t.Comments      = '';
 
