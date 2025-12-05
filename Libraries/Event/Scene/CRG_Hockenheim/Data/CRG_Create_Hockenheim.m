@@ -25,7 +25,7 @@ if(nargout == 0)
     road_opts.zb = 0.05;
     road_opts.reverse = 0;
     road_opts.datasrc = 'xyz';  % xyz or gps
-    sm_car_centerline_to_crg('CRG Hockenheim',road_opts)
+    sm_car_centerline_to_crg('CRG_Hockenheim',road_opts)
 end
 
 %% Create driver trajectory

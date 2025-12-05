@@ -158,7 +158,7 @@ opts = data.opts;
 default = struct;
 default = crg_check_opts(default);
 f = fieldnames(opts);
-for i = 1:size(f)
+for i = 1:length(f)
     if isfield(default.opts, f{i}) && (opts.(f{i}) == default.opts.(f{i}))
         opts = rmfield(opts, f{i});
     end
