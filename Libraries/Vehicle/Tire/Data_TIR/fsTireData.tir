@@ -34,7 +34,7 @@ TURNSLIP                 = 'true'            $Turnslip
 VXLOW                    = 1                 $Lower boundary of slip calculation
 $------------------------------------------------------------dimension
 [DIMENSION]
-UNLOADED_RADIUS          = 0.2667            $Free tire radius
+UNLOADED_RADIUS          = 0.26734            $Free tire radius
 WIDTH                    = 0.1778            $Nominal section width of the tire
 ASPECT_RATIO             = 0.536             $Nominal aspect ratio
 RIM_RADIUS               = 0.1651            $Nominal rim radius
@@ -51,8 +51,8 @@ IYY                      = 0.736             $Tire polar moment of inertia
 $-------------------------------------------------------------vertical
 [VERTICAL]
 FNOMIN                   = 1112              $Nominal wheel load
-VERTICAL_STIFFNESS       = 209651            $Tire vertical stiffness
-VERTICAL_DAMPING         = 50                $Tire vertical damping
+VERTICAL_STIFFNESS       = 92000            $Tire vertical stiffness
+VERTICAL_DAMPING         = 105                $Tire vertical damping
 MC_CONTOUR_A             = 0                 $Motorcycle contour ellipse A
 MC_CONTOUR_B             = 0                 $Motorcycle contour ellipse B
 BREFF                    = 8.386             $Low load stiffness effective rolling radius

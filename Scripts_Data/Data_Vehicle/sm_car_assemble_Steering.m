@@ -2,6 +2,10 @@ function Vehicle = sm_car_assemble_Steering(filename,Vehicle)
 
 % Temporary until steering will be fixed
 hrdPt=read_excel(filename,'HardpointsFr','UseRowNames',true)./1000;
+% len = norm(hrdPt{'steerWheel',:} -   hrdPt{'steerRack',:});
+% x1 = asin(0.01365/len);
+% x2 = atan2(abs(hrdPt{'steerWheel','X'} - hrdPt{'steerRack','X'}),hrdPt{'steerWheel','Z'} - hrdPt{'steerRack','Z'});
+% pinionIncl = pi/2 - x2 + x1;
 pinionIncl=-atan((hrdPt{'upperCol','X'}-hrdPt{'steerRack','X'})/(hrdPt{'upperCol','Z'}-hrdPt{'steerRack','Z'}));
 Vehicle.Chassis.SuspA1.Steer = struct;
 Vehicle.Chassis.SuspA1.Steer.class = struct;
@@ -80,7 +84,7 @@ Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack = struct;
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Comments = ...
   'Rack Displacement - reference only--Modify to get value form table';
-Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Value = linspace(-0.032,0.032,21);
+Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Value = linspace(-0.04,0.04,21);
 Vehicle.Chassis.SuspA1.Steer.Type = 'Steer';
 Vehicle.Chassis.SuspA1.Steer.Instance = ...
   'WheelDrivenRack1UJoint_Ch2_Achilles';

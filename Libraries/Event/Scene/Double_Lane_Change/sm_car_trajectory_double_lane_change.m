@@ -26,7 +26,7 @@ gate6       = gate5+30;   % Exit 3rd set of cones
 gate7       = gate6+30;   % End
 
 
-v_lc        = 19;     % Speed during lane change (m/s)
+v_lc        = 17;     % Speed during lane change (m/s)
 x_testv     = 20;    % Distance when target speed is reached (m)
 
 % Assemble waypoints, foundation for interpolation

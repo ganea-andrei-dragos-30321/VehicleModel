@@ -38,7 +38,7 @@ clear drv
 
 %% Default Driver - FSAE Achilles
 veh_name = 'FSAE_Achilles';
-drv.Lateral.NForward.Value          = 1;          % (no units) 
+drv.Lateral.NForward.Value          = 2;          % (no units) 
 drv.Lateral.NReverse.Value          = 2.5;        % (no units)
 drv.Lateral.xWheelbase.Value        = 1.265;      % m
 drv.Lateral.aMaxSteer.Value         = 154;         % deg
@@ -147,7 +147,7 @@ clear drv
 %% List of Closed-Loop Maneuvers
 % Maneuvers with longitudinal and lateral driver
 cl_manv_longLat = {...
-    'CRG_Custom';
+    'CRG_Dej';
     'CRG_Hockenheim';
     'CRG_Kyalami';
     'CRG_Mallory_Park';

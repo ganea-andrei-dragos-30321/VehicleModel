@@ -102,20 +102,20 @@ InitSet.CRG_Mallory_Park_F.Data         = {...
     'sChassis','m',   6,    0,       0};
 
 %% Scene CRG Customizable Event, Standard Lap, Slow Start
-InitSet.CRG_Custom.Type   = 'CRG_Custom';
+InitSet.CRG_Custom.Type   = 'CRG_Dej';
 InitSet.CRG_Custom.Instance     = '';
 InitSet.CRG_Custom.Data         = {...
     'aChassis','rad', 0,   0.0368,  0;
     'vChassis','m/s', 10,   0,       0;
-    'sChassis','m',   6,   0,      -0.18};
+    'sChassis','m',   0,   0,      0};
 
 %% Scene CRG Customizable Event No Elevation, Standard Lap, Slow Start
-InitSet.CRG_Custom_F.Type   = 'CRG_Custom_F';
+InitSet.CRG_Custom_F.Type   = 'CRG_Dej_F';
 InitSet.CRG_Custom_F.Instance     = '';
 InitSet.CRG_Custom_F.Data         = {...
     'aChassis','rad', 0,    0,       0;
-    'vChassis','m/s', 10,   0,       0;
-    'sChassis','m',   6,    0,       0};
+    'vChassis','m/s', 0,    0,       0;
+    'sChassis','m',   0,    0,       0};
 
 %% Scene CRG Nurburgring Nordschleife, Standard Lap, Slow Start
 InitSet.CRG_Nurburgring_N.Type   = 'CRG_Nurburgring_N';
