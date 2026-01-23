@@ -11,7 +11,7 @@ Visual = sm_car_param_visual('default');
 assignin('base','Visual',Visual);
 
 %% Create .mat files with Vehicle structure presets
-evalin('base','Vehicle = sm_car_read_database')
+evalin('base','Vehicle = sm_car_read_database;')
 
 %% Load Initial Vehicle state database
 sm_car_gen_init_database;
