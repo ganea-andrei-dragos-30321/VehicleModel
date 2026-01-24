@@ -41,9 +41,9 @@ end
 
 %% Create driver trajectory
 traj_coeff.blend_distance = 10;     % m
-traj_coeff.diff_exp       = 1.3;    % Curvature exponent
+traj_coeff.diff_exp       = 1.4;    % Curvature exponent
 traj_coeff.diff_smooth    = 8;     % Diff smoothing number of points
-traj_coeff.curv_smooth    = 25;    % Curvature smoothing number of points
+traj_coeff.curv_smooth    = 20;    % Curvature smoothing number of points
 traj_coeff.lim_smooth     = 100;    % Limit smoothing number of points
 traj_coeff.target_shape_smooth = 8;  % Number of points for smoothing
 traj_coeff.vmax           = 20;   % Max speed, m/s
