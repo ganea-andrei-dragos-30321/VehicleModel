@@ -19,11 +19,12 @@ evalin('base','Init = IDatabase.Skidpad.FSAE_Achilles;')
 
 %% Load Maneuver database
 sm_car_import_maneuver_data;
-evalin('base','Maneuver = MDatabase.Skidpad.FSAE_Achilles;')
 
 %% Load Driver database
 sm_car_gen_driver_database;
-evalin('base','Driver = DDatabase.Skidpad.FSAE_Achilles;');
+
+%% Set default maneuver
+sm_car_config_maneuver('sm_car','Skidpad');
 
 %% Load Camera Frame Database
 CDatabase.Camera = sm_car_gen_camera_database;
