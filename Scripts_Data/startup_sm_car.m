@@ -23,9 +23,6 @@ sm_car_import_maneuver_data;
 %% Load Driver database
 sm_car_gen_driver_database;
 
-%% Set default maneuver
-sm_car_config_maneuver('sm_car','Skidpad');
-
 %% Load Camera Frame Database
 CDatabase.Camera = sm_car_gen_camera_database;
 assignin('base','CDatabase',CDatabase)
