@@ -2,14 +2,10 @@ function Vehicle = sm_car_assemble_Steering(filename,Vehicle)
 
 % Temporary until steering will be fixed
 hrdPt=read_excel(filename,'HardpointsFr','UseRowNames',true)./1000;
-% len = norm(hrdPt{'steerWheel',:} -   hrdPt{'steerRack',:});
-% x1 = asin(0.01365/len);
-% x2 = atan2(abs(hrdPt{'steerWheel','X'} - hrdPt{'steerRack','X'}),hrdPt{'steerWheel','Z'} - hrdPt{'steerRack','Z'});
-% pinionIncl = pi/2 - x2 + x1;
-pinionIncl=-atan((hrdPt{'upperCol','X'}-hrdPt{'steerRack','X'})/(hrdPt{'upperCol','Z'}-hrdPt{'steerRack','Z'}));
+
 Vehicle.Chassis.SuspA1.Steer = struct;
 Vehicle.Chassis.SuspA1.Steer.class = struct;
-Vehicle.Chassis.SuspA1.Steer.class.Value = 'WheelDrivenRack1UJoint1';
+Vehicle.Chassis.SuspA1.Steer.class.Value = 'WheelDrivenRack1UJoint';
 Vehicle.Chassis.SuspA1.Steer.Rack = struct;
 Vehicle.Chassis.SuspA1.Steer.Rack.sMount = struct;
 Vehicle.Chassis.SuspA1.Steer.Rack.sMount.Units = 'm';
@@ -30,61 +26,63 @@ Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Comments = '';
 Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Value = ...
   hrdPt{'steerWheel',:};
-Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol = struct;
-Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Units = 'm';
-Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Wheel.sUpperCol.Value = ...
-  hrdPt{'upperCol',:};
 Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis = struct;
 Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Units = 'rad';
 Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Value = ...
- -atan((hrdPt{'steerWheel','Z'}-hrdPt{'upperCol','Z'})/(hrdPt{'steerWheel','X'}-hrdPt{'upperCol','X'}));
+Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Value = deg2rad(41.782);
 Vehicle.Chassis.SuspA1.Steer.Wheel.m = struct;
 Vehicle.Chassis.SuspA1.Steer.Wheel.m.Units = 'kg';
 Vehicle.Chassis.SuspA1.Steer.Wheel.m.Comments = 'Mass';
-Vehicle.Chassis.SuspA1.Steer.Wheel.m.Value = 0.7;
+Vehicle.Chassis.SuspA1.Steer.Wheel.m.Value = 0.8;
 Vehicle.Chassis.SuspA1.Steer.Wheel.class = struct;
 Vehicle.Chassis.SuspA1.Steer.Wheel.class.Value = 'FSAE';
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper = struct;
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m = struct;
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Units = 'kg';
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Value = 0.4;
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength = struct;
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength.Units = 'm';
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength.Value = ((hrdPt{'steerWheel','X'}-hrdPt{'upperCol','X'})^2+(hrdPt{'steerWheel','X'}-hrdPt{'upperCol','X'})^2)^(1/2);
-Vehicle.Chassis.SuspA1.Steer.Shaft_Lower = struct;
-Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m = struct;
-Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Units = 'kg';
-Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Value = 0.4;
 Vehicle.Chassis.SuspA1.Steer.Pinion = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value = 0.01365;
-Vehicle.Chassis.SuspA1.Steer.Pinion.sMount = struct;
-Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Units = 'm';
-Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Comments = '';
-Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Value = ...
-  hrdPt{'steerPinion',:}-[cos(pinionIncl)*Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value,0,sin(pinionIncl)*Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value];
+Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value = 0.012732;
 Vehicle.Chassis.SuspA1.Steer.Pinion.m = struct;
 Vehicle.Chassis.SuspA1.Steer.Pinion.m.Units = 'kg';
 Vehicle.Chassis.SuspA1.Steer.Pinion.m.Comments = '';
 Vehicle.Chassis.SuspA1.Steer.Pinion.m.Value = 0.05;
+Vehicle.Chassis.SuspA1.Steer.Pinion.sMount = struct;
+Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Units = 'm';
+Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Comments = '';
+Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Value = ...
+  [Vehicle.Chassis.SuspA1.Steer.Rack.sMount.Value(1) - sin((Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Value)) * Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value ...
+   0 ...
+   Vehicle.Chassis.SuspA1.Steer.Rack.sMount.Value(3) - cos((Vehicle.Chassis.SuspA1.Steer.Wheel.aAxis.Value)) * Vehicle.Chassis.SuspA1.Steer.Pinion.xRad.Value];
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper = struct;
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m = struct;
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Units = 'kg';
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Comments = '';
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.m.Value = 0.2;
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength = struct;
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength.Units = 'm';
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength.Comments = '';
+Vehicle.Chassis.SuspA1.Steer.Shaft_Upper.xLength.Value = norm(Vehicle.Chassis.SuspA1.Steer.Pinion.sMount.Value - Vehicle.Chassis.SuspA1.Steer.Wheel.sMount.Value)/2;
+Vehicle.Chassis.SuspA1.Steer.Shaft_Lower = struct;
+Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m = struct;
+Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Units = 'kg';
+Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Comments = '';
+Vehicle.Chassis.SuspA1.Steer.Shaft_Lower.m.Value = 0.2;
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table = struct;
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.aWheel = struct;
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.aWheel.Units = 'rad';
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.aWheel.Comments = ...
-  'Wheel Angle - reference only -- Modify to get value form table';
-Vehicle.Chassis.SuspA1.Steer.Ratio_Table.aWheel.Value = linspace(-2.689,2.689,21);
+  'Wheel Angle - reference only';
+Vehicle.Chassis.SuspA1.Steer.Ratio_Table.aWheel.Value = ...
+  [-3.1416 -2.8274 -2.5133 -2.1991 -1.8849 -1.5708 -1.2566 -0.94247 -0.62831 ...
+   -0.31416 0 0.31416 0.62831 0.94247 1.2566 1.5708 1.8849 2.1991 2.5133 ...
+   2.8274 3.1416];
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack = struct;
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Units = 'm';
 Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Comments = ...
-  'Rack Displacement - reference only--Modify to get value form table';
-Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Value = linspace(-0.04,0.04,21);
+  'Rack Displacement - reference only';
+Vehicle.Chassis.SuspA1.Steer.Ratio_Table.xRack.Value = ...
+  [-0.042894 -0.038604 -0.034315 -0.030026 -0.025736 -0.021447 -0.017157 ...
+   -0.012868 -0.0085787 -0.0042894 0 0.0042894 0.0085787 0.012868 0.017157 ...
+   0.021447 0.025736 0.030026 0.034315 0.038604 0.042894];
 Vehicle.Chassis.SuspA1.Steer.Type = 'Steer';
 Vehicle.Chassis.SuspA1.Steer.Instance = ...
   'WheelDrivenRack1UJoint_Ch2_Achilles';
@@ -122,11 +120,6 @@ Vehicle.Chassis.SuspA1.Steer.DriverHuman.Opacity.Comments = '';
 Vehicle.Chassis.SuspA1.Steer.DriverHuman.Opacity.Value = 1;
 Vehicle.Chassis.SuspA1.Steer.DriverHuman.Type = 'DriverHuman';
 Vehicle.Chassis.SuspA1.Steer.DriverHuman.Instance = 'None';
-Vehicle.Chassis.SuspA2.Steer = struct;
-Vehicle.Chassis.SuspA2.Steer.class = struct;
-Vehicle.Chassis.SuspA2.Steer.class.Value = 'None';
-Vehicle.Chassis.SuspA2.Steer.Type = 'Steer';
-Vehicle.Chassis.SuspA2.Steer.Instance = 'None_default';
 
 
 end

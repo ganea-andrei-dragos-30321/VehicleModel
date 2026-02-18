@@ -34,6 +34,11 @@ for i=1:length(Instance_List)
     mdata.(Instance).Accel.rPedal.Value          = [0.00	0.00	0.70	0.70	0.00	0.00];
     mdata.(Instance).Accel.rPedal.Units    = '0-1';
     mdata.(Instance).Accel.rPedal.Comments = '';
+
+    mdata.(Instance).nPreviewPoints.Value      = 5; % m
+    mdata.(Instance).nPreviewPoints.Units      = ''; % m
+    mdata.(Instance).nPreviewPoints.Comments   = 'For Pure Pursuit Driver'; % m    
+
 end
 
 % Unique settings (values)

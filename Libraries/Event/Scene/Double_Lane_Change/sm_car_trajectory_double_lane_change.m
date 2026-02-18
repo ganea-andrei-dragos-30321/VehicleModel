@@ -26,7 +26,7 @@ gate6       = gate5+30;   % Exit 3rd set of cones
 gate7       = gate6+30;   % End
 
 
-v_lc        = 17;     % Speed during lane change (m/s)
+v_lc        = 16;     % Speed during lane change (m/s)
 x_testv     = 20;    % Distance when target speed is reached (m)
 
 % Assemble waypoints, foundation for interpolation
@@ -93,7 +93,7 @@ if(showPlot)
 end
 
 % Calculate target yaw angle (rad)
-yaw_interval = 5; % 10
+yaw_interval = 1; % 10
 aYaw_new = atan2(...
     y_new(yaw_interval+1:end)-y_new(1:end-yaw_interval),...
     x_new(yaw_interval+1:end)-x_new(1:end-yaw_interval));

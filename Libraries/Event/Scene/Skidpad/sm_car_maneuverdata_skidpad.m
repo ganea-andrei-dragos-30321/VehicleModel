@@ -15,7 +15,7 @@ for i=1:length(Instance_List)
     mdata.(Instance).Trajectory_LoadFile.Units    = '';
     mdata.(Instance).Trajectory_LoadFile.Comments = '';
 
-    mdata.(Instance).xMaxLat.Value         = 5; % m
+    mdata.(Instance).xMaxLat.Value         = 1.5; % m
     mdata.(Instance).xMaxLat.Units         = 'm'; % m
     mdata.(Instance).xMaxLat.Comments      = ''; % m
 
@@ -27,7 +27,7 @@ for i=1:length(Instance_List)
     mdata.(Instance).vGain.Units           = ''; % m
     mdata.(Instance).vGain.Comments        = 'Scales target speed Trajectory vx'; % m
 
-    mdata.(Instance).xPreview.x.Value      = [2.5 3 21]; % m
+    mdata.(Instance).xPreview.x.Value      = [1.5 2 10]; % m
     mdata.(Instance).xPreview.x.Units      = 'm'; % m
     mdata.(Instance).xPreview.x.Comments   = ''; % m
 
@@ -38,11 +38,16 @@ for i=1:length(Instance_List)
     mdata.(Instance).xMax.Value            = 290; % m
     mdata.(Instance).xMax.Units            = 'm'; % m
     mdata.(Instance).xMax.Comments         = 'Stop test when vehicle has reached this distance'; % m
+
+    mdata.(Instance).nPreviewPoints.Value      = 5; % m
+    mdata.(Instance).nPreviewPoints.Units      = ''; % m
+    mdata.(Instance).nPreviewPoints.Comments   = 'For Pure Pursuit Driver'; % m    
+
 end
 
 % Unique trajectory settings (smaller vehicles)
 mdata.Sedan_Hamba.xPreview.x.Value      = [2.5 3 10]; % m
-mdata.FSAE_Achilles.xPreview.x.Value    = [2.5 3 10]; % m
+mdata.FSAE_Achilles.xPreview.x.Value    = [1.5 2 10]; % m
 
 
 % Unique trajectory settings (counterclockwise)

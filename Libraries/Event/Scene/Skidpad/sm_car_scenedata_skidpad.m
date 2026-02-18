@@ -31,7 +31,7 @@ y = [cosd([a1:1:a2])*r+sep/2  -cosd(360-[a2:-1:a1])*r-sep/2];
 z = zeros(size(x));
 ctrline = [x' y' z'];
 scene_data.Track.ctrline = ctrline;
-scene_data.Track.w       = 6;
+scene_data.Track.w       = 3;
 
 scene_data.Plane.l = 15.25+6*8; % m
 scene_data.Plane.w = 18.25+15.25+12*1.5; % m
