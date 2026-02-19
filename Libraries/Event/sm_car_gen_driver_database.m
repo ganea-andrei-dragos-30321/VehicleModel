@@ -109,7 +109,7 @@ drv.Lateral.Pursuit.nPreviewPoints.Value    = 5;        % (no units)
 drv.Lateral.class.Value               = 'Stanley';  % Lat Driver Type               
 
 drv.Long.mVehicle.Value             = 270;       % kg
-drv.Long.FTractive.Value            = 2000;      % N
+drv.Long.FTractive.Value            = 17297;      % N
 drv.Long.tDriver.Value              = 0.05;       % s
 drv.Long.xPreview.Value             = 0.1;         % s
 drv.Long.NDragRoll.Value            = 200;        % N       
