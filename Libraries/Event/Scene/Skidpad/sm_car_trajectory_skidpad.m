@@ -99,7 +99,6 @@ for i = 2:length(aYaw_wrap)
     %disp([' aY+: ' num2str(aYaw_wrap(i)) ' aY0: ' num2str(aYaw_wrap(i-1)) ' sigwrap:' num2str(sigwrap)])
 end
 
-
 subplot(212)
 plot(xTrajectory_new,aYaw_new,'-o')
 xlabel('Distance Traveled (m)');

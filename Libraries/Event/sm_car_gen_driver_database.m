@@ -98,7 +98,7 @@ drv.Lateral.xWheelbase.Value        = 1.575;      % m
 drv.Lateral.aMaxSteer.Value         = 32;         % deg
 drv.Lateral.fSteerCutoff.Value      = 314.159265; % rad/s
 
-drv.Lateral.Stanley.NForward.Value          = 0.1;          % (no units) 
+drv.Lateral.Stanley.NForward.Value          = 1;          % (no units) 
 drv.Lateral.Stanley.NReverse.Value          = 2.5*0.1;        % (no units)
 
 drv.Lateral.Pursuit.kLookahead.Value        = 3;          % (no units)
