@@ -1,6 +1,7 @@
 % Startup file for sm_car.slx Example
 % Copyright 2019-2024 The MathWorks, Inc.
-
+clc
+clear
 curr_proj = simulinkproject;
 
 % Add folders with Simscape Multibody tire subsystem to path

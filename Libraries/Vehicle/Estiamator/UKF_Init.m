@@ -1,0 +1,21 @@
+function ukf = UKF_Init
+% y = [ Phi_dotg a_xa a_ya omega_fl omega_fr ]
+
+MeasurementNoise = single(diag([1e-3, 1e-6, 5e-4, 3e-3, 1e-2, 1e-2]));
+
+% x     = [ v_x v_y Phi Phi_dot a_x a_y miu ]
+ProcessNoise = single(diag([6e-5, 4e-6, 1e-4, 1e-3, 6e-5, 6e-5]));
+
+alpha = single(0.01);
+beta  = single(2);
+kappa = single(0);
+initial_state = single([1e-3; 0; 0; 0; 0; 0]);
+ukf = unscentedKalmanFilter(@prediction_model, @measurement_model, initial_state);
+ukf.Alpha =alpha;
+ukf.Beta = beta;
+ukf.Kappa = kappa;
+ukf.ProcessNoise = ProcessNoise;
+ukf.MeasurementNoise = MeasurementNoise;
+% Tight on velocity/yaw, but give the accelerometers some room
+ukf.StateCovariance = single(diag([1e-2, 1e-3, 1e-3, 1e-3, 0.1, 0.1]));
+end
