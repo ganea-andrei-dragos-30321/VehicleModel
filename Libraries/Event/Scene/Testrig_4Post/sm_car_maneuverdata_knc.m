@@ -38,7 +38,7 @@ if(nargin == 0)
     Instance_List = {...
         'Sedan_Hamba','Sedan_HambaLG','SUV_Landy','Bus_Makhulu','Truck_Amandla','Truck_Rhuqa','FSAE_Achilles'};
     Jounce       =  [   0.14  0.22  0.10    0.15  0.22  0.22  0.06];  % m
-    Rebound      =  [  -0.15 -0.15 -0.11 -0.10 -0.15 -0.15 -0.05];  % m
+    Rebound      =  [  -0.15 -0.15 -0.11 -0.10 -0.15 -0.15 -0.03];  % m
     zBumpHeight  =  [   0.01  0.01  0.01  0.01  0.01  0.01  0.01];  % m
     qSteerCaster =  [   0.95  0.95  0.95  0.95  0.95  0.95  2.689];  % rad
     Roll         =  [   0.10  0.10  0.10  0.10  0.10  0.10  0.05];  % m
