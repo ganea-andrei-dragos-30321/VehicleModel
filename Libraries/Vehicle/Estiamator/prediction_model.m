@@ -1,7 +1,7 @@
 function x_next = prediction_model(x, u)
 %#codegen
 % u     = [ delta  omega_fl omega_fr omega_rl omega_rr ]
-% x     = [ v_x v_y Phi Phi_dot a_x a_y miu ]
+% x     = [ v_x v_y Phi Phi_dot a_x a_y ]
 % x_dot = [ v_x_dot v_y_dot Phi_dot a_x_dot a_y_dot]
 v_x      = x(1);
 beta     = x(2);
@@ -10,14 +10,15 @@ Phi_dot  = x(4);
 a_x      = x(5);
 a_y      = x(6);
 
+Params = get_vehicle_params();
 
-delta    = u(1) / 7;
+
+delta    = u(1) / Params.Car.SteerR;
 omega_fl = u(2); % Front left wheel angular velocity
 omega_fr = u(3); % Front right wheel angular velocity
 omega_rl = u(4); % Rear left wheel angular velocity
 omega_rr = u(5); % Rear right wheel angular velocity
 
-Params = get_vehicle_params();
 eps = single(1e-1);
 
 if abs(v_x) < 0.1
@@ -31,38 +32,46 @@ Fz_down     = 1 / 2 * Params.Physics.ro * Params.Car.Af * Params.Car.cl * v_x ^ 
 Fx_drag     = 1 / 2 * Params.Physics.ro * Params.Car.Af * Params.Car.cd * v_x ^ 2;
 
 % Ackerman steering angles
-delta_L     = atan(Params.Car.L / (Params.Car.L / tan(delta) - Params.Car.tf / 2));
-delta_R     = atan(Params.Car.L / (Params.Car.L / tan(delta) + Params.Car.tf / 2));
+delta_L     = atan2(Params.Car.L * tan(delta), (Params.Car.L - Params.Car.tf / 2 * tan(delta)));
+delta_R     = atan2(Params.Car.L * tan(delta), (Params.Car.L + Params.Car.tf / 2 * tan(delta)));
 
+% Velocity vectors
+v_x_fl = v_x - Phi_dot * Params.Car.tf / 2;
+v_x_fr = v_x + Phi_dot * Params.Car.tf / 2;
+v_x_rl = v_x - Phi_dot * Params.Car.tr / 2;
+v_x_rr = v_x + Phi_dot * Params.Car.tr / 2;
+
+v_y_f = v_y + Phi_dot * Params.Car.a;
+v_y_r = v_y - Phi_dot * Params.Car.b;
 % Slip angles
-alpha_fl    = atan((v_y + Phi_dot * Params.Car.a) / (v_x - Phi_dot * Params.Car.tf / 2)) - delta_L;
-alpha_fr    = atan((v_y + Phi_dot * Params.Car.a) / (v_x + Phi_dot * Params.Car.tf / 2)) - delta_R;
-alpha_rl    = atan((v_y - Phi_dot * Params.Car.b) / (v_x - Phi_dot * Params.Car.tr / 2));
-alpha_rr    = atan((v_y - Phi_dot * Params.Car.b) / (v_x + Phi_dot * Params.Car.tr / 2));
+alpha_fl    = atan2(v_y_f, v_x_fl) - delta_L;
+alpha_fr    = atan2(v_y_f, v_x_fr) - delta_R;
+alpha_rl    = atan2(v_y_r, v_x_rl);
+alpha_rr    = atan2(v_y_r, v_x_rr);
 
 % Slip ratios
-kappa_fl    = (omega_fl * Params.Tire.r_load - (v_x - Phi_dot * Params.Car.tf / 2) * cos(alpha_fl)) / max(omega_fl * Params.Tire.r_load, (v_x - Phi_dot * Params.Car.tf / 2) * cos(alpha_fl));
-kappa_fr    = (omega_fr * Params.Tire.r_load - (v_x + Phi_dot * Params.Car.tf / 2) * cos(alpha_fr)) / max(omega_fr * Params.Tire.r_load, (v_x + Phi_dot * Params.Car.tf / 2) * cos(alpha_fr));
-kappa_rl    = (omega_rl * Params.Tire.r_load - (v_x - Phi_dot * Params.Car.tr / 2) * cos(alpha_rl)) / max(omega_rl * Params.Tire.r_load, (v_x - Phi_dot * Params.Car.tr / 2) * cos(alpha_rl));
-kappa_rr    = (omega_rr * Params.Tire.r_load - (v_x + Phi_dot * Params.Car.tr / 2) * cos(alpha_rr)) / max(omega_rr * Params.Tire.r_load, (v_x + Phi_dot * Params.Car.tr / 2) * cos(alpha_rr));
+kappa_fl    = (omega_fl * Params.Car.r_load - ((v_x_fl * cos(delta_L) + v_y_f * sin(delta_L)))) / max(omega_fl * Params.Car.r_load, (v_x_fl * cos(delta_L) + v_y_f * sin(delta_L)));
+kappa_fr    = (omega_fr * Params.Car.r_load - ((v_x_fr * cos(delta_R) + v_y_f * sin(delta_R)))) / max(omega_fr * Params.Car.r_load, (v_x_fr * cos(delta_R) + v_y_f * sin(delta_R)));
+kappa_rl    = (omega_rl * Params.Car.r_load - v_x_rl) / max(omega_rl * Params.Car.r_load, v_x_rl);
+kappa_rr    = (omega_rr * Params.Car.r_load - v_x_rr) / max(omega_rr * Params.Car.r_load, v_x_rr);
 
 % Wheel loads 
-Fz_fl       = Params.Car.m * Params.Physics.g * Params.Car.b / Params.Car.L - Fz_down * Params.Car.b_cop / Params.Car.L - 1 / 2 * Params.Car.m * a_x * Params.Car.h_cog / Params.Car.L - 1 / 2 * Params.Car.m * a_y * Params.Car.h_cog / Params.Car.tf;
-Fz_fr       = Params.Car.m * Params.Physics.g * Params.Car.b / Params.Car.L - Fz_down * Params.Car.b_cop / Params.Car.L - 1 / 2 * Params.Car.m * a_x * Params.Car.h_cog / Params.Car.L + 1 / 2 * Params.Car.m * a_y * Params.Car.h_cog / Params.Car.tf;
-Fz_rl       = Params.Car.m * Params.Physics.g * Params.Car.a / Params.Car.L - Fz_down * Params.Car.a_cop / Params.Car.L + 1 / 2 * Params.Car.m * a_x * Params.Car.h_cog / Params.Car.L - 1 / 2 * Params.Car.m * a_y * Params.Car.h_cog / Params.Car.tr;
-Fz_rr       = Params.Car.m * Params.Physics.g * Params.Car.a / Params.Car.L - Fz_down * Params.Car.a_cop / Params.Car.L + 1 / 2 * Params.Car.m * a_x * Params.Car.h_cog / Params.Car.L + 1 / 2 * Params.Car.m * a_y * Params.Car.h_cog / Params.Car.tr;
+Fz_fl       = 1 / 2 * Params.Car.m * Params.Physics.g * Params.Car.b / Params.Car.L - 1 / 2 * Fz_down * Params.Car.b_cop / Params.Car.L - 1 / 2 * Params.Car.m * a_x * Params.Car.h_cog / Params.Car.L - Params.Car.b / Params.Car.L * Params.Car.m * a_y * Params.Car.h_cog / Params.Car.tf;
+Fz_fr       = 1 / 2 * Params.Car.m * Params.Physics.g * Params.Car.b / Params.Car.L - 1 / 2 * Fz_down * Params.Car.b_cop / Params.Car.L - 1 / 2 * Params.Car.m * a_x * Params.Car.h_cog / Params.Car.L + Params.Car.b / Params.Car.L * Params.Car.m * a_y * Params.Car.h_cog / Params.Car.tf;
+Fz_rl       = 1 / 2 * Params.Car.m * Params.Physics.g * Params.Car.a / Params.Car.L - 1 / 2 * Fz_down * Params.Car.a_cop / Params.Car.L + 1 / 2 * Params.Car.m * a_x * Params.Car.h_cog / Params.Car.L - Params.Car.a / Params.Car.L * Params.Car.m * a_y * Params.Car.h_cog / Params.Car.tr;
+Fz_rr       = 1 / 2 * Params.Car.m * Params.Physics.g * Params.Car.a / Params.Car.L - 1 / 2 * Fz_down * Params.Car.a_cop / Params.Car.L + 1 / 2 * Params.Car.m * a_x * Params.Car.h_cog / Params.Car.L + Params.Car.a / Params.Car.L * Params.Car.m * a_y * Params.Car.h_cog / Params.Car.tr;
 
 % Magic formula lateral 
-Fy_fl       = MF_y(Fz_fl, alpha_fl, kappa_fl, Params.Tire.lat);
-Fy_fr       = MF_y(Fz_fr, alpha_fr, kappa_fr, Params.Tire.lat);
-Fy_rl       = MF_y(Fz_rl, alpha_rl, kappa_rl, Params.Tire.lat);
-Fy_rr       = MF_y(Fz_rr, alpha_rr, kappa_rr, Params.Tire.lat);
+Fy_fl       = MF_y(Fz_fl, alpha_fl, kappa_fl, Params.TireLeft.lat);
+Fy_fr       = MF_y(Fz_fr, alpha_fr, kappa_fr, Params.TireRight.lat);
+Fy_rl       = MF_y(Fz_rl, alpha_rl, kappa_rl, Params.TireLeft.lat);
+Fy_rr       = MF_y(Fz_rr, alpha_rr, kappa_rr, Params.TireRight.lat);
 
 % Magic formula longitudinal 
-Fx_fl       = MF_x(Fz_fl, alpha_fl, kappa_fl, Params.Tire.long);
-Fx_fr       = MF_x(Fz_fr, alpha_fr, kappa_fr, Params.Tire.long);
-Fx_rl       = MF_x(Fz_rl, alpha_rl, kappa_rl, Params.Tire.long);
-Fx_rr       = MF_x(Fz_rr, alpha_rr, kappa_rr, Params.Tire.long);
+Fx_fl       = MF_x(Fz_fl, alpha_fl, kappa_fl, Params.TireLeft.long);
+Fx_fr       = MF_x(Fz_fr, alpha_fr, kappa_fr, Params.TireRight.long);
+Fx_rl       = MF_x(Fz_rl, alpha_rl, kappa_rl, Params.TireLeft.long);
+Fx_rr       = MF_x(Fz_rr, alpha_rr, kappa_rr, Params.TireRight.long);
 
 % State derivatives [1, 2, 4]
 v_x_dot     = 1 / Params.Car.m * (Fx_rr + Fx_rl + Fx_fl * cos(delta_L) + Fx_fr * cos(delta_R) - Fy_fl * sin(delta_L) - Fy_fr * sin(delta_R) + Fx_drag) + v_y * Phi_dot;
