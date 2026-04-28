@@ -4,12 +4,12 @@ function x_next = prediction_model(x, u)
 % x     = [ v_x v_y Phi Phi_dot a_x a_y ]
 % x_dot = [ v_x_dot v_y_dot Phi_dot a_x_dot a_y_dot]
 v_x      = x(1);
-beta     = x(2);
+v_y     = x(2);
 Phi      = x(3);
 Phi_dot  = x(4);
 a_x      = x(5);
 a_y      = x(6);
-
+miu_rd = 0.8;
 Params = get_vehicle_params();
 
 
@@ -19,13 +19,17 @@ omega_fr = u(3); % Front right wheel angular velocity
 omega_rl = u(4); % Rear left wheel angular velocity
 omega_rr = u(5); % Rear right wheel angular velocity
 
-eps = single(1e-1);
+eps = single(8e-1);
 
-if abs(v_x) < 0.1
+if abs(v_x) < eps
     v_x = eps;
+    singularity_safety = abs(v_x) / eps;
+else 
+    singularity_safety = single(1);
+
 end
 
-v_y = v_x * tan(beta);
+%v_y = v_x * tan(beta);
 
 % Aero forces
 Fz_down     = 1 / 2 * Params.Physics.ro * Params.Car.Af * Params.Car.cl * v_x ^ 2;
@@ -62,30 +66,33 @@ Fz_rl       = 1 / 2 * Params.Car.m * Params.Physics.g * Params.Car.a / Params.Ca
 Fz_rr       = 1 / 2 * Params.Car.m * Params.Physics.g * Params.Car.a / Params.Car.L - 1 / 2 * Fz_down * Params.Car.a_cop / Params.Car.L + 1 / 2 * Params.Car.m * a_x * Params.Car.h_cog / Params.Car.L + Params.Car.a / Params.Car.L * Params.Car.m * a_y * Params.Car.h_cog / Params.Car.tr;
 
 % Magic formula lateral 
-Fy_fl       = MF_y(Fz_fl, alpha_fl, kappa_fl, Params.TireLeft.lat);
-Fy_fr       = MF_y(Fz_fr, alpha_fr, kappa_fr, Params.TireRight.lat);
-Fy_rl       = MF_y(Fz_rl, alpha_rl, kappa_rl, Params.TireLeft.lat);
-Fy_rr       = MF_y(Fz_rr, alpha_rr, kappa_rr, Params.TireRight.lat);
+Fy_fl       = miu_rd * singularity_safety * MF_y(Fz_fl, alpha_fl, kappa_fl, Params.TireLeft.lat);
+Fy_fr       = miu_rd * singularity_safety * MF_y(Fz_fr, alpha_fr, kappa_fr, Params.TireRight.lat);
+Fy_rl       = miu_rd * singularity_safety * MF_y(Fz_rl, alpha_rl, kappa_rl, Params.TireLeft.lat);
+Fy_rr       = miu_rd * singularity_safety * MF_y(Fz_rr, alpha_rr, kappa_rr, Params.TireRight.lat);
 
 % Magic formula longitudinal 
-Fx_fl       = MF_x(Fz_fl, alpha_fl, kappa_fl, Params.TireLeft.long);
-Fx_fr       = MF_x(Fz_fr, alpha_fr, kappa_fr, Params.TireRight.long);
-Fx_rl       = MF_x(Fz_rl, alpha_rl, kappa_rl, Params.TireLeft.long);
-Fx_rr       = MF_x(Fz_rr, alpha_rr, kappa_rr, Params.TireRight.long);
+Fx_fl       = miu_rd * singularity_safety * MF_x(Fz_fl, alpha_fl, kappa_fl, Params.TireLeft.long);
+Fx_fr       = miu_rd * singularity_safety * MF_x(Fz_fr, alpha_fr, kappa_fr, Params.TireRight.long);
+Fx_rl       = miu_rd * singularity_safety * MF_x(Fz_rl, alpha_rl, kappa_rl, Params.TireLeft.long);
+Fx_rr       = miu_rd * singularity_safety * MF_x(Fz_rr, alpha_rr, kappa_rr, Params.TireRight.long);
 
 % State derivatives [1, 2, 4]
 v_x_dot     = 1 / Params.Car.m * (Fx_rr + Fx_rl + Fx_fl * cos(delta_L) + Fx_fr * cos(delta_R) - Fy_fl * sin(delta_L) - Fy_fr * sin(delta_R) + Fx_drag) + v_y * Phi_dot;
 v_y_dot     = 1 / Params.Car.m * (Fy_rr + Fy_rl + Fx_fl * sin(delta_L) + Fx_fr * sin(delta_R) + Fy_fl * cos(delta_L) + Fy_fr * cos(delta_R)) - v_x * Phi_dot;
 Phi_dot_dot = 1 / Params.Car.Izz * ((Fy_fl * cos(delta_L) + Fx_fl * sin(delta_L) + Fx_fr * sin(delta_R) + Fy_fr * cos(delta_R)) * Params.Car.a - Fy_rl * Params.Car.b - Fy_rr * Params.Car.b + (Fx_rr - Fx_rl) * Params.Car.tr / 2 + (Fx_fr*cos(delta_R) - Fy_fr * sin(delta_R) + Fy_fl * sin(delta_L) - Fx_fl*cos(delta_L))*Params.Car.tf/2);
 
-v_safe_sq = max(v_x^2 + v_y^2, single(0.1)); 
-beta_dot  = (v_y_dot * v_x - v_y * v_x_dot) / v_safe_sq;
+%v_safe_sq = max(v_x^2 + v_y^2, single(0.1)); 
+%beta_dot  = (v_y_dot * v_x - v_y * v_x_dot) / v_safe_sq;
 % Random walk model (assume 0 jerk with exception of some noise) [4, 5, 6]
 a_x_dot  = 0;
 a_y_dot  = 0;
 
-x_dot    = [v_x_dot, beta_dot, Phi_dot, Phi_dot_dot, a_x_dot, a_y_dot]';
+x_dot    = [v_x_dot, v_y_dot, Phi_dot, Phi_dot_dot, a_x_dot, a_y_dot]';
 
+if abs(x(1)) < eps
+    x_dot(2) = -20 * x(2);  % Force beta stay close to 0 when stationary
+end
 % Update state using Euler integration
 x_next   = x + x_dot * Params.TimeStep; 
 end

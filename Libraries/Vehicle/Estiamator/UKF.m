@@ -19,7 +19,7 @@ predict(ukf,u);
     yMeas_mod(3) = yPred(3) + wrapped_error_Phi;
     % --------------------------------
     
-ukf.State(2) = mod(ukf.State(2) + pi, 2*pi) - pi;
+%ukf.State(2) = mod(ukf.State(2) + pi, 2*pi) - pi;
 
 % If beta somehow flipped to the back of the car, force it to the front
 if ukf.State(2) > pi/2
@@ -30,4 +30,13 @@ end
 vx_safe = max(abs(ukf.State(1)), 1e-3);
 ukf.MeasurementNoise = single(diag([1e-3, (0.01 / vx_safe)^2, 5e-4, 3e-3, 1e-2, 1e-2]));
 CorrState = correct(ukf,yMeas_mod,u);
+if CorrState(1) < 0.1
+    % If the corrected state is below a threshold, set it to zero
+    CorrState(1) = max(CorrState(1), 0);
+    CorrState(4) = 0;
+    CorrState(2) = 0;
+
+
+end
+
 end

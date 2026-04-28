@@ -106,9 +106,9 @@ drv.Lateral.Pursuit.xLookaheadMin.Value     = 0.5;        % m
 drv.Lateral.Pursuit.xLookaheadMax.Value     = 20;         % m
 drv.Lateral.Pursuit.nWeightHeadingErr.Value = 0.2;        % (no units)
 drv.Lateral.Pursuit.nPreviewPoints.Value    = 5;        % (no units)
-drv.Lateral.class.Value               = 'Stanley';  % Lat Driver Type               
+drv.Lateral.class.Value               = 'Pure_Pursuit';  % Lat Driver Type               
 
-drv.Long.mVehicle.Value             = 270;       % kg
+drv.Long.mVehicle.Value             = 320;       % kg
 drv.Long.FTractive.Value            = 17297;      % N
 drv.Long.tDriver.Value              = 0.05;       % s
 drv.Long.xPreview.Value             = 0.1;         % s

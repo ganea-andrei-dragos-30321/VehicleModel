@@ -1,10 +1,10 @@
 function ukf = UKF_Init
-% y = [ V_GPS COG_GPS Phi_GPS Phi_dotg a_xa a_ya omega_fl omega_fr ]
+% y = [ V_GPS COG_GPS Phi_GPS Phi_dotg a_xa a_ya ]
 
 MeasurementNoise = single(diag([1e-3, 1e-6, 5e-4, 3e-3, 1e-2, 1e-2]));
 
 % x     = [ v_x v_y Phi Phi_dot a_x a_y miu ]
-ProcessNoise = single(diag([1e-5, 1e-7, 1e-5, 1e-4, 6e-5, 1e-3]));
+ProcessNoise = single(diag([1e-5, 1e-7, 1e-5, 1e-4, 3e-4, 1e-3]));
 
 alpha = single(0.01);
 beta  = single(2);

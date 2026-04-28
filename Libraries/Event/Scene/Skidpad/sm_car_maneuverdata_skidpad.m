@@ -27,7 +27,7 @@ for i=1:length(Instance_List)
     mdata.(Instance).vGain.Units           = ''; % m
     mdata.(Instance).vGain.Comments        = 'Scales target speed Trajectory vx'; % m
 
-    mdata.(Instance).xPreview.x.Value      = [1.5 2 10]; % m
+    mdata.(Instance).xPreview.x.Value      = [1.5 2 5]; % m
     mdata.(Instance).xPreview.x.Units      = 'm'; % m
     mdata.(Instance).xPreview.x.Comments   = ''; % m
 
@@ -47,7 +47,7 @@ end
 
 % Unique trajectory settings (smaller vehicles)
 mdata.Sedan_Hamba.xPreview.x.Value      = [2.5 3 10]; % m
-mdata.FSAE_Achilles.xPreview.x.Value    = [1.5 2 10]; % m
+mdata.FSAE_Achilles.xPreview.x.Value    = [1.5 2 5]; % m
 
 
 % Unique trajectory settings (counterclockwise)
