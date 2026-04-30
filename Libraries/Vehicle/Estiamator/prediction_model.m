@@ -48,10 +48,10 @@ v_x_rr = v_x + Phi_dot * Params.Car.tr / 2;
 v_y_f = v_y + Phi_dot * Params.Car.a;
 v_y_r = v_y - Phi_dot * Params.Car.b;
 % Slip angles
-alpha_fl    = atan2(v_y_f, v_x_fl) - delta_L;
-alpha_fr    = atan2(v_y_f, v_x_fr) - delta_R;
-alpha_rl    = atan2(v_y_r, v_x_rl);
-alpha_rr    = atan2(v_y_r, v_x_rr);
+alpha_fl    = -atan2(v_y_f, v_x_fl) + delta_L;
+alpha_fr    = -atan2(v_y_f, v_x_fr) + delta_R;
+alpha_rl    = -atan2(v_y_r, v_x_rl);
+alpha_rr    = -atan2(v_y_r, v_x_rr);
 
 % Slip ratios
 kappa_fl    = (omega_fl * Params.Car.r_load - ((v_x_fl * cos(delta_L) + v_y_f * sin(delta_L)))) / max(omega_fl * Params.Car.r_load, (v_x_fl * cos(delta_L) + v_y_f * sin(delta_L)));
