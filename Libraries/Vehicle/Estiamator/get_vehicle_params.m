@@ -5,26 +5,26 @@ Params.Physics.g              = 9.81;               % Gravitational acceleration
 Params.Physics.ro             = 1.225;              % Air density [kg/m^3]
 
 % Ecu parameters
-Params.TimeStep               = 0.002;              % Time step for integration
+Params.TimeStep               = 0.003;              % Time step for integration
 
 % GPS postion 
-Params.GPS.Lant               = 0.874;              % Distance from front antenna to the CoG [m]
+Params.GPS.Lant               = 0.500;              % Distance from front antenna to the CoG [m]
 
 % Vehicle parmeters
 Params.Car.SteerR      = 5.71;      % Steering Ratio
-Params.Car.a           = 0.874;     % Distance from CoG to front axle[ m]
-Params.Car.b           = 0.701;     % Distance from CoG to rear axle [m]
+Params.Car.a           = 0.823;     % Distance from CoG to front axle[ m]
+Params.Car.b           = 0.752;     % Distance from CoG to rear axle [m]
 Params.Car.tf          = 1.28;      % Front track [m]
-Params.Car.tr          = 1.24;      % Rear track [m]
+Params.Car.tr          = 1.248;      % Rear track [m]
 Params.Car.m           = 315;       % Mass [kg]
 Params.Car.L           = 1.575;     % Wheelbase
-Params.Car.b_cop       = 0.775;     % Distance from center of pressure to rear axle [m]
-Params.Car.a_cop       = 0.8;       % Distance from center of pressure to front axle [m]
-Params.Car.h_cog       = 0.35;      % CoG height [m]
-Params.Car.Izz         = 270;       % Yaw inertia [kg*m^2]
+Params.Car.b_cop       = 0.5;     % Distance from center of pressure to rear axle [m]
+Params.Car.a_cop       = 1.075;       % Distance from center of pressure to front axle [m]
+Params.Car.h_cog       = 0.315;      % CoG height [m]
+Params.Car.Izz         = 140;       % Yaw inertia [kg*m^2]
 Params.Car.Af          = 1.2;       % Frontal area [m^2]
-Params.Car.cl          = -2.15;     % Lift coefficient [~]
-Params.Car.cd          = -1;        % Drag coefficient [~]
+Params.Car.cl          = -1.4;     % Lift coefficient [~] -0.9
+Params.Car.cd          = -0.9;        % Drag coefficient [~] -0.8
 % General tire parameters
 Params.Car.f          = 0.02;      % Rolling resistance coef [~]
 Params.Car.r_load     = 0.263;     % Load tire radius [m]

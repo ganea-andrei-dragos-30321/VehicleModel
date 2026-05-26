@@ -102,21 +102,62 @@ InitSet.CRG_Mallory_Park_F.Data         = {...
     'sChassis','m',   6,    0,       0};
 
 %% Scene CRG Customizable Event, Standard Lap, Slow Start
-InitSet.CRG_Custom.Type   = 'CRG_Dej';
-InitSet.CRG_Custom.Instance     = '';
-InitSet.CRG_Custom.Data         = {...
+InitSet.CRG_Dej.Type   = 'CRG_Dej';
+InitSet.CRG_Dej.Instance     = '';
+InitSet.CRG_Dej.Data         = {...
     'aChassis','rad', 0,   0.0368,  0;
     'vChassis','m/s', 10,   0,       0;
     'sChassis','m',   0,   0,      0};
+%% Scene CRG Customizable Event, Standard Lap, Slow Start
+InitSet.CRG_Dej_Wide.Type   = 'CRG_Dej_Wide';
+InitSet.CRG_Dej_Wide.Instance     = '';
+InitSet.CRG_Dej_Wide.Data         = {...
+    'aChassis','rad', 0,   0,       0;
+    'vChassis','m/s', 0,   0,       0;
+    'sChassis','m',   0,   0,      0};
+%% Scene CRG Customizable Event, Standard Lap, Slow Start
+InitSet.CRG_Dej_Wide_F.Type   = 'CRG_Dej_Wide_F';
+InitSet.CRG_Dej_Wide_F.Instance     = '';
+InitSet.CRG_Dej_Wide_F.Data         = {...
+    'aChassis','rad', 0,   0,       0;
+    'vChassis','m/s', 0,   0,       0;
+    'sChassis','m',   0,   0,      0};
+%% Scene CRG Customizable Event, Standard Lap, Slow Start
+InitSet.CRG_Dej_Teste_F.Type   = 'CRG_Teste_F';
+InitSet.CRG_Dej_Teste_F.Instance     = '';
+InitSet.CRG_Dej_Teste_F.Data         = {...
+    'aChassis','rad', 0,   0,       0;
+    'vChassis','m/s', 0,   0,       0;
+    'sChassis','m',   0,   0,      0};
 
+%% Scene CRG Customizable Event, Standard Lap, Slow Start
+InitSet.CRG_Dej_Teste.Type   = 'CRG_Teste';
+InitSet.CRG_Dej_Teste.Instance     = '';
+InitSet.CRG_Dej_Teste.Data         = {...
+    'aChassis','rad', 0,   0,       0;
+    'vChassis','m/s', 0,   0,       0;
+    'sChassis','m',   0,   0,      0};
 %% Scene CRG Customizable Event No Elevation, Standard Lap, Slow Start
-InitSet.CRG_Custom_F.Type   = 'CRG_Dej_F';
-InitSet.CRG_Custom_F.Instance     = '';
-InitSet.CRG_Custom_F.Data         = {...
+InitSet.CRG_Dej_F.Type   = 'CRG_Dej_F';
+InitSet.CRG_Dej_F.Instance     = '';
+InitSet.CRG_Dej_F.Data         = {...
     'aChassis','rad', 0,    0,       0;
     'vChassis','m/s', 0,    0,       0;
     'sChassis','m',   0,    0,       0};
-
+%% Scene CRG Customizable Event No Elevation, Standard Lap, Slow Start
+InitSet.CRG_Germania.Type   = 'CRG_Germania';
+InitSet.CRG_Germania.Instance     = '';
+InitSet.CRG_Germania.Data         = {...
+    'aChassis','rad', 0,    0,       0;
+    'vChassis','m/s', 0,    0,       0;
+    'sChassis','m',   0,    0,       0};
+%% Scene CRG Customizable Event No Elevation, Standard Lap, Slow Start
+InitSet.CRG_Germania_F.Type   = 'CRG_Germania_F';
+InitSet.CRG_Germania_F.Instance     = '';
+InitSet.CRG_Germania_F.Data         = {...
+    'aChassis','rad', 0,    0,       0;
+    'vChassis','m/s', 0,    0,       0;
+    'sChassis','m',   0,    0,       0};
 %% Scene CRG Nurburgring Nordschleife, Standard Lap, Slow Start
 InitSet.CRG_Nurburgring_N.Type   = 'CRG_Nurburgring_N';
 InitSet.CRG_Nurburgring_N.Instance     = '';
@@ -197,7 +238,7 @@ InitSet.Double_Lane_Change.Instance     = '';
     sChassisY = -5.3325;
 InitSet.Double_Lane_Change.Data         = {...
     'aChassis','rad', 0,   0,     0;
-    'vChassis','m/s', 2.5, 0,     0;
+    'vChassis','m/s', 0, 0,     0;
     'sChassis','m',   5,  sChassisY,  0};
 
 %% Scene Double Lane Change, Slow Start
@@ -205,7 +246,7 @@ InitSet.Double_Lane_Change_ISO3888.Type   = 'Double_Lane_Change_ISO3888';
 InitSet.Double_Lane_Change_ISO3888.Instance     = '';
 InitSet.Double_Lane_Change_ISO3888.Data         = {...
     'aChassis','rad', 0,   0,     0;
-    'vChassis','m/s', 2.5, 0,     0;
+    'vChassis','m/s', 0, 0,     0;
     'sChassis','m',   5,  -3.35,  0};
 
 %% Scene Skidpad, Slow Start

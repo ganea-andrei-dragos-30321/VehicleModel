@@ -79,6 +79,7 @@ switch maneuver_str
         set_param(modelname,'StopTime','40');
         sm_car_config_road(modelname,'Plane Grid');
         sm_car_config_solver(modelname,'variable step'); % Default only
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
 
     % --- EMPTY
     case 'none'
@@ -96,6 +97,7 @@ switch maneuver_str
         set_param(drive_h,'popup_driver_type','Open Loop');
         set_param(modelname,'StopTime','40');
         sm_car_config_road(modelname,'Plane Grid');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
         
     % --- Ice patch
     case 'ice patch'
@@ -120,6 +122,7 @@ switch maneuver_str
         set_param(drive_h,'popup_driver_type','Open Loop');
         set_param(modelname,'StopTime','40');
         sm_car_config_road(modelname,'Plane Grid');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
 
     % --- Rough road based on RDF file
     case 'rdf rough road'
@@ -182,6 +185,7 @@ switch maneuver_str
         set_param(drive_h,'popup_driver_type','Closed Loop');
         evalin('base',['Driver = DDatabase.Double_Lane_Change.' veh_inst ';']);
         sm_car_config_road(modelname,'Double Lane Change');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
 
         % Ensure event runs until vehicle crosses finish line
         set_param(modelname,'StopTime','100');        
@@ -196,6 +200,7 @@ switch maneuver_str
         evalin('base',['Driver = DDatabase.Double_Lane_Change_ISO3888.' veh_inst ';']);
         sm_car_config_road(modelname,'Double Lane Change ISO3888');
         set_param(modelname,'StopTime','35');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
 
     % --- Slalom
     case 'slalom'
@@ -234,6 +239,7 @@ switch maneuver_str
         set_param(drive_h,'popup_driver_type','Closed Loop');
         evalin('base',['Driver = DDatabase.Skidpad.' veh_inst ';']);
         sm_car_config_road(modelname,'Skidpad');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
 
         % Ensure event runs until vehicle crosses finish line
         set_param(modelname,'StopTime','100');        
@@ -293,6 +299,7 @@ switch maneuver_str
         % For only this maneuver, driver commands will be overridden once
         % the second part of the maneuver starts
         set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','Override');
+        set_param([modelname '/Check'], 'start_check_time_ld','100000');
         
     % --- Straightline at constant speed
     case 'straight constant speed'
@@ -355,6 +362,7 @@ switch maneuver_str
         sm_car_config_road(modelname,'CRG Hockenheim');
         set_param(modelname,'StopTime','400');
         set_param([modelname '/Check'],'start_check_time_end_lap','20');        
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
 
     % --- crg hockenheim f 
     case 'crg hockenheim f'
@@ -421,7 +429,42 @@ switch maneuver_str
         sm_car_config_road(modelname,'CRG Custom');
         set_param(modelname,'StopTime','200');
         set_param([modelname '/Check'],'start_check_time_end_lap','20');
-        
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
+    % --- CRG Teste
+    case 'crg teste'
+        evalin('base',['Init = IDatabase.CRG_Teste.' init_inst ';']);
+        evalin('base',['Maneuver = MDatabase.CRG_Teste.' veh_inst ';']);
+        set_param(drive_h,'popup_driver_type','Closed Loop');
+        evalin('base',['Driver = DDatabase.CRG_Teste.' veh_inst ';']);
+        evalin('base','sm_car_scene_stl_create(Scene.CRG_Teste);');
+        sm_car_config_road(modelname,'CRG Teste F');
+        set_param(modelname,'StopTime','200');
+        set_param([modelname '/Check'],'start_check_time_end_lap','20');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
+    % --- CRG Germania F
+    case 'crg germania f'
+        evalin('base',['Init = IDatabase.CRG_Germania_F.' init_inst ';']);
+        evalin('base',['Maneuver = MDatabase.CRG_Germania_F.' veh_inst ';']);
+        set_param(drive_h,'popup_driver_type','Closed Loop');
+        evalin('base',['Driver = DDatabase.CRG_Germania.F.' veh_inst ';']);
+        evalin('base','sm_car_scene_stl_create(Scene.CRG_Germania_F);');
+        sm_car_config_road(modelname,'CRG Teste F');
+        set_param(modelname,'StopTime','200');
+        set_param([modelname '/Check'],'start_check_time_end_lap','20');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
+    % --- CRG Germania 
+    case 'crg germania'
+        evalin('base',['Init = IDatabase.CRG_Germania.' init_inst ';']);
+        evalin('base',['Maneuver = MDatabase.CRG_Germania.' veh_inst ';']);
+        set_param(drive_h,'popup_driver_type','Closed Loop');
+        evalin('base',['Driver = DDatabase.CRG_Germania.' veh_inst ';']);
+        evalin('base','sm_car_scene_stl_create(Scene.CRG_Germania);');
+        sm_car_config_road(modelname,'CRG Germania');
+        set_param(modelname,'StopTime','200');
+        set_param([modelname '/Check'],'start_check_time_end_lap','20');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
+          
+          
     % --- CUSTOM EVENT based on CRG, no slope: placeholder for custom race circuit
     case 'crg dej f'
         evalin('base',['Init = IDatabase.CRG_Dej_F.' init_inst ';']);
@@ -432,6 +475,18 @@ switch maneuver_str
         sm_car_config_road(modelname,'CRG Dej F');
         set_param(modelname,'StopTime','200');
         set_param([modelname '/Check'],'start_check_time_end_lap','20');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
+      % --- CUSTOM EVENT based on CRG, no slope: placeholder for custom race circuit
+    case 'crg dej wide f'
+        evalin('base',['Init = IDatabase.CRG_Dej_Wide_F.' init_inst ';']);
+        evalin('base',['Maneuver = MDatabase.CRG_Dej_Wide_F.' veh_inst ';']);
+        set_param(drive_h,'popup_driver_type','Closed Loop');
+        evalin('base',['Driver = DDatabase.CRG_Dej_Wide.' veh_inst ';']);
+        evalin('base','sm_car_scene_stl_create(Scene.CRG_Dej_Wide_F);');
+        sm_car_config_road(modelname,'CRG Dej Wide F');
+        set_param(modelname,'StopTime','200');
+        set_param([modelname '/Check'],'start_check_time_end_lap','20');
+        set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
         
     % --- Nurburgring Nordschleife based on CRG with slope
     case 'crg nurburgring n'

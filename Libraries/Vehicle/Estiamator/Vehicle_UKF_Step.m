@@ -34,7 +34,7 @@ function State_Vec = Vehicle_UKF_Step(yMeas, u)
     % -------------------------------------------
     % State Vector 
     % - 1. Velocity on X [m/s]
-    % - 2. Velocity on Y [m/s]
+    % - 2. Side Slip angle [deg]
     % - 3. Rotation on Z [rad]
     % - 4. Angular velocity on Z [rad/s]
     % - 5. Acceleration on X [m/s^2]

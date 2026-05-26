@@ -25,15 +25,15 @@ control_param.Steer.Limits.aUpper.Units   = 'rad';
 %% Parameters for model control
 Vehicle = evalin('base','Vehicle');
 
-tire_param = simscape.multibody.tirread(eval('which(''fsTireData.tir'')'));
+tire_param = simscape.multibody.tirread(eval('which(''Hoosier_R20B_20p5x7_R13_7in_12psi.tir'')'));
 rwheel=tire_param.DIMENSION.UNLOADED_RADIUS;
 
-mcg=Vehicle.Chassis.Body.m.Value;                           % mass at center of G       
+mcg=320;                           % mass at center of G       
 L=-Vehicle.Chassis.Body.sAxle2.Value(1);                    % wheelbase 
 a=-Vehicle.Chassis.Body.sCG.Value(1);                       % distance from front axle to CoG
 b=L-a;  
-c_alpha_f=25000;                                            % front cornering stiffness
-c_alpha_r=27000;                                            % rear cornering stiffness
+c_alpha_f=34000;                                            % front cornering stiffness
+c_alpha_r=62000;                                            % rear cornering stiffness
 Gr=1/Vehicle.Powertrain.Driveline.Gearbox.ratio.Value;      % gear ratio for torque
 H=Vehicle.Chassis.Body.sCG.Value(3);                        % CoG height
 tr=Vehicle.Chassis.Body.TrackRear.Value;                    % rear track width
@@ -43,10 +43,10 @@ control_param.RearTrack=Vehicle.Chassis.Body.TrackRear.Value;
 control_param.WheelRad=rwheel;
 control_param.FuzzySystem=readfis('FIS_DYC');
 control_param.GearRatio=Vehicle.Powertrain.Driveline.Gearbox.ratio.Value;
-control_param.StrWheelRatio=0.165;
+control_param.StrWheelRatio=1/5.71;
 control_param.UndersteerGradient= mcg / L * (b / c_alpha_f - a / c_alpha_r);
 control_param.Wheelbase=L;
-control_param.F=rwheel / tr / Gr;
+control_param.F=rwheel / tr * Gr;
 control_param.Mass=mcg;
 control_param.TrackFrontToCG=a;
 control_param.Height=H;

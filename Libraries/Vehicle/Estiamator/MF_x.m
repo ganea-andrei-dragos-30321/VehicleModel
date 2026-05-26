@@ -1,13 +1,14 @@
-function Fx = MF_x(Fz, alpha, kappa, long)
-
+function Fx = MF_x(Fz_in, alpha, kappa, long)
 %#codegen
 coder.inline('always')
 
-% Friction scalling coeficient
+% 1. PROTECT FZ: Prevent wheel lift-off and negative loads
+Fz = max(Fz_in, single(10.0));
+
+% Friction scaling coefficient
 Amu = 1;
 LMUX_prime = Amu * long.LMUX / (1 + (Amu - 1) * long.LMUX);  
 
-% 1. Pure longitudinal
 % Nominal load and normalized nominal load
 Fz0 = long.Fz0;  
 dfz = (Fz - long.LFZ0 * Fz0) / (long.LFZ0 * Fz0); 
@@ -26,34 +27,38 @@ kappax = kappa + SHx;
 mux = (long.PDX1 + long.PDX2 * dfz) * long.LMUX;
 Dx 	= mux * Fz;
 
-% Shape (Cx), Curvature (Ex), Stiffness (Bx)
+% Shape (Cx), Curvature (Ex)
 Cx 	= long.PCX1 * long.LCX;
 if kappax >= 0
     Ex = (long.PEX1 + long.PEX2 * dfz + long.PEX3 * dfz^2) * (1 - long.PEX4) * long.LEX;
 else
     Ex = (long.PEX1 + long.PEX2 * dfz + long.PEX3 * dfz^2) * (1 + long.PEX4) * long.LEX;
 end
-Bx = Kx / (Cx * Dx + 1e-6);
+
+% 2. PROTECT Bx: Prevent denominator cancellation
+Bx = Kx / max(Cx * Dx, single(1e-4));
 
 % Pure longitudinal force
 Fx0 = Dx * sin(Cx * atan(Bx * kappax - Ex * (Bx * kappax - atan(Bx * kappax)))) + SVx;
 
-% 2. Weighting function for combined slip
-% Shift term
+% Weighting function for combined slip
 SHxa = long.RHX1;
-
-% Shape (Cxa), Curvature (Exa), and Stiffness (Bxa)
 Cxa = long.RCX1; 
 Exa = long.REX1 + long.REX2 * dfz;
 Bxa = long.RBX1 * cos(atan(long.RBX2 * kappa)) * long.LXAL;
             
 % Weighting function term with alpha shift
 alphas = alpha + SHxa;  
-            
 Gxa0 = cos(Cxa * atan(Bxa * SHxa - Exa * (Bxa * SHxa - atan(Bxa * SHxa))));  
-Gxa = cos(Cxa * atan(Bxa * alphas - Exa * (Bxa * alphas - atan(Bxa * alphas)))) / Gxa0; 
-            
-% 3. Lateral force
 
+% 3. PROTECT Gxa0: Prevent division by zero
+Gxa0_safe = sign(Gxa0) * max(abs(Gxa0), single(1e-4));
+if Gxa0_safe == 0 % Fallback just in case sign is 0
+    Gxa0_safe = single(1e-4);
+end
+
+Gxa = cos(Cxa * atan(Bxa * alphas - Exa * (Bxa * alphas - atan(Bxa * alphas)))) / Gxa0_safe; 
+            
+% Longitudinal force
 Fx = Gxa * Fx0;
 end

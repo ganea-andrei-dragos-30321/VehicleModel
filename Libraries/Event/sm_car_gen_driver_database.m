@@ -323,7 +323,11 @@ cl_manv_longLat = {...
     'Coastdown';
     'Sine_With_Dwell';
     'Ramp_Steer';
-    'Slalom'};
+    'Slalom';
+    'CRG_Teste';
+    'CRG_Dej_Wide';
+    'CRG_Germania_F';
+    'CRG_Germania'};
 
 % Maneuvers with longitudinal driver only
 cl_manv_longOnly = {...

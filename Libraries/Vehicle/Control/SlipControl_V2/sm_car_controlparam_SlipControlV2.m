@@ -25,8 +25,7 @@ control_param.Steer.Limits.aUpper.Units   = 'rad';
 %% Parameters for model control
 Vehicle = evalin('base','Vehicle');
 
-tire_param = simscape.multibody.tirread(eval('which(''fsae190_50R10.tir'')'));
-rwheel=tire_param.DIMENSION.UNLOADED_RADIUS; 
+rwheel=0.263; 
 
 % Drivetrain Parameters
 control_param.WheelRad = rwheel;
@@ -36,23 +35,23 @@ control_param.MotorW = Vehicle.Powertrain.Power.Motor.TorqueSpd.w.Value;
 control_param.Tmax = max(control_param.MotorTrq);
 
 % Vehicle Dynamics and Aero Parameters
-control_param.RearTrack = 1.24;
-control_param.FrontTrackToCG = 0.871;
+control_param.RearTrack = 1.248;
+control_param.FrontTrackToCG = 0.823;
 control_param.FrontTrackToCoP = 0.8;
 control_param.FrontalArea = 1.2;
 
 % PID Control Gains
-control_param.Proportional_P = 2350;
-control_param.Integral_I = 78025;
-control_param.Derivative_D = 11;
+control_param.Proportional_P = 50;
+control_param.Integral_I = 200;
+control_param.Derivative_D = 5;
 
 % Simulation and Physical Constants
 control_param.ActivationVelocity = 0.7;
 control_param.LiftCoef = -2.15;
 control_param.GravitationAcc = 9.81;
-control_param.CGHeight = 0.35;
+control_param.CGHeight = 0.315;
 control_param.Wheelbase = 1.575;
-control_param.Mass = 320;
+control_param.Mass = 315;
 control_param.AirDensity = 1.226;
 
 % Slip Refence Table

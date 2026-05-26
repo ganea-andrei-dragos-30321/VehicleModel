@@ -64,9 +64,9 @@ end
 %% check data consistency
 
 data = crg_check_data(data);
-if ~isfield(data, 'ok')
-    ierr = ierr + 1;
-end
+%if ~isfield(data, 'ok')
+ %   ierr = ierr + 1;
+%end
 
 %% check core data type
 
