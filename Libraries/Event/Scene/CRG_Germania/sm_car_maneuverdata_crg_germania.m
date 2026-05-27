@@ -19,11 +19,11 @@ for i=1:length(Instance_List)
     mdata.(Instance).xMaxLat.Units         = 'm'; % m
     mdata.(Instance).xMaxLat.Comments      = ''; % m
 
-    mdata.(Instance).vMinTarget.Value      = 5; % m
+    mdata.(Instance).vMinTarget.Value      = 3; % m
     mdata.(Instance).vMinTarget.Units      = 'm/s'; % m
     mdata.(Instance).vMinTarget.Comments   = ''; % m
 
-    mdata.(Instance).vGain.Value           = 0.85; % m
+    mdata.(Instance).vGain.Value           = 1; % m
     mdata.(Instance).vGain.Units           = ''; % m
     mdata.(Instance).vGain.Comments        = 'Scales target speed Trajectory vx'; % m
 
