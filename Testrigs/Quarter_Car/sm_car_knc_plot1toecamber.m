@@ -1,12 +1,14 @@
-function [TSuspMetrics, toeCurve, camCurve] = sm_car_knc_plot1toecamber(logsout,showplot,calcMetrics,debugPlots)
+function [TSuspMetrics, toeCurve, camCurve] = sm_car_knc_plot1toecamber(logsout,showplot,calcMetrics,debugPlots,axleName)
 %sm_car_knc_plot1toecamber  Obtain toe curve, camber curve, and suspension metrics
-%   [TSuspMetrics, toeCurve, camCurve] = sm_car_knc_plot1toecamber(logsout,showplot,calcMetrics,debugPlots)
+%   [TSuspMetrics, toeCurve, camCurve] = sm_car_knc_plot1toecamber(logsout,showplot,calcMetrics,debugPlots,axleName)
 %   This function extracts specific measurements from suspension
 %   simulations for suspension metric calculations and plots. 
 %       logsout      Results from suspension simulation
 %       showplot     true to plot toe and camber curves
 %       calcMetrics  true to calculate suspension metrics
 %       debugPlots   true to create plots detailing suspension metric calculations
+%       axleName     'Front' or 'Rear'. If omitted, the half-car testrig
+%                    Axle mask is used when available; otherwise 'Front'.
 %
 %   Outputs:
 %       TSuspMetrics Table of suspension metrics from KnC test
@@ -19,13 +21,41 @@ function [TSuspMetrics, toeCurve, camCurve] = sm_car_knc_plot1toecamber(logsout,
 logsout_VehBus = logsout.get('VehBus');
 logsout_RdBus  = logsout.get('RdBus');
 
+axleNameSpecified = nargin>=5 && ~isempty(axleName);
+if(~axleNameSpecified)
+    axleName = 'Front';
+    try
+        if(bdIsLoaded('testrig_susp_knc'))
+            axleName = get_param('testrig_susp_knc/Axle','AxNum');
+        end
+    catch
+    end
+end
+if(strcmpi(axleName,'Rear'))
+    axleInd = 2;
+else
+    axleInd = 1;
+end
+
 simlog_t             = logsout_VehBus.Values.Chassis.WhlL1.xyz.Time;
 simlog_pxTire        = logsout_VehBus.Values.Chassis.WhlL1.xyz.Data(:,1);
 simlog_pyTire        = logsout_VehBus.Values.Chassis.WhlL1.xyz.Data(:,2);
 simlog_pzTire        = logsout_VehBus.Values.Chassis.WhlL1.xyz.Data(:,3);
+try
+    simlog_pyTireR   = logsout_VehBus.Values.Chassis.WhlR1.xyz.Data(:,2);
+    simlog_pzTireR   = logsout_VehBus.Values.Chassis.WhlR1.xyz.Data(:,3);
+catch
+    simlog_pyTireR   = nan(size(simlog_pyTire));
+    simlog_pzTireR   = nan(size(simlog_pzTire));
+end
 simlog_aCamber       = squeeze(logsout_VehBus.Values.Chassis.SuspA1.WhlL.aCamber.Data);
 simlog_aToe          = squeeze(logsout_VehBus.Values.Chassis.SuspA1.WhlL.aToe.Data);
 simlog_aToeR         = squeeze(logsout_VehBus.Values.Chassis.SuspA1.WhlR.aToe.Data);
+try
+    simlog_aCamberR  = squeeze(logsout_VehBus.Values.Chassis.SuspA1.WhlR.aCamber.Data);
+catch
+    simlog_aCamberR  = nan(size(simlog_aCamber));
+end
 simlog_aCamberX      = squeeze(logsout_VehBus.Values.Chassis.SuspA1.WhlL.aCamberX.Data);
 simlog_aToeX         = squeeze(logsout_VehBus.Values.Chassis.SuspA1.WhlL.aToeX.Data);
 simlog_rigFz         = squeeze(logsout_VehBus.Values.Chassis.WhlL1.Testrig.Fz.Data);
@@ -65,7 +95,26 @@ if(calcMetrics)
     % If testrig performs steer tests, get parameters for post-processing
     timeTestPhases = simlog_testPhases;
     Vehicle = evalin('base','Vehicle');
-    veh_track = Vehicle.Chassis.Body.TrackFront.Value;
+    if(isfield(Vehicle.Chassis.Body,'TrackRear') && ...
+            all(isfinite([simlog_pyTire(1) simlog_pyTireR(1)])))
+        logTrack = abs(simlog_pyTire(1)-simlog_pyTireR(1));
+        [~,logAxleInd] = min(abs(logTrack-[Vehicle.Chassis.Body.TrackFront.Value ...
+            Vehicle.Chassis.Body.TrackRear.Value]));
+        if(~axleNameSpecified)
+            axleInd = logAxleInd;
+        elseif(logAxleInd~=axleInd)
+            axleNames = ["Front" "Rear"];
+            warning('sm_car:knc:AxleMismatch', ...
+                ['Logged wheel track is closer to the %s axle, but axleName ' ...
+                 'was set to %s. Confirm that the logs came from the requested axle.'], ...
+                axleNames(logAxleInd),axleNames(axleInd));
+        end
+    end
+    if(axleInd==2 && isfield(Vehicle.Chassis.Body,'TrackRear'))
+        veh_track = Vehicle.Chassis.Body.TrackRear.Value;
+    else
+        veh_track = Vehicle.Chassis.Body.TrackFront.Value;
+    end
     veh_wheelbase = -Vehicle.Chassis.Body.sAxle2.Value(1);
     veh_mass = Vehicle.Chassis.Body.m.Value;
     if(isfield(Vehicle.Chassis.Body.BodyGeometry,'sWall2Wall'))
@@ -75,7 +124,13 @@ if(calcMetrics)
     end
     [tireK, tireW] = sm_car_get_tire_params(Vehicle);
     wctrs = sm_car_get_sWheelCentre(Vehicle);
-    simlog_zWChp = wctrs(1,end);
+    tireKInd = min(axleInd,numel(tireK));
+    tireWInd = min(axleInd,numel(tireW));
+    if(size(wctrs,1)>=axleInd)
+        simlog_zWChp = wctrs(axleInd,end);
+    else
+        simlog_zWChp = wctrs(1,end);
+    end
     % Get indices of simulation results for vertical test phase
     indToeCamb = intersect(find(simlog_t>=Maneuver.tRange.Jounce(1)),find(simlog_t<=Maneuver.tRange.Rebound(2)));
 else
@@ -105,6 +160,9 @@ if(calcMetrics)
         simlog_pxTire, ...
         simlog_pyTire, ...
         simlog_pzTire, ...
+        simlog_pyTireR, ...
+        simlog_pzTireR, ...
+        simlog_aCamberR, ...
         timeTestPhases, ...
         simlog_qToeForCaster,...
         simlog_zOffsetBumpTest,...
@@ -124,9 +182,10 @@ if(calcMetrics)
         veh_wheelbase,...
         veh_mass,...
         veh_sW2W,...
-        tireK(1),...
-        tireW(1),...
-        debugPlots);
+        tireK(tireKInd),...
+        tireW(tireWInd),...
+        debugPlots,...
+        showplot);
 else
     TSuspMetrics = [];
 end
@@ -167,6 +226,3 @@ if(showplot)
 
     linkaxes(simlog_handles,'y')
 end
-
-
-

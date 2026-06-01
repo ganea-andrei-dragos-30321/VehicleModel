@@ -4,7 +4,7 @@ function x_next = prediction_model(x, u)
 % x     = [ v_x v_y Phi Phi_dot a_x a_y ]
 % x_dot = [ v_x_dot v_y_dot Phi_dot a_x_dot a_y_dot]
 v_x      = x(1);
-beta     = x(2);
+v_y      = x(2);
 Phi      = x(3);
 Phi_dot  = x(4);
 a_x      = x(5);
@@ -12,7 +12,7 @@ a_y      = x(6);
 miu_rd = 1;
 Params = get_vehicle_params();
 
-beta = max(min(beta, 1),-1);
+%beta = max(min(beta, 1),-1);
 
 delta    = u(1) / Params.Car.SteerR;
 omega_fl = u(2); % Front left wheel angular velocity
@@ -22,7 +22,7 @@ omega_rr = u(5); % Rear right wheel angular velocity
 
 eps = single(1e-3);
 
-v_y = v_x * tan(beta);
+%v_y = v_x * tan(beta);
 
 % Aero forces
 Fz_down     = 1 / 2 * Params.Physics.ro * Params.Car.Af * Params.Car.cl * v_x ^ 2;
@@ -83,23 +83,23 @@ v_x_dot     = 1 / Params.Car.m * (Fx_rr + Fx_rl + Fx_fl * cos(delta_L) + Fx_fr *
 v_y_dot     = 1 / Params.Car.m * (Fy_rr + Fy_rl + Fx_fl * sin(delta_L) + Fx_fr * sin(delta_R) + Fy_fl * cos(delta_L) + Fy_fr * cos(delta_R)) - v_x * Phi_dot;
 Phi_dot_dot = 1 / Params.Car.Izz * ((Fy_fl * cos(delta_L) + Fx_fl * sin(delta_L) + Fx_fr * sin(delta_R) + Fy_fr * cos(delta_R)) * Params.Car.a - Fy_rl * Params.Car.b - Fy_rr * Params.Car.b + (Fx_rr - Fx_rl) * Params.Car.tr / 2 + (Fx_fr*cos(delta_R) - Fy_fr * sin(delta_R) + Fy_fl * sin(delta_L) - Fx_fl*cos(delta_L))*Params.Car.tf/2);
 
-v_safe_sq = max(v_x^2 + v_y^2, single(0.1)); 
-beta_dot  = (v_y_dot * v_x - v_y * v_x_dot) / v_safe_sq;
+%v_safe_sq = max(v_x^2 + v_y^2, single(0.1)); 
+%beta_dot  = (v_y_dot * v_x - v_y * v_x_dot) / v_safe_sq;
 % Random walk model (assume 0 jerk with exception of some noise) [4, 5, 6]
 a_x_dot  = 0;
 a_y_dot  = 0;
 
-x_dot    = [v_x_dot, beta_dot, Phi_dot, Phi_dot_dot, a_x_dot, a_y_dot]';
-%x_dot    = [v_x_dot, v_y_dot, Phi_dot, Phi_dot_dot, a_x_dot, a_y_dot]';
+%x_dot    = [v_x_dot, beta_dot, Phi_dot, Phi_dot_dot, a_x_dot, a_y_dot]';
+x_dot    = [v_x_dot, v_y_dot, Phi_dot, Phi_dot_dot, a_x_dot, a_y_dot]';
 
 % Update state using Euler integration
  x_next   = x + x_dot * Params.TimeStep; 
-x_next(2) = atan2(sin(x_next(2)),cos(x_next(2)));
-if x_next(2) > pi/2
-    x_next(2) = x_next(2) - pi;
-elseif x_next(2) < -pi/2
-    x_next(2) = x_next(2) + pi;
-end
+%x_next(2) = atan2(sin(x_next(2)),cos(x_next(2)));
+%if x_next(2) > pi/2
+%    x_next(2) = x_next(2) - pi;
+%elseif x_next(2) < -pi/2
+%    x_next(2) = x_next(2) + pi;
+%end
 x_next(3) = atan2(sin(x_next(3)),cos(x_next(3)));
 
 end

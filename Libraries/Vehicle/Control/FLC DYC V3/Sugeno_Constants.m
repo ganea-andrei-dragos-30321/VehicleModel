@@ -15,7 +15,7 @@ ephi_ops  = [-1.0, -0.5, 0, 0.5, 1.0];     % rad/s → NL,NS,ZE,PS,PL
 ebeta_ops = [-0.15, 0, 0.15];              % rad   → N, ZE, P
 
 %% --- Bryson weights ------------------------------------------
-ephi_max  = 1.2;     % rad/s
+ephi_max  = 1.5;     % rad/s
 dMz_max   = 650;    % Nm
 
 Q = 1/ephi_max^2;
@@ -167,11 +167,11 @@ Ac = (A_disc - eye(n)) / dt;
 Bc = B_disc / dt;
 
 % % Sanity check — Bc(4) should be ≈ 1/Iz
-% expected = 1 / Params.Car.Izz;
-% actual   = Bc(4);
-% if abs(actual - expected)/expected > 0.01
-%     warning('Bc(4)=%.4e but 1/Iz=%.4e — check injection', actual, expected);
-% end
+expected = 1 / Params.Car.Izz;
+actual   = Bc(4);
+if abs(actual - expected)/expected > 0.01
+     warning('Bc(4)=%.4e but 1/Iz=%.4e — check injection', actual, expected);
+end
  end
 %% --- Wrapper that adds ΔMz directly to yaw acceleration ----
 function x_next = dyc_inject(x, u, dMz, Params)

@@ -1,10 +1,11 @@
 function TSuspMetrics = sm_car_knc_calc_susp_metrics(simlog_toe,...
     simlog_camber,simlog_toeX,simlog_camberX,simlog_toeR,...
     simlog_pxTire, simlog_pyTire, simlog_pzTire, ...
+    simlog_pyTireR, simlog_pzTireR, simlog_camberR, ...
     testPhases,qToeMeas,zOffsetBumpTest,simlog_t,wCtrZ,simlog_rigFz,...
     simlog_fBumpstop,simlog_xSpring,simlog_xRack,simlog_FRack,simlog_aWheel,...
     simlog_trqTz,simlog_fLat,simlog_fLong,simlog_yCPtch,...
-    veh_track,veh_wheelbase,veh_mass,veh_sW2W,tireK,tireW,showPlots)
+    veh_track,veh_wheelbase,veh_mass,veh_sW2W,tireK,tireW,showPlots,showRollCenterPlot)
 % sm_car_calc_susp_metrics Calculates suspension metrics
 %    TSuspMetrics = sm_car_calc_susp_metrics(...)
 %    This function calculates various suspension metrics. It requires
@@ -19,6 +20,9 @@ function TSuspMetrics = sm_car_knc_calc_susp_metrics(simlog_toe,...
 %       simlog_pxTire    Position of wheel center in global X-frame (m)
 %       simlog_pyTire    Position of wheel center in global Y-frame (m)
 %       simlog_pzTire    Position of wheel center in global Z-frame (m)
+%       simlog_pyTireR   Right wheel center in global Y-frame (m)
+%       simlog_pzTireR   Right wheel center in global Z-frame (m)
+%       simlog_camberR   Right camber measured using z axis of wheel spin frame (deg)
 %       testPhases       Time periods [start finish] for each phase of test (sec)
 %       qToeMeas         Toe angle used for caster angle calculation (deg)
 %       zOffsetBumpTest  Height for calculating bump steer, bump camber, ... (m)
@@ -41,6 +45,7 @@ function TSuspMetrics = sm_car_knc_calc_susp_metrics(simlog_toe,...
 %       tireK            Tire vertical stiffness (N/m)
 %       tireW            Tire width (m)
 %       showPlots        true or false to show plots detailing calculations
+%       showRollCenterPlot true or false to show roll center position
 
 % Copyright 2018-2024 The MathWorks, Inc.
 
@@ -594,6 +599,10 @@ damRatn   = interp1(simlog_pzTireTCsrt,simlog_xSpringTCsrt, wCtrZ-zOffsetBumpTes
 damRat    = (damRatn - damRatp)/(zOffsetBumpTest*2);
 
 %% -- Roll KnC
+rollCenterLatZ0    = NaN;
+rollCenterHeightZ0 = NaN;
+rollCenterCurve    = struct('qRoll',[],'y',[],'z',[],'zTravel',[]);
+
 % Prepare the data used to find required toe and camber angles
 % Sort measured data by tire height and remove duplicates
 [simlog_pzTireROsrt, iROsrt] = unique(simlog_pzTire(indRoll),'sorted');
@@ -662,13 +671,178 @@ if(~isempty(simlog_pzTireROsrt))
     %% Roll Stiffness (Total)
     rollStiffnessTotal = 1/(1/rollStiffness + 1/(tireK*(simlog_pyTire(1))/(AngleForRollTest*2))); % N/mm 
 
+    %% Roll Center Position
+    % Estimate front-view instant centers from wheel center motion and
+    % camber rate, then intersect the contact-patch-to-instant-center lines.
+    tRoll       = simlog_t(indRoll(:));
+    qRoll       = atand((simlog_pzTire(indRoll(:))-wCtrZ)./simlog_pyTire(indRoll(:)));
+    yWheelL     = simlog_pyTire(indRoll(:));
+    zWheelL     = simlog_pzTire(indRoll(:));
+    camberL     = deg2rad(simlog_camber(indRoll(:)));
+    dCamberL    = gradient(camberL,tRoll);
+    dYdCamberL  = gradient(yWheelL,tRoll)./dCamberL;
+    dZdCamberL  = gradient(zWheelL,tRoll)./dCamberL;
+    yICL        = yWheelL + dZdCamberL;
+    zICL        = zWheelL - dYdCamberL;
+    yContactL   = yWheelL - zWheelL.*tan(camberL);
+    slopeL      = zICL./(yICL-yContactL);
+    validL      = isfinite(qRoll) & isfinite(yContactL) & isfinite(slopeL) & ...
+                  abs(dCamberL)>1e-8 & abs(yICL-yContactL)>1e-6;
+
+    hasRightRollData = numel(simlog_pyTireR)>=max(indRoll) && ...
+                       numel(simlog_pzTireR)>=max(indRoll) && ...
+                       numel(simlog_camberR)>=max(indRoll);
+    if(hasRightRollData)
+        yWheelR   = simlog_pyTireR(indRoll(:));
+        zWheelR   = simlog_pzTireR(indRoll(:));
+        % Right camber uses the opposite global-x sign when the wheel angle
+        % convention reports positive camber as top-out on both sides.
+        camberR   = -deg2rad(simlog_camberR(indRoll(:)));
+        validRightSignals = all(isfinite(yWheelR)) && all(isfinite(zWheelR)) && ...
+            all(isfinite(camberR)) && range(zWheelR)>1e-6 && range(camberR)>1e-8;
+    else
+        validRightSignals = false;
+    end
+
+    if(validRightSignals)
+        dCamberR   = gradient(camberR,tRoll);
+        dYdCamberR = gradient(yWheelR,tRoll)./dCamberR;
+        dZdCamberR = gradient(zWheelR,tRoll)./dCamberR;
+        yICR       = yWheelR + dZdCamberR;
+        zICR       = zWheelR - dYdCamberR;
+        yContactR  = yWheelR - zWheelR.*tan(camberR);
+        slopeR     = zICR./(yICR-yContactR);
+        validR     = isfinite(yContactR) & isfinite(slopeR) & ...
+                     abs(dCamberR)>1e-8 & abs(yICR-yContactR)>1e-6;
+
+        yRollCtr = zeros(size(yContactL));
+        zRollCtr = mean([slopeL.*(yRollCtr-yContactL) ...
+                         slopeR.*(yRollCtr-yContactR)],2);
+        validRC  = validL & validR & isfinite(zRollCtr);
+    else
+        yRollCtr = zeros(size(yContactL));
+        zRollCtr = slopeL.*(yRollCtr-yContactL);
+        validRC  = validL & isfinite(zRollCtr);
+    end
+
+    if(validRightSignals)
+        yWheelAll = [yWheelL; yWheelR];
+    else
+        yWheelAll = yWheelL;
+    end
+    lateralLimit = max([veh_track,2*max(abs(yWheelAll)),1]);
+    heightLimit  = max([veh_track,4*wCtrZ,1]);
+    validRC      = validRC & abs(yRollCtr)<=lateralLimit & ...
+                   abs(zRollCtr)<=heightLimit;
+
+    rollCenterCurve.qRoll = qRoll(validRC);
+    rollCenterCurve.y     = yRollCtr(validRC);
+    rollCenterCurve.z     = zRollCtr(validRC);
+    rollCenterCurve.zTravel = zWheelL(validRC)-wCtrZ;
+
+    if(numel(rollCenterCurve.qRoll)<5 || ...
+            ~(min(rollCenterCurve.qRoll)<=0 && max(rollCenterCurve.qRoll)>=0))
+        zWheelLTC    = simlog_pzTireTCsrt(:);
+        yWheelLTC    = simlog_pyTireTCsrt(:);
+        camberLTC    = deg2rad(simlog_camberTCsrt(:));
+        qRollTC      = atand((zWheelLTC-wCtrZ)./abs(yWheelLTC));
+        dCamberDzTC  = gradient(camberLTC,zWheelLTC);
+        dYdZTC       = gradient(yWheelLTC,zWheelLTC);
+        dYdCamberTC  = dYdZTC./dCamberDzTC;
+        dZdCamberTC  = 1./dCamberDzTC;
+        yICLTC       = yWheelLTC + dZdCamberTC;
+        zICLTC       = zWheelLTC - dYdCamberTC;
+        yContactLTC  = yWheelLTC - zWheelLTC.*tan(camberLTC);
+        slopeLTC     = zICLTC./(yICLTC-yContactLTC);
+        yRollCtrTC   = zeros(size(yContactLTC));
+        zRollCtrTC   = slopeLTC.*(yRollCtrTC-yContactLTC);
+        validRCTC    = isfinite(qRollTC) & isfinite(zRollCtrTC) & ...
+                       abs(dCamberDzTC)>1e-8 & abs(yICLTC-yContactLTC)>1e-6 & ...
+                       abs(zRollCtrTC)<=heightLimit;
+
+        rollCenterCurve.qRoll = qRollTC(validRCTC);
+        rollCenterCurve.y     = yRollCtrTC(validRCTC);
+        rollCenterCurve.z     = zRollCtrTC(validRCTC);
+        rollCenterCurve.zTravel = zWheelLTC(validRCTC)-wCtrZ;
+    end
+
+    if(numel(rollCenterCurve.qRoll)>=1)
+        [qRollSrt,iRollSrt] = unique(rollCenterCurve.qRoll,'sorted');
+        yRollCtrSrt = rollCenterCurve.y(iRollSrt);
+        zRollCtrSrt = rollCenterCurve.z(iRollSrt);
+        if(numel(qRollSrt)>=2 && min(qRollSrt)<=0 && max(qRollSrt)>=0)
+            rollCenterLatZ0    = -interp1(qRollSrt,yRollCtrSrt,0)*1000;
+            rollCenterHeightZ0 =  interp1(qRollSrt,zRollCtrSrt,0)*1000;
+        else
+            [~,iRollCtr0] = min(abs(qRollSrt));
+            rollCenterLatZ0    = -yRollCtrSrt(iRollCtr0)*1000;
+            rollCenterHeightZ0 =  zRollCtrSrt(iRollCtr0)*1000;
+        end
+    end
+
 else
-    % No data for right side means quarter-car test
+    % No roll data available
     % Return not-a-number for roll metrics
     rollSteer     = NaN;
     rollCamber    = NaN;
     rollStiffness = NaN;
     rollStiffnessTotal = NaN;
+end
+
+%% Roll Center Position Plot
+if(showRollCenterPlot && ~isempty(rollCenterCurve.qRoll))
+    % Reuse figure if it exists, else create new figure
+    fig_handle_name =   'h2_sm_car_testrig_roll_center';
+
+    handle_var = evalin('base',['who(''' fig_handle_name ''')']);
+    if(isempty(handle_var))
+        evalin('base',[fig_handle_name ' = figure(''Name'', ''' fig_handle_name ''');']);
+    elseif ~isgraphics(evalin('base',handle_var{:}))
+        evalin('base',[fig_handle_name ' = figure(''Name'', ''' fig_handle_name ''');']);
+    end
+    figure(evalin('base',fig_handle_name))
+    clf(evalin('base',fig_handle_name))
+
+    [qRollPlot,iRollPlot] = sort(rollCenterCurve.qRoll);
+    yRollCtrPlot = -rollCenterCurve.y(iRollPlot)*1000;
+    zRollCtrPlot =  rollCenterCurve.z(iRollPlot)*1000;
+    zTravelPlot   =  rollCenterCurve.zTravel(iRollPlot)*1000;
+
+    subplot(1,2,1)
+    if(range(yRollCtrPlot)>1)
+        plot(yRollCtrPlot,zRollCtrPlot,'.-','LineWidth',1)
+        hold on
+        plot(rollCenterLatZ0,rollCenterHeightZ0,'rx','MarkerSize',8)
+        xline(0,':','Color',[0.5 0.5 0.5],'HandleVisibility','off')
+        yline(0,':','Color',[0.5 0.5 0.5],'HandleVisibility','off')
+        hold off
+        title('Roll Center Path')
+        xlabel('Lateral Position, +Left (mm)')
+    else
+        plot(zTravelPlot,zRollCtrPlot,'.-','LineWidth',1)
+        hold on
+        plot(0,rollCenterHeightZ0,'rx','MarkerSize',8)
+        xline(0,':','Color',[0.5 0.5 0.5],'HandleVisibility','off')
+        yline(0,':','Color',[0.5 0.5 0.5],'HandleVisibility','off')
+        hold off
+        title('Roll Center vs. Travel')
+        xlabel('Wheel Center Travel (mm)')
+    end
+    ylabel('Roll Center Height Above Ground (mm)')
+    grid on
+    axis tight
+
+    subplot(1,2,2)
+    plot(qRollPlot,zRollCtrPlot,'.-','LineWidth',1)
+    hold on
+    plot(0,rollCenterHeightZ0,'rx','MarkerSize',8)
+    yline(0,':','Color',[0.5 0.5 0.5],'HandleVisibility','off')
+    hold off
+    title('Roll Center Height')
+    xlabel('Roll Angle (deg)')
+    ylabel('Roll Center Height Above Ground (mm)')
+    grid on
+    axis tight
 end
 
 %% Debug plot
@@ -1005,7 +1179,7 @@ Values = [...
     zBump,zRebound,zTotal,...
     WCRecLong,WCRecLat,...
     sprRat,damRat,...
-    rollSteer,rollCamber,rollStiffness,rollStiffnessTotal,...
+    rollSteer,rollCamber,rollCenterLatZ0,rollCenterHeightZ0,rollStiffness,rollStiffnessTotal,...
     rackMax,steerRatio,...
     maxToeOut,maxToeIn,...
     pcntAck20deg,pcntAckMx,...
@@ -1029,7 +1203,7 @@ Names = [...
     "Wheel Travel Bump","Wheel Travel Rebound","Wheel Travel Total",...
     "WC Recession Long", "WC Recession Lat",...
     "Spring Ratio","Damper Ratio",...
-    "Roll Steer","Roll Camber","Roll Stiffness","Roll Stiffness Total",...
+    "Roll Steer","Roll Camber","Roll Center Lat","Roll Center Height","Roll Stiffness","Roll Stiffness Total",...
     "Max Rack Travel","Steering Ratio",...
     "Max Toe Out","Max Toe In",...
     "Ackermann at 20 deg Inner","Ackermann at Max Inner"...
@@ -1053,7 +1227,7 @@ Units = [...
     "mm", "mm", "mm",...
     "mm/m", "mm/m",...
     "1", "1",...
-    "deg","deg","N*m/deg","N*m/deg",...
+    "deg","deg","mm","mm","N*m/deg","N*m/deg",...
     "mm","1",...
     "deg","deg",...
     "%","%",...
@@ -1079,7 +1253,7 @@ Description = [...
     "Up","Down","Up+Down",...
     "+Backwards","+In",...
     "Spring Disp/WC Disp","Damper Disp/WC Disp",...
-    "+/-2deg Roll, +Toe In","+/-2deg Roll, +Top Out","+/-2deg Roll, Wheel Center","+/-2deg Roll, Contact Patch",...
+    "+/-2deg Roll, +Toe In","+/-2deg Roll, +Top Out","0deg Roll, +Left of Centerline","0deg Roll, Above Ground","+/-2deg Roll, Wheel Center","+/-2deg Roll, Contact Patch",...
     "Rack Travel at Max Steer","Handwheel Angle/Toe Angle, 20 deg Toe",...
     "+Toe In","+Toe In",...
     "0% if parallel, 100% if ideal","0% if parallel, 100% if ideal",...
@@ -1095,5 +1269,3 @@ Description = [...
     ]';
 
 TSuspMetrics = table(Names,Values,Units,Description);
-
-

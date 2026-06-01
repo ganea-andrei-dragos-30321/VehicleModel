@@ -83,7 +83,8 @@ T_S_FIS = addRule(T_S_FIS,[1 1 1 1 1 1 1; ...
     2 5 1 1 14 1 1; ...
     3 5 1 1 15 1 1]);
 % Save FIS to specified MAT-file, overwriting any existing file
-outPath = fullfile('.', 'Libraries', 'Vehicle', 'Control', 'FLC DYC V3', 'FIS_TS.mat');
+scriptDir = fileparts(mfilename('fullpath'));
+outPath = fullfile(scriptDir, 'FIS_TS.mat');
 % Save T_S_FIS variable to MAT-file, -v7.3 not required but safe for large objects
 save(outPath, 'T_S_FIS', '-mat');
 end
