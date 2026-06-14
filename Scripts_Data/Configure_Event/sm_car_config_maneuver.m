@@ -430,13 +430,13 @@ switch maneuver_str
         set_param(modelname,'StopTime','200');
         set_param([modelname '/Check'],'start_check_time_end_lap','20');
         set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
-    % --- CRG Teste
-    case 'crg teste'
-        evalin('base',['Init = IDatabase.CRG_Teste.' init_inst ';']);
-        evalin('base',['Maneuver = MDatabase.CRG_Teste.' veh_inst ';']);
+    % --- CRG Teste with cone overlay
+    case {'crg teste','crg teste f'}
+        evalin('base',['Init = IDatabase.CRG_Teste_F.' init_inst ';']);
+        evalin('base',['Maneuver = MDatabase.CRG_Teste_F.' veh_inst ';']);
         set_param(drive_h,'popup_driver_type','Closed Loop');
-        evalin('base',['Driver = DDatabase.CRG_Teste.' veh_inst ';']);
-        evalin('base','sm_car_scene_stl_create(Scene.CRG_Teste);');
+        evalin('base',['Driver = DDatabase.CRG_Germania_F.' veh_inst ';']);
+        evalin('base','sm_car_scene_stl_create(Scene.CRG_Teste_F);');
         sm_car_config_road(modelname,'CRG Teste F');
         set_param(modelname,'StopTime','200');
         set_param([modelname '/Check'],'start_check_time_end_lap','20');
@@ -446,9 +446,9 @@ switch maneuver_str
         evalin('base',['Init = IDatabase.CRG_Germania_F.' init_inst ';']);
         evalin('base',['Maneuver = MDatabase.CRG_Germania_F.' veh_inst ';']);
         set_param(drive_h,'popup_driver_type','Closed Loop');
-        evalin('base',['Driver = DDatabase.CRG_Germania.F.' veh_inst ';']);
+        evalin('base',['Driver = DDatabase.CRG_Germania_F.' veh_inst ';']);
         evalin('base','sm_car_scene_stl_create(Scene.CRG_Germania_F);');
-        sm_car_config_road(modelname,'CRG Teste F');
+        sm_car_config_road(modelname,'CRG Germania F');
         set_param(modelname,'StopTime','200');
         set_param([modelname '/Check'],'start_check_time_end_lap','20');
         set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');

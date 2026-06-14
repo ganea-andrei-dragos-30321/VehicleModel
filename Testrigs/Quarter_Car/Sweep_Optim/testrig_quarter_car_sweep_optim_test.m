@@ -15,7 +15,7 @@
 % testrig_quarter_car_doublewishbone.slx.  They can also be performed on
 % testrig_quarter_car_doublewishbone_pullrod.slx.
 %
-% Copyright 2024-2025 The MathWorks, Inc.
+% Copyright 2024-2026 The MathWorks, Inc.
 
 %% Quarter-Car Testrig Model
 %
@@ -28,7 +28,7 @@
 %
 % <matlab:open_system('testrig_quarter_car_doublewishbone'); Open Model>
 
-mdl = 'testrig_quarter_car_doublewishbone';
+mdl = 'testrig_quarter_car';
 open_system(mdl)
 sm_car_config_variants(mdl);
 
@@ -42,7 +42,7 @@ sm_car_config_variants(mdl);
 %
 % <matlab:open_system('testrig_quarter_car_doublewishbone');open_system('testrig_quarter_car_doublewishbone/DoubleWishbone','force'); Open Subsystem>
 
-open_system('testrig_quarter_car_doublewishbone/DoubleWishbone','force');
+open_system('testrig_quarter_car','force');
 
 %% Define Sets of Values for Parameter Sweep
 %
@@ -58,10 +58,10 @@ open_system('testrig_quarter_car_doublewishbone/DoubleWishbone','force');
 % path2Val is complete path to variable and index in parentheses
 par_list = [];
 par_list(1).path2Val = 'Vehicle.Chassis.SuspA1.Linkage.TrackRod.sInboard.Value(3)';
-par_list(1).relRange = -0.03:0.015:0.03;  % Relative range in m
+par_list(1).relRange = -0.03:0.045:0.03;  % Relative range in m
 
 par_list(2).path2Val = 'Vehicle.Chassis.SuspA1.Linkage.TrackRod.sOutboard.Value(3)';
-par_list(2).relRange = -0.03:0.03:0.03;  % Relative range in m
+par_list(2).relRange = -0.03:0.06:0.03;  % Relative range in m
 
 % Structure par_list must contain valueSet with values for parameter
 % initVal is required for two-parameter surface plot only
@@ -71,7 +71,7 @@ for par_i = 1:length(par_list)
 end
 
 % Set up Maneuver
-Maneuver = sm_car_maneuverdata_knc(0.17,-0.21,0.01,1.3,0.1,500,1200,1200,1200,1200,-0.3);
+Maneuver = sm_car_maneuverdata_knc(0.05,-0.03,0.01,2.8449,0.5,1000,2400,2400,2400,2400,-0.3);
 
 %% Conduct Parameter Sweep
 %

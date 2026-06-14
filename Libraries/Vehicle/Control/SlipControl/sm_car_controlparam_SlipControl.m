@@ -36,26 +36,25 @@ control_param.Tmax = max(control_param.MotorTrq);
 
 % Vehicle Dynamics and Aero Parameters
 control_param.RearTrack = 1.248;
-control_param.FrontTrackToCG = 0.823;
-control_param.FrontTrackToCoP = 0.8;
+control_param.FrontTrackToCG = 0.8232;
+control_param.FrontTrackToCoP = 0.707;
 control_param.FrontalArea = 1.2;
 
 % PID Control Gains
-control_param.Proportional_P = 1550;
-control_param.Integral_I = 38025;
-control_param.Derivative_D = 8;
+control_param.Proportional_P = 800;
+control_param.Integral_I = 6000;
+control_param.Derivative_D = 11;
+control_param.Filter_N = 100;
 
 % Simulation and Physical Constants
 control_param.ActivationVelocity = 0.7;
 control_param.LiftCoef = -2.15;
 control_param.GravitationAcc = 9.81;
-control_param.CGHeight = 0.315;
+control_param.CGHeight = 0.3583;
 control_param.Wheelbase = 1.575;
-control_param.Mass = 315;
+control_param.Mass = 320;
 control_param.AirDensity = 1.226;
 
 % Slip Refence Table
-control_param.SlipRef = [0.08;0.08;0.152;0.116;0.102;0.096;0.092;0.09;0.09;0.09;0.094;0.098;0.104;0.112;0.126;0.154;0.232;0.1];
+control_param.SlipRef = [0.08;0.08;0.09;0.095;0.093;0.092;0.091;0.09;0.09;0.09;0.094;0.098;0.104;0.112;0.126;0.154;0.2;0.12];
 control_param.LoadRef = [0;400;500;600;700;800;900;1000;1100;1200;1300;1400;1500;1600;1700;1800;1900;2000];
-
-

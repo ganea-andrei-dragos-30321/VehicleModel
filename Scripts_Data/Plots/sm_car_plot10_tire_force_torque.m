@@ -16,7 +16,7 @@ else
 end
 
 % Check for simulation results
-logsout_sm_car = evalin('base','out.logsout_sm_car');
+logsout_sm_car = evalin('base','logsout_sm_car');
 if isempty('logsout_sm_car')
     error('logsout_sm_car data not available.')
 end

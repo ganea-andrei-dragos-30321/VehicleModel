@@ -52,6 +52,14 @@ Visual.SteeringWheel.clr    = Visual.clr.gray;
 Visual.TireContactPlane.clr = Visual.clr.gray;
 Visual.TireContactPlane.opc = 0.25;
 
+Visual.TorqueBars.fill.clr   = Visual.clr.red;
+Visual.TorqueBars.rail.clr   = Visual.clr.graylight;
+Visual.TorqueBars.tick.clr   = Visual.clr.white;
+Visual.TorqueBars.fill.opc   = 1;
+Visual.TorqueBars.rail.opc   = 0.35;
+Visual.TorqueBars.tick.opc   = 0.8;
+Visual.TorqueBars.filterTimeConstant = 0.01;
+
 Visual.PaceCar.body.clr     = Visual.clr.red;
 
 % Emblem
@@ -105,6 +113,12 @@ if(strcmpi(car_option,'default'))
     Visual.Driveshaft.rad     = 0.025;
     Visual.DriveshaftCVs.rad  = 0.03;
     Visual.Axle.rad           = 0.025;
+
+    % Rear motor torque demand bars
+    Visual.TorqueBars.travel     = 0.25;
+    Visual.TorqueBars.yOffset    = 0.18;
+    Visual.TorqueBars.zOffset    = 0.30;
+    Visual.TorqueBars.markerSize = 10;
     
 else
     % Shock Visualization
@@ -146,5 +160,11 @@ else
     Visual.DiffShaftOut.rad   = 0.0125;
     Visual.DriveshaftCVs.rad  = 0.015;
     Visual.Axle.rad           = 0.0125;
+
+    % Rear motor torque demand bars
+    Visual.TorqueBars.travel     = 0.18;
+    Visual.TorqueBars.yOffset    = 0.12;
+    Visual.TorqueBars.zOffset    = 0.22;
+    Visual.TorqueBars.markerSize = 8;
     
 end

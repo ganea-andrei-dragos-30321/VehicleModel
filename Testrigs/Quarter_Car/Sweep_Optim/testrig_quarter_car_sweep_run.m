@@ -2,6 +2,8 @@ function [simInput, simOut, TSuspMetricsSet] = testrig_quarter_car_sweep_run(mdl
 
 % Ensure model is open
 open_system(mdl)
+set_param(mdl,'FastRestart','off')
+cleanupFastRestart = onCleanup(@() set_param(mdl,'FastRestart','off'));
 sm_car_config_variants(mdl);
 
 % Limit stop time - do not need entire KnC test
@@ -48,7 +50,13 @@ end
 %% Run simulations
 clear simOut
 simOut = sim(simInput,'ShowSimulationManager','off',...
-    'ShowProgress','on','UseFastRestart','on');
+    'ShowProgress','on','UseFastRestart','off');
+simErrorInds = find(arrayfun(@(simResult) ~isempty(simResult.ErrorMessage),simOut));
+if(~isempty(simErrorInds))
+    error('sm_car:testrigSweep:SimulationFailed', ...
+        'Simulation failed for run(s): %s\nFirst error:\n%s', ...
+        mat2str(simErrorInds),simOut(simErrorInds(1)).ErrorMessage);
+end
 
 %% Reuse figure if it exists, else create new figure
 fig_handle_name =   'h1_sm_car_testrig_quarter_car_sweep';

@@ -20,14 +20,15 @@ function [xFinal,fval,TSuspMetricsFinal] = testrig_quarter_car_optim_run(mdl,Veh
 %      fval               Optimized value of performance metrics
 %      TSuspMetricsFinal  Metrics obtained with optimized parameters
 %
-% Copyright 2020-2025 The MathWorks, Inc.
+% Copyright 2020-2026 The MathWorks, Inc.
 
 %% Obtain and display default level of target metric (such as "bump steer")
 open_system(mdl)
 stopTimeBzn = Maneuver.tRange.Bumpzn(2);
 tempStopTime = get_param(mdl,'stopTime');
+set_param(mdl,'FastRestart','off')
+cleanupModelSettings = onCleanup(@() set_param(mdl,'FastRestart','on','StopTime',tempStopTime));
 set_param(mdl,'StopTime',num2str(stopTimeBzn))
-set_param(mdl,'FastRestart','on')
 out = sim(mdl);
 
 % Add short name to par_list
@@ -103,6 +104,7 @@ disp('Metrics with Optimized Set of Parameter Values')
 
 set_param(mdl,'FastRestart','off')
 set_param(mdl,'StopTime',tempStopTime)
+clear cleanupModelSettings
 
 for mni = 1:length(metricName)
     metric_i(mni)  = find(strcmp(TSuspMetricsFinal.Names,metricName{mni}));

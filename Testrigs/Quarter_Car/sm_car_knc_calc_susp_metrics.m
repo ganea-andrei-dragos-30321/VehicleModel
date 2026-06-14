@@ -637,12 +637,12 @@ PzMax     = min(max(PzPzUp),max(PzPzDn));
 PzMin     = max(min(PzPzUp),min(PzPzDn));
 
 % Sample testrig post force for test phases with increasing and decreasing post height
-% PzSamplePts = linspace(PzMin,PzMax,100);
-% FzPzUpSamp = interp1(PzPzUp,FzROUp,PzSamplePts);
-% FzPzDnSamp = interp1(PzPzDn,FzRODn,PzSamplePts);
+PzSamplePtsRO = linspace(PzMin,PzMax,100);
+FzPzROUpSamp = interp1(PzPzUp,FzROUp,PzSamplePtsRO);
+FzPzRODnSamp = interp1(PzPzDn,FzRODn,PzSamplePtsRO);
 
 % Average both curves to obtain testrig post force without hysteresis
-FzAvgRO = mean([FzPzUpSamp;FzPzDnSamp]);
+FzAvgRO = mean([FzPzROUpSamp;FzPzRODnSamp]);
 
 
 %% Obtain Toe, Camber: + 2deg Roll
@@ -663,8 +663,8 @@ if(~isempty(simlog_pzTireROsrt))
     rollCamber  = camberROZp - camberROZn;
 
     %% Roll Stiffness
-    fzp2deg  = interp1(PzSamplePts,FzAvgRO, wCtrZ+pzRoll);
-    fzn2deg  = interp1(PzSamplePts,FzAvgRO, wCtrZ-pzRoll);
+    fzp2deg  = interp1(PzSamplePtsRO,FzAvgRO, wCtrZ+pzRoll);
+    fzn2deg  = interp1(PzSamplePtsRO,FzAvgRO, wCtrZ-pzRoll);
 
     rollStiffness = (fzp2deg-fzn2deg)*(simlog_pyTire(1))/(AngleForRollTest*2); % N*m/deg
 
@@ -866,7 +866,7 @@ if(showPlots)
 
     plot(simlog_pzTireROsrt-wCtrZ(1),simlog_rigFzROsrt,'.','DisplayName','Normal Force')
     hold on
-    plot(PzSamplePts-wCtrZ(1),FzAvgRO,'r','DisplayName','Avg')
+    plot(PzSamplePtsRO-wCtrZ(1),FzAvgRO,'r','DisplayName','Avg')
     if(~isempty(indBumpstopAll))
         hold on
         plot(simlog_pzTireROsrt(indBumpstopAll)-wCtrZ(1),   simlog_rigFzROsrt(indBumpstopAll),'ro','DisplayName','Bumpstop')

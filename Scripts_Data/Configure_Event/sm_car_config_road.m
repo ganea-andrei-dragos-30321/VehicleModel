@@ -251,6 +251,50 @@ switch lower(scenename)
 
         set_param(modelname,'StopTime','200')
 
+    case 'crg teste'
+        if(checkNonFlatCRG)
+            error_str = sprintf([messgNonFlatCRG1 '\n' ...
+                tire_diag_str_fmt '\n'...
+                tireTr_diag_str_fmt '\n'...
+                messgNonFlatCRG2]);
+            errordlg(error_str,'Wrong Tire Software')
+        end
+
+        % Select CRG file
+        roadFile = 'which(''CRG_Teste.crg'')';
+
+        set_param(modelname,'StopTime','200')
+
+    case 'crg teste f'
+        if(~sum([contains(tirClass,'MFEval') contains(tirClassTr,'MFEval')]))
+            % Set file flat road for MF-Swift
+            roadFile  = 'which(''TNO_FlatRoad.rdf'')';
+        end
+
+        set_param(modelname,'StopTime','200')
+
+    case 'crg germania'
+        if(checkNonFlatCRG)
+            error_str = sprintf([messgNonFlatCRG1 '\n' ...
+                tire_diag_str_fmt '\n'...
+                tireTr_diag_str_fmt '\n'...
+                messgNonFlatCRG2]);
+            errordlg(error_str,'Wrong Tire Software')
+        end
+
+        % Select CRG file
+        roadFile = 'which(''CRG_Germania.crg'')';
+
+        set_param(modelname,'StopTime','200')
+
+    case 'crg germania f'
+        if(~sum([contains(tirClass,'MFEval') contains(tirClassTr,'MFEval')]))
+            % Set file flat road for MF-Swift
+            roadFile  = 'which(''TNO_FlatRoad.rdf'')';
+        end
+
+        set_param(modelname,'StopTime','200')
+
     case 'crg nurburgring n'
         if(checkNonFlatCRG)
             error_str = sprintf([messgNonFlatCRG1 '\n' ...
@@ -485,5 +529,3 @@ end
 %% Assign results to workspace
 assignin('base','Vehicle',Vehicle);
 %assignin('base',trailer_var,Trailer);
-
-
