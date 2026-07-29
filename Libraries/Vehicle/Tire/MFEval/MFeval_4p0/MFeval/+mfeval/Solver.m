@@ -40,7 +40,7 @@ classdef Solver
             [forcesAndmoments, varinf] = obj.doForcesAndMoments(tirParams, postProInputs, internalParams, modes);
             
             % Call doExtras
-            [Re, omega, rho, Rl, a, b, Cx, Cy, Cz, sigmax, sigmay, instKya] = obj.doExtras(tirParams, postProInputs, forcesAndmoments, varinf);
+            [Re, omega, rho, Rl, TV, b, Cx, Cy, Cz, sigmax, sigmay, instKya] = obj.doExtras(tirParams, postProInputs, forcesAndmoments, varinf);
             
             % Check the sign of the coefficient of friction
             % The calculation of Fy is not affected by the sign of muy
@@ -71,7 +71,7 @@ classdef Solver
             out(:,12) = real(postProInputs.p);
             out(:,13) = real(Re);
             out(:,14) = real(rho);
-            out(:,15) = real(2*a);
+            out(:,15) = real(2*TV);
             out(:,16) = real(varinf.t);
             out(:,17) = real(varinf.mux);
             out(:,18) = real(varinf.muy);
@@ -1820,7 +1820,7 @@ classdef Solver
             
         end % calculateRhoRl62
         
-        function [a, b, NCz] = calculateContactPatch(~, tirParams, postProInputs, dpi)%#codegen
+        function [TV, b, NCz] = calculateContactPatch(~, tirParams, postProInputs, dpi)%#codegen
             
             % Unpack Parameters
             Fz_unlimited = postProInputs.uFz;
@@ -1879,11 +1879,11 @@ classdef Solver
                     Q_A2 = 1.693*Q_A1^2;
                 end
                 
-                a = R0.*(Q_A2.*(Fz_unlimited./Fz0)+Q_A1.*sqrt(Fz_unlimited./Fz0)); % From the MF-Tyre equation manual
+                TV = R0.*(Q_A2.*(Fz_unlimited./Fz0)+Q_A1.*sqrt(Fz_unlimited./Fz0)); % From the MF-Tyre equation manual
                 b = w/2; % From the MF-Tyre equation manual
             else
                 % MF6.1 and 6.2 equatons
-                a = R0.*(Q_RA2.*(Fz_unlimited./(NCz.*R0)) + Q_RA1.*sqrt(Fz_unlimited./(NCz.*R0))); %[Eqn (9) Page 3 - Paper]
+                TV = R0.*(Q_RA2.*(Fz_unlimited./(NCz.*R0)) + Q_RA1.*sqrt(Fz_unlimited./(NCz.*R0))); %[Eqn (9) Page 3 - Paper]
                 b = w.*(Q_RB2.*(Fz_unlimited./(NCz.*R0)) + Q_RB1.*(Fz_unlimited./(NCz.*R0)).^(1/3)); %[Eqn (10) Page 3 - Paper]
             end
         end % calculateContactPatch
@@ -2070,7 +2070,7 @@ classdef Solver
             
         end % doForcesAndMoments
         
-        function [Re, omega, rho, Rl, a, b, Cx, Cy, Cz, sigmax, sigmay, instKya] = doExtras(obj, tirParams, postProInputs, forcesAndmoments, varinf)%#codegen
+        function [Re, omega, rho, Rl, TV, b, Cx, Cy, Cz, sigmax, sigmay, instKya] = doExtras(obj, tirParams, postProInputs, forcesAndmoments, varinf)%#codegen
             
             dpi = (postProInputs.p - tirParams.NOMPRES)./tirParams.NOMPRES; % [Eqn (4.E2b) Page 177 - Book]
             
@@ -2083,7 +2083,7 @@ classdef Solver
                 [rho, Rl, Cz] = obj.calculateRhoRl62(tirParams, postProInputs, forcesAndmoments, dpi, omega, Romega);
             end
             
-            [a, b, ~] = obj.calculateContactPatch(tirParams, postProInputs, dpi);
+            [TV, b, ~] = obj.calculateContactPatch(tirParams, postProInputs, dpi);
             
             [Cx, Cy, sigmax, sigmay] = obj.calculateRelax(tirParams, postProInputs, varinf);
             

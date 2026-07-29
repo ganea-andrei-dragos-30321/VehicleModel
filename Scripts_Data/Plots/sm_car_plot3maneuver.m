@@ -38,10 +38,11 @@ if(~isempty(hasTrajectory))
     if(startsWith(lower(Maneuver.Type),'crg_'))
         ctrline = Scene.(Maneuver.Type).Geometry.centerline.xyz(:,1:2);
         w = Scene.(Maneuver.Type).Geometry.w;
-    elseif(isfield(Scene.(Maneuver.Type),'Track'))
+    elseif(isfield(Scene,Maneuver.Type) && isfield(Scene.(Maneuver.Type),'Track'))
         ctrline = Scene.(Maneuver.Type).Track.ctrline;
         w = Scene.(Maneuver.Type).Track.w;
     else
+
     hasTrack = false;
     end
     if(hasTrack)
@@ -230,33 +231,33 @@ else
     logsout_rBrakePedal = logsout_DrvBus.Values.rBrakePedal;
     
     ah(1) = subplot(311);
-    plot(Maneuver.Accel.t.Value,Maneuver.Accel.rPedal.Value,'-o','LineWidth',2);
-    hold on
+   % plot(Maneuver.Accel.t.Value,Maneuver.Accel.rPedal.Value,'-o','LineWidth',2);
+   % hold on
     plot(logsout_rAccelPedal.Time,logsout_rAccelPedal.Data,'--x','LineWidth',1);
-    hold off
+   % hold off
     ylabel('Travel (0-1)');
     title('Accelerator Pedal Travel');
-    legend({'Command','Measured'},'Location','Best');
+    legend({'Measured'},'Location','Best');
     set(gca,'YLim',[0 1]);
     
     ah(2) = subplot(312);
-    plot(Maneuver.Brake.t.Value,Maneuver.Brake.rPedal.Value,'-o','LineWidth',2);
-    hold on
+   % plot(Maneuver.Brake.t.Value,Maneuver.Brake.rPedal.Value,'-o','LineWidth',2);
+   % hold on
     plot(logsout_rBrakePedal.Time,logsout_rBrakePedal.Data,'--x','LineWidth',1);
-    hold off
+    %hold off
     ylabel('Travel (0-1)');
     title('Brake Pedal Travel');
     set(gca,'YLim',[0 1]);
     
     ah(3) = subplot(313);
-    plot(Maneuver.Steer.t.Value,Maneuver.Steer.aWheel.Value*180/pi,'-o','LineWidth',2);
-    hold on
+  %  plot(Maneuver.Steer.t.Value,Maneuver.Steer.aWheel.Value*180/pi,'-o','LineWidth',2);
+   % hold on
     plot(logsout_aSteerWheel.Time,logsout_aSteerWheel.Data,'--x','LineWidth',1);
-    hold off
+  % hold off
     ylabel('Angle (deg)')
     title('Steering Wheel Angle');
     xlabel('Time (s)');
-    
+       
     subplot(311)
     linkaxes(ah, 'x')
     label_str = sprintf('Maneuver: %s\nData: %s',...

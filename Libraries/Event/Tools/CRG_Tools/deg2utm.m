@@ -105,8 +105,8 @@ for i=1:n1
    else Letra='X';
    end
 
-   a = cos(lat) * sin(deltaS);
-   epsilon = 0.5 * log( ( 1 +  a) / ( 1 - a ) );
+   TV = cos(lat) * sin(deltaS);
+   epsilon = 0.5 * log( ( 1 +  TV) / ( 1 - TV ) );
    nu = atan( tan(lat) / cos(deltaS) ) - lat;
    v = ( c / ( ( 1 + ( e2cuadrada * ( cos(lat) ) ^ 2 ) ) ) ^ 0.5 ) * 0.9996;
    ta = ( e2cuadrada / 2 ) * epsilon ^ 2 * ( cos(lat) ) ^ 2;

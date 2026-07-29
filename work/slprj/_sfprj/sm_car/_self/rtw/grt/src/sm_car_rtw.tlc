@@ -11,14 +11,6 @@
 %function GlobalMachineInitializer(block) void
   %openfile tmpFcnBuf
   %<DumpMachineInitializer(block)>\
-  %if FILE_EXISTS("drivingvehiclecontroller_rtw.tlc")
-    %generatefile "machineSource" "drivingvehiclecontroller_rtw.tlc"
-    %<GENERATE_TYPE(block,"DumpMachineInitializer","machineSource")>\
-  %endif
-  %if FILE_EXISTS("mfeval_CPI_LIB_rtw.tlc")
-    %generatefile "machineSource" "mfeval_CPI_LIB_rtw.tlc"
-    %<GENERATE_TYPE(block,"DumpMachineInitializer","machineSource")>\
-  %endif
   %if FILE_EXISTS("autolibsharedcommon_rtw.tlc")
     %generatefile "machineSource" "autolibsharedcommon_rtw.tlc"
     %<GENERATE_TYPE(block,"DumpMachineInitializer","machineSource")>\
@@ -38,10 +30,6 @@
 %function GlobalMachineTerminator(block) void
   %openfile tmpFcnBuf
   %<DumpMachineTerminator(block)>\
-  %generatefile "machineSource" "drivingvehiclecontroller_rtw.tlc"
-  %<GENERATE_TYPE(block,"DumpMachineTerminator","machineSource")>\
-  %generatefile "machineSource" "mfeval_CPI_LIB_rtw.tlc"
-  %<GENERATE_TYPE(block,"DumpMachineTerminator","machineSource")>\
   %generatefile "machineSource" "autolibsharedcommon_rtw.tlc"
   %<GENERATE_TYPE(block,"DumpMachineTerminator","machineSource")>\
   %closefile tmpFcnBuf

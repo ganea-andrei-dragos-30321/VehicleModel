@@ -167,13 +167,13 @@ function [ds] = crg_peakfinder_laplacian(z, th)
 %   ds = crg_peakfinder_laplacian(z, th)
 
 % Laplacian filter mask (edge detector incl. 45deg)
-a = [-1 -1 -1;
+TV = [-1 -1 -1;
      -1  8 -1;
      -1 -1 -1 ];
 
-a = a*10;                           % peaks should get more attention
+TV = TV*10;                           % peaks should get more attention
 
-zi = filter2(a, abs(z), 'valid');   % filter image/matrix
+zi = filter2(TV, abs(z), 'valid');   % filter image/matrix
 
 zi = [zeros(1,size(zi,2)); zi; zeros(1,size(zi,2))]; % add cut off edges
 zi = [zeros(size(zi,1),1), zi, zeros(size(zi,1),1)];

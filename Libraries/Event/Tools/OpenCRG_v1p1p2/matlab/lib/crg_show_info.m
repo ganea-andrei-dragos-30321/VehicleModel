@@ -192,7 +192,7 @@ if isfield(dved, 'ulex'), c{end+1} = sprintf('%s = %20.12g','crossing_ulen      
 
 p0 = [0.02 0.07 0.46 0.86];
 s0 = 10;
-a = annotation('textbox', p0, ...
+TV = annotation('textbox', p0, ...
     'BackgroundColor', 'w', ...
     'HorizontalAlignment', 'left', ...
     'VerticalAlignment', 'top', ...
@@ -202,14 +202,14 @@ a = annotation('textbox', p0, ...
     'FontSize', s0, ...
     'FitBoxToText', 'off', ...
     'String', c);
-set(a, 'FitBoxToText', 'on');
-p1 = get(a, 'Position');
+set(TV, 'FitBoxToText', 'on');
+p1 = get(TV, 'Position');
 s1 = s0 * min(p0(3)/p1(3), p0(4)/p1(4));
 if s1 < s0
-    set(a, 'FontSize', s1)
+    set(TV, 'FontSize', s1)
 end
-set(a, 'FitBoxToText', 'off');
-set(a, 'Position', p0);
+set(TV, 'FitBoxToText', 'off');
+set(TV, 'Position', p0);
 
 
 %% right annotation textbox
@@ -227,7 +227,7 @@ end
 
 p0 = [0.52 0.07 0.46 0.86];
 s0 = 10;
-a = annotation('textbox', p0, ...
+TV = annotation('textbox', p0, ...
     'BackgroundColor', 'w', ...
     'HorizontalAlignment', 'left', ...
     'VerticalAlignment', 'top', ...
@@ -238,13 +238,13 @@ a = annotation('textbox', p0, ...
     'FitBoxToText', 'off', ...
     'String', c);
 
-set(a, 'FitBoxToText', 'on');
-p1 = get(a, 'Position');
+set(TV, 'FitBoxToText', 'on');
+p1 = get(TV, 'Position');
 s1 = s0 * min(p0(3)/p1(3), p0(4)/p1(4));
 if s1 < s0
-    set(a, 'FontSize', s1)
+    set(TV, 'FontSize', s1)
 end
-set(a, 'FitBoxToText', 'off');
-set(a, 'Position', p0);
+set(TV, 'FitBoxToText', 'off');
+set(TV, 'Position', p0);
 
 end

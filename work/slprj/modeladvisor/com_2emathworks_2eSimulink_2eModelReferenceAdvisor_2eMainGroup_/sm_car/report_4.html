@@ -178,7 +178,7 @@
 -->
 </style>
 
-<script type="text/javascript"> <!-- /* Copyright 2013-2025 The MathWorks, Inc. */
+<script type="text/javascript"> <!-- /* Copyright 2013-2026 The MathWorks, Inc. */
 /* define String.trim() method if not defined (used by filterByText() function) */
 if(!String.prototype.trim) {
   String.prototype.trim = function () {
@@ -305,8 +305,8 @@ function markEmptyFolders(){
 
 function updateVisibleChecks( /* show all flags */ checkbox ){
 	
-	var checkboxes = ["Failed Checkbox", "Passed Checkbox", "Warning Checkbox", "Not Run Checkbox", "Justified Checkbox", "Incomplete Checkbox"];
-	var nodeTypes = ["Failed Check","Passed Check",  "Warning Check", "Not Run Check", "Justified Check", "Incomplete Check"];
+	const checkboxes = ['Failed Checkbox', 'Passed Checkbox', 'Warning Checkbox', 'Not Run Checkbox', 'Justified Checkbox', 'Information Checkbox', 'Incomplete Checkbox'];
+    const nodeTypes = ['Failed Check', 'Passed Check', 'Warning Check', 'Not Run Check', 'Justified Check', 'Information Check', 'Incomplete Check'];
 	var textInput = document.getElementById("TxtFilterInput");
 	
 	
@@ -504,7 +504,7 @@ function setTextContent(element, value) {
 }
 
 function hideControlPanel(control){
-	var panelComponents = ["ControlsCheckFiltering", "ControlsView", "ControlsTOC","TextFilter"];
+	var panelComponents = ["ControlsCheckFiltering", "ControlsView", "ControlsTOC", "TextFilter"];
 	var reportContent = document.querySelector(".ReportContent");
 	var controlPanel = document.getElementById("ControlPanel");
 	var isHidden = false;
@@ -722,13 +722,13 @@ Simulink Model Reference Conversion Advisor Report - <font color="#800000">sm_ca
 <tr>
 <td align="left" valign="top">
 <b>
-Simulink version: <font color="#800000">25.2</font>
+Simulink version: <font color="#800000">26.1</font>
 </b>
 
 </td>
 <td align="right" valign="top">
 <b>
-Model version: <font color="#800000">15.259</font>
+Model version: <font color="#800000">16.5</font>
 </b>
 
 </td>
@@ -743,7 +743,7 @@ System: <font color="#800000">sm_car</font>
 </td>
 <td align="right" valign="top">
 <b>
-Current run: <font color="#800000">01-Jun-2026 20:53:59</font>
+Current run: <font color="#800000">22-Jun-2026 01:48:28</font>
 </b>
 
 </td>
@@ -753,8 +753,8 @@ Current run: <font color="#800000">01-Jun-2026 20:53:59</font>
 </table>
 <!-- Compile Status Flag --><!-- Service Status Flag -->
 <!-- mdladv_ignore_start --><div name = "Warning Check" id = "Warning Check" class="WarningCheck" style="margin-left: 0pt;"> <!-- mdladv_ignore_finish -->
-<p><hr /></p>  <a name="CheckRecord_170"></a><div class="CheckHeader" id="Header_com.mathworks.Simulink.ModelReferenceAdvisor.SubsystemInterface">
-<!-- mdladv_ignore_start --><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD3SURBVHgBzZI7EsFQFIb/I4oQRTSUsgOlNlqPGTtgB+yAHRg9Ywka/c0WFGp0aCgYxuvIZcwk8phkRuGr7uPc///P3AP8NVY9vbBqmgirSQRdiIrWApNhL01RTXUQB9FQDel+Wi/5tFmynWInTF2PnIDuSlu6q/kC1FxBHunIXDqRBKQ7GJ5iArX9UngTXJUe/NFJu/ZDBaQ7EZoIgtAStYwZKEA3ZeLcnzcrnLerLw3uuvcfd/vbKIExIsCgcnl6sFwJSHErS0rDOUqjuUeAiMeuFhxDEw2G8RmuVwtyaGIJvNmb02M2+RJ80MDuvxjnNT8wwy94AjZHSy+aGaDFAAAAAElFTkSuQmCC"  />&#160;<!-- mdladv_ignore_finish --><span class="CheckHeading" id="Heading_com.mathworks.Simulink.ModelReferenceAdvisor.SubsystemInterface">
+<p><hr /></p>  <a name="CheckRecord_175"></a><div class="CheckHeader" id="Header_com.mathworks.Simulink.ModelReferenceAdvisor.SubsystemInterface">
+<!-- mdladv_ignore_start --><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD3SURBVHgBzZI7EsFQFIb/I4oQRTSUsgOlNlqPGTtgB+yAHRg9Ywka/c0WFGp0aCgYxuvIZcwk8phkRuGr7uPc///P3AP8NVY9vbBqmgirSQRdiIrWApNhL01RTXUQB9FQDel+Wi/5tFmynWInTF2PnIDuSlu6q/kC1FxBHunIXDqRBKQ7GJ5iArX9UngTXJUe/NFJu/ZDBaQ7EZoIgtAStYwZKEA3ZeLcnzcrnLerLw3uuvcfd/vbKIExIsCgcnl6sFwJSHErS0rDOUqjuUeAiMeuFhxDEw2G8RmuVwtyaGIJvNmb02M2+RJ80MDuvxjnNT8wwy94AjZHSy+aGaDFAAAAAElFTkSuQmCC" />&#160;<!-- mdladv_ignore_finish --><span class="CheckHeading" id="Heading_com.mathworks.Simulink.ModelReferenceAdvisor.SubsystemInterface">
 Check subsystem interface</span>
 <!-- mdladv_ignore_start --><!-- mdladv_ignore_finish --><!-- mdladv_ignore_start --><!-- mdladv_ignore_finish --></div>
 <!-- mdladv_ignore_start --><div class="subsection"><!-- mdladv_ignore_finish --><p /><p /><p>
@@ -771,19 +771,13 @@ Warnings:
 
 </b>
 <font color="#C04C0B">
-<div><span onclick="collapseAll(this, 'e5c222ba-e8d5-4f5c-8a14-7ed9a718c791','ef08accd-7ef0-4721-95e3-1fe82098005b')" onmouseover="this.style.cursor = 'pointer'">
-<img class="CollapseAllControlImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAAhklEQVR42mL8//8/AyUAIICYGCgEAAFEsQEAAUSxAQABxIIu0NTURDBQ6urqGGFsgABiwaagpqYOp+aWliYUPkAAUewFgACi2ACAAGLBKcGCafafP/8wxAACCKcB2BRjAwABRLEXAAKIYgMAAoiFmKjCBwACiJHSzAQQQBR7ASCAKDYAIMAAUtQUow+YsTsAAAAASUVORK5CYII="/>
-</span>
-<div id="e5c222ba-e8d5-4f5c-8a14-7ed9a718c791" class="AllCollapse">
 <ul>
 <li>
-Subsystem '<a href="matlab: hilite_system(Simulink.ID.getHandle('sm_car:3525:347'))">sm_car/Controller/Default/State Estimation/Subsystem</a>' is in a masked subsystem with initialization code. Check that the simulation results are consistent before and after conversion.
+Subsystem '<a href="matlab: hilite_system(Simulink.ID.getHandle('sm_car:4253:869'))">sm_car/Controller/TrqVec_FLC_V3/Power Control/TV FLC V3</a>' is in a masked subsystem with initialization code. Check that the simulation results are consistent before and after conversion.
 </li>
 
 </ul>
 
-</div>
-</div>
 </font>
 
 </p>

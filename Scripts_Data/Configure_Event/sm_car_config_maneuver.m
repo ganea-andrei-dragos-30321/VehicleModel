@@ -431,13 +431,13 @@ switch maneuver_str
         set_param([modelname '/Check'],'start_check_time_end_lap','20');
         set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
     % --- CRG Teste with cone overlay
-    case {'crg teste','crg teste f'}
-        evalin('base',['Init = IDatabase.CRG_Teste_F.' init_inst ';']);
-        evalin('base',['Maneuver = MDatabase.CRG_Teste_F.' veh_inst ';']);
+    case {'crg balkans','crg balkans f'}
+        evalin('base',['Init = IDatabase.CRG_Balkans_F.' init_inst ';']);
+        evalin('base',['Maneuver = MDatabase.CRG_Balkans_F.' veh_inst ';']);
         set_param(drive_h,'popup_driver_type','Closed Loop');
-        evalin('base',['Driver = DDatabase.CRG_Germania_F.' veh_inst ';']);
-        evalin('base','sm_car_scene_stl_create(Scene.CRG_Teste_F);');
-        sm_car_config_road(modelname,'CRG Teste F');
+        evalin('base',['Driver = DDatabase.CRG_Balkans_F.' veh_inst ';']);
+        evalin('base','sm_car_scene_stl_create(Scene.CRG_Balkans_F);');
+        sm_car_config_road(modelname,'CRG Balkans F');
         set_param(modelname,'StopTime','200');
         set_param([modelname '/Check'],'start_check_time_end_lap','20');
         set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');
@@ -466,13 +466,13 @@ switch maneuver_str
           
           
     % --- CUSTOM EVENT based on CRG, no slope: placeholder for custom race circuit
-    case 'crg dej f'
-        evalin('base',['Init = IDatabase.CRG_Dej_F.' init_inst ';']);
-        evalin('base',['Maneuver = MDatabase.CRG_Dej_F.' veh_inst ';']);
+    case {'crg balkans end','crg balkans end f'}
+        evalin('base',['Init = IDatabase.CRG_Balkans_End_F.' init_inst ';']);
+        evalin('base',['Maneuver = MDatabase.CRG_Balkans_End_F.' veh_inst ';']);
         set_param(drive_h,'popup_driver_type','Closed Loop');
-        evalin('base',['Driver = DDatabase.CRG_Dej.' veh_inst ';']);
-        evalin('base','sm_car_scene_stl_create(Scene.CRG_Dej_F);');
-        sm_car_config_road(modelname,'CRG Dej F');
+        evalin('base',['Driver = DDatabase.CRG_Balkans_End.' veh_inst ';']);
+        evalin('base','sm_car_scene_stl_create(Scene.CRG_Balkans_End_F);');
+        sm_car_config_road(modelname,'CRG Balkans End F');
         set_param(modelname,'StopTime','200');
         set_param([modelname '/Check'],'start_check_time_end_lap','20');
         set_param([modelname '/Driver/Closed Loop/Driver Override'],'popup_driver_override','None');

@@ -25,21 +25,20 @@ control_param.Steer.Limits.aUpper.Units   = 'rad';
 %% Parameters for model control
 Vehicle = evalin('base','Vehicle');
 
-tire_param = simscape.multibody.tirread(eval('which(''Hoosier_R20B_20p5x7_R13_7in_12psi.tir'')'));
 rwheel=0.263;
 
-mcg = 315;                           % mass at center of G       
-L = 1.575;                    % wheelbase 
+mcg = 320;                           % mass at center of G       
+L = 1.578;                    % wheelbase 
 a = -Vehicle.Chassis.Body.sCG.Value(1);                       % distance from front axle to CoG
 b = L-a;  
-c_alpha_f = 34000;                                            % front cornering stiffness
-c_alpha_r = 62000;                                            % rear cornering stiffness
+c_alpha_f = 23252*2;                                            % front cornering stiffness
+c_alpha_r = 24436*2;                                            % rear cornering stiffness
 Gr = 1/Vehicle.Powertrain.Driveline.Gearbox.ratio.Value;      % gear ratio for torque
 tr = Vehicle.Chassis.Body.TrackRear.Value;                    % rear track width
  
 
-control_param.FuzzySystem = load('FIS_TS.mat');
-control_param.FuzzySystem = control_param.FuzzySystem.T_S_FIS;
+control_param.FuzzySystem = load('FIS_DYC_V3.mat');
+control_param.FuzzySystem = control_param.FuzzySystem.FIS_DYC_3;
 control_param.StrWheelRatio = 1/5.71;
 control_param.UndersteerGradient = mcg / L * (b / c_alpha_f - a / c_alpha_r);
 control_param.F = rwheel / tr * Gr;
@@ -51,30 +50,33 @@ control_param.MotorW = Vehicle.Powertrain.Power.Motor.TorqueSpd.w.Value;
 control_param.Tmax = max(control_param.MotorTrq);
 
 % Vehicle Dynamics and Aero Parameters
-control_param.RearTrack = 1.24;
-control_param.FrontTrackToCG = 0.871;
-control_param.FrontTrackToCoP = 0.8;
+control_param.RearTrack = 1.248;
+control_param.FrontTrackToCG = 0.8232;
+control_param.FrontTrackToCoP = 0.707;
 control_param.FrontalArea = 1.2;
 
 % PID Control Gains
-control_param.Proportional_P = 2350;
-control_param.Integral_I = 78025;
+control_param.Proportional_P = 800;
+control_param.Integral_I = 6000;
 control_param.Derivative_D = 11;
+control_param.Filter_N = 100;
+
+% TV Control gains 
+control_param.Kp_Yaw = 1000;
+control_param.Kp_beta = 600;
 
 % Simulation and Physical Constants
-control_param.maxBeta = 0.175;
-control_param.TVActivation = 0.1;
-control_param.ActivationVelocity = 0.7;
+control_param.ActivationVelocity = 1;
 control_param.LiftCoef = -2.15;
 control_param.GravitationalAcc = 9.81;
-control_param.CGHeight = 0.352;
-control_param.Wheelbase = 1.575;
-control_param.Mass = 315;
+control_param.CGHeight = 0.3583;
+control_param.Wheelbase = 1.578;
+control_param.Mass = 320;
 control_param.AirDensity = 1.226;
-control_param.CalphaF = 34000;
+control_param.CalphaF = c_alpha_f;
 
 % Slip Refence Table
-control_param.SlipRef = [0.09;0.09;0.152;0.116;0.102;0.096;0.092;0.09;0.09;0.09;0.094;0.098;0.104;0.112;0.126;0.154;0.232;0.1];
+control_param.SlipRef = [0.152;0.152;0.152;0.116;0.102;0.096;0.092;0.09;0.09;0.09;0.094;0.098;0.104;0.112;0.126;0.154;0.232;0.15];
 control_param.LoadRef = [0;400;500;600;700;800;900;1000;1100;1200;1300;1400;1500;1600;1700;1800;1900;2000];
 
 

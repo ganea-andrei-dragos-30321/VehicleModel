@@ -327,7 +327,11 @@ cl_manv_longLat = {...
     'CRG_Teste';
     'CRG_Dej_Wide';
     'CRG_Germania_F';
-    'CRG_Germania'};
+    'CRG_Germania';
+    'CRG_Balkans';
+    'CRG_Balkans_F';
+    'CRG_Balkans_End_F';
+    'CRG_Balkans_End'};
 
 % Maneuvers with longitudinal driver only
 cl_manv_longOnly = {...

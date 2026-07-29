@@ -10,7 +10,7 @@ Params.TimeStep               = 0.003;              % Time step for integration
 % GPS postion 
 Params.GPS.Lant               = 0.6812;              % Distance from front antenna to the CoG [m]
 
-% Vehicle parmeters
+% Vehicle parameters
 Params.Car.SteerR      = 5.71;      % Steering Ratio 
 Params.Car.a           = 0.8232;     % Distance from CoG to front axle[ m]
 Params.Car.b           = 0.7518;     % Distance from CoG to rear axle [m]
@@ -45,7 +45,7 @@ BaseTire.long.LHX   = 1;         % Horizontal shift scale
 BaseTire.long.LVX   = 1;         % Vertical shift scale
 BaseTire.long.LXAL  = 1;         % Combined stiffness scale
 
-% Pure Longitudinal Coefs
+% Pure Longitudinal Coeffs
 BaseTire.long.PCX1  = 1.35825;   % Shape factor Cfx
 BaseTire.long.PDX1  = 2.35273;   % Friction Mux at Fznom
 BaseTire.long.PDX2  = -0.08098;  % Friction variation with load

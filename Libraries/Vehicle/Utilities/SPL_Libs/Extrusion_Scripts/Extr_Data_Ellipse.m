@@ -1,4 +1,4 @@
-function [xy_data] = Extr_Data_Ellipse(a, b, deg1, deg2, ctr, varargin)
+function [xy_data] = Extr_Data_Ellipse(TV, b, deg1, deg2, ctr, varargin)
 %Extr_Data_Ellipse Produce extrusion data for an ellipse.
 %   [xy_data] = Extr_Data_Ellipse(a, b, deg1, deg2, ctr, varargin)
 %   This function returns x-y data for a ring.
@@ -21,7 +21,7 @@ function [xy_data] = Extr_Data_Ellipse(a, b, deg1, deg2, ctr, varargin)
 
 % Default data to show diagram
 if (nargin == 0)
-    a = 5;
+    TV = 5;
     b = 2;
     deg1 = 60;
     deg2 = 315;
@@ -36,9 +36,9 @@ else
 end
 
 % Calculate quarter of ellipse
-xdata = a:-a/50:0;
+xdata = TV:-TV/50:0;
 for i=1:length(xdata)
-    ydata(i) = b/a*sqrt(a^2-xdata(i)^2);
+    ydata(i) = b/TV*sqrt(TV^2-xdata(i)^2);
 end
 
 % Full outer ellipse
@@ -88,20 +88,20 @@ if (nargin == 0 || strcmpi(showplot,'plot'))
     
     %    plot(xy_data(:,1),xy_data(:,2),'-','Marker','.','MarkerSize',12,'LineWidth',1.5);
     axis('equal');
-    axis([-1.1 1.1 -1.1 1.1]*max(a,b));
+    axis([-1.1 1.1 -1.1 1.1]*max(TV,b));
     
     % Show parameters
     hold on
     
     a_label_ang = 180;
     b_label_ang = 90;
-    plot([0 a*(cos(a_label_ang*pi/180))],[0 a*(sin(a_label_ang*pi/180))],'r-d','MarkerFaceColor','r');
-    text(cos(a_label_ang*pi/180)*0.75*a,sin(a_label_ang*pi/180)*0.75*a,'{\color{red}a}');
+    plot([0 TV*(cos(a_label_ang*pi/180))],[0 TV*(sin(a_label_ang*pi/180))],'r-d','MarkerFaceColor','r');
+    text(cos(a_label_ang*pi/180)*0.75*TV,sin(a_label_ang*pi/180)*0.75*TV,'{\color{red}a}');
     
     plot([0 b*(cos(b_label_ang*pi/180))],[0 b*(sin(b_label_ang*pi/180))],'g-d','MarkerFaceColor','g');
     text(cos(b_label_ang*pi/180)*0.5*b,sin(b_label_ang*pi/180)*0.5*b,'{\color{green}b}');
     
-    plot([0 a],[0 0],'k:');
+    plot([0 TV],[0 0],'k:');
     plot([0 b*cos(deg1*pi/180)],[0 b*sin(deg1*pi/180)],'k:');
     plot([0 b*cos(deg2*pi/180)],[0 b*sin(deg2*pi/180)],'k:');
     
@@ -119,9 +119,9 @@ if (nargin == 0 || strcmpi(showplot,'plot'))
     plot(cos(arc2(end))*arc2_r,sin(arc2(end))*arc2_r,'kd','MarkerFaceColor','k');
     text(cos(0.7*deg2*pi/180)*arc2_r*2,sin(0.7*deg2*pi/180)*arc2_r*2,'deg2');
     
-    text(-a,0.75*a,'ctr = 0, center point included');
-    text(-a,0.65*a,'ctr >0 & <1, hollow ellipse created');
-    text(-a,0.55*a,'ctr = 1, chord connects ends');
+    text(-TV,0.75*TV,'ctr = 0, center point included');
+    text(-TV,0.65*TV,'ctr >0 & <1, hollow ellipse created');
+    text(-TV,0.55*TV,'ctr = 1, chord connects ends');
     
     title(['[xy\_data] = Extr\_Data\_Ellipse(a, b, deg1, deg2, ctr);']);
     hold off

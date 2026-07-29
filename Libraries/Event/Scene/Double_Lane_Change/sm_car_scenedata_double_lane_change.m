@@ -34,11 +34,11 @@ scene_data.Road.yaw   = 0*pi/180;   % rad
 scene_data.Cones.lane_a_offset       = 50;     % Start early
 scene_data.Cones.lane_width          = 3.2;    % FS lane width
 scene_data.Cones.lane_lateral_offset = 3.2;    % Lateral change
-scene_data.Cones.lane_a_length       = 25;     % First segment
-scene_data.Cones.gap_a_to_b          = 8;      % Tighter gap
-scene_data.Cones.lane_b_length       = 25;     % Second segment
-scene_data.Cones.gap_b_to_c          = 8;      % Tighter gap
-scene_data.Cones.lane_c_length       = 25;     % Final swerve out
+scene_data.Cones.lane_a_length       = 27;     % First segment
+scene_data.Cones.gap_a_to_b          = 10;      % Tighter gap
+scene_data.Cones.lane_b_length       = 22;     % Second segment
+scene_data.Cones.gap_b_to_c          = 10;      % Tighter gap
+scene_data.Cones.lane_c_length       = 30;     % Final swerve out
 
 scene_data.Cones.height              = 0.6;  % m
 scene_data.Cones.base_thickness      = 0.04; % m

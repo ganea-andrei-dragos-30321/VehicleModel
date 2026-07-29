@@ -178,7 +178,7 @@
 -->
 </style>
 
-<script type="text/javascript"> <!-- /* Copyright 2013-2025 The MathWorks, Inc. */
+<script type="text/javascript"> <!-- /* Copyright 2013-2026 The MathWorks, Inc. */
 /* define String.trim() method if not defined (used by filterByText() function) */
 if(!String.prototype.trim) {
   String.prototype.trim = function () {
@@ -305,8 +305,8 @@ function markEmptyFolders(){
 
 function updateVisibleChecks( /* show all flags */ checkbox ){
 	
-	var checkboxes = ["Failed Checkbox", "Passed Checkbox", "Warning Checkbox", "Not Run Checkbox", "Justified Checkbox", "Incomplete Checkbox"];
-	var nodeTypes = ["Failed Check","Passed Check",  "Warning Check", "Not Run Check", "Justified Check", "Incomplete Check"];
+	const checkboxes = ['Failed Checkbox', 'Passed Checkbox', 'Warning Checkbox', 'Not Run Checkbox', 'Justified Checkbox', 'Information Checkbox', 'Incomplete Checkbox'];
+    const nodeTypes = ['Failed Check', 'Passed Check', 'Warning Check', 'Not Run Check', 'Justified Check', 'Information Check', 'Incomplete Check'];
 	var textInput = document.getElementById("TxtFilterInput");
 	
 	
@@ -504,7 +504,7 @@ function setTextContent(element, value) {
 }
 
 function hideControlPanel(control){
-	var panelComponents = ["ControlsCheckFiltering", "ControlsView", "ControlsTOC","TextFilter"];
+	var panelComponents = ["ControlsCheckFiltering", "ControlsView", "ControlsTOC", "TextFilter"];
 	var reportContent = document.querySelector(".ReportContent");
 	var controlPanel = document.getElementById("ControlPanel");
 	var isHidden = false;
@@ -722,13 +722,13 @@ Simulink Model Reference Conversion Advisor Report - <font color="#800000">sm_ca
 <tr>
 <td align="left" valign="top">
 <b>
-Simulink version: <font color="#800000">25.2</font>
+Simulink version: <font color="#800000">26.1</font>
 </b>
 
 </td>
 <td align="right" valign="top">
 <b>
-Model version: <font color="#800000">15.259</font>
+Model version: <font color="#800000">16.5</font>
 </b>
 
 </td>
@@ -743,7 +743,7 @@ System: <font color="#800000">sm_car</font>
 </td>
 <td align="right" valign="top">
 <b>
-Current run: <font color="#800000">01-Jun-2026 20:53:59</font>
+Current run: <font color="#800000">22-Jun-2026 01:48:28</font>
 </b>
 
 </td>
@@ -753,8 +753,8 @@ Current run: <font color="#800000">01-Jun-2026 20:53:59</font>
 </table>
 <!-- Compile Status Flag --><!-- Service Status Flag -->
 <!-- mdladv_ignore_start --><div name = "Passed Check"  id = "Passed Check" class="PassedCheck" style="margin-left: 0pt;"><!-- mdladv_ignore_finish -->
-<p><hr /></p>  <a name="CheckRecord_169"></a><div class="CheckHeader" id="Header_com.mathworks.Simulink.ModelReferenceAdvisor.ModelConfigurations">
-<!-- mdladv_ignore_start --><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHTSURBVHgBrVO9ThtBEP7mLomDFEWXpEhFbD9BlC5SUGynSkdSpoiOMt2lovXdG0CqpEpIR2cXtPxJSNAgIyoaOKBBAuEzDRYSHmb29hYbRAWjk3a1O9/PzM4B9wy6dRIHAeBFBJpioJInUIfBHeAyQZyldxL4yatwwJgRYGAvGETEPGBLlDFxgubprMM4dPIyAtNv2T0dYid2e9L9mOw+o1FKsdzf0nPP2q4IOFZFHnLEziJRJXiDuDaNF6XnUo0/k5daEMBXcMCaidFQEgUvhi0069P4WJ3QlAADL3IEYu/tKIa5IFLwUtg2a+doG6vpWu7KRzjkgA3BXrSJ3WhT7JY1h6sG3BLwOLYE/GluEt1+TxSkUqaqI2BbatY/s4ot1MofaNEqK7gxN8lduS8aWti1JSDV9ev8d6TZQU4y1XbKjf9fRPmMhvsCMxfOAf0TVuxnh6pkSDSsMrLzHuNWUMeKw06fv2e6axo3jnp5Au2dBVPWtarzkAGDdzqV16+WBCGx/7d4SjYvQeZjvmGAvJ9oHs/mj1GETlZtrCeA9zDTODoSlJuQe/xA8+RPce6PMK+cr6NempfWBJr/7LH/+skjjy4uORWKX/IzfUPc3cBDxhXE6LNA6WFItQAAAABJRU5ErkJggg=="  />&#160;<!-- mdladv_ignore_finish --><span class="CheckHeading" id="Heading_com.mathworks.Simulink.ModelReferenceAdvisor.ModelConfigurations">
+<p><hr /></p>  <a name="CheckRecord_174"></a><div class="CheckHeader" id="Header_com.mathworks.Simulink.ModelReferenceAdvisor.ModelConfigurations">
+<!-- mdladv_ignore_start --><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHTSURBVHgBrVO9ThtBEP7mLomDFEWXpEhFbD9BlC5SUGynSkdSpoiOMt2lovXdG0CqpEpIR2cXtPxJSNAgIyoaOKBBAuEzDRYSHmb29hYbRAWjk3a1O9/PzM4B9wy6dRIHAeBFBJpioJInUIfBHeAyQZyldxL4yatwwJgRYGAvGETEPGBLlDFxgubprMM4dPIyAtNv2T0dYid2e9L9mOw+o1FKsdzf0nPP2q4IOFZFHnLEziJRJXiDuDaNF6XnUo0/k5daEMBXcMCaidFQEgUvhi0069P4WJ3QlAADL3IEYu/tKIa5IFLwUtg2a+doG6vpWu7KRzjkgA3BXrSJ3WhT7JY1h6sG3BLwOLYE/GluEt1+TxSkUqaqI2BbatY/s4ot1MofaNEqK7gxN8lduS8aWti1JSDV9ev8d6TZQU4y1XbKjf9fRPmMhvsCMxfOAf0TVuxnh6pkSDSsMrLzHuNWUMeKw06fv2e6axo3jnp5Au2dBVPWtarzkAGDdzqV16+WBCGx/7d4SjYvQeZjvmGAvJ9oHs/mj1GETlZtrCeA9zDTODoSlJuQe/xA8+RPce6PMK+cr6NempfWBJr/7LH/+skjjy4uORWKX/IzfUPc3cBDxhXE6LNA6WFItQAAAABJRU5ErkJggg==" />&#160;<!-- mdladv_ignore_finish --><span class="CheckHeading" id="Heading_com.mathworks.Simulink.ModelReferenceAdvisor.ModelConfigurations">
 Check model configurations</span>
 <!-- mdladv_ignore_start --><!-- mdladv_ignore_finish --><!-- mdladv_ignore_start --><!-- mdladv_ignore_finish --></div>
 <!-- mdladv_ignore_start --><div class="subsection"><!-- mdladv_ignore_finish --><p /><p /><p>

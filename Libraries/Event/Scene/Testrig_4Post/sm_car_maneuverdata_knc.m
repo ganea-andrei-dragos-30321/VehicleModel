@@ -40,7 +40,8 @@ if(nargin == 0)
     Jounce       =  [   0.14  0.22  0.10    0.15  0.22  0.22  0.05];  % m
     Rebound      =  [  -0.15 -0.15 -0.11 -0.10 -0.15 -0.15 -0.03];  % m
     zBumpHeight  =  [   0.01  0.01  0.01  0.01  0.01  0.01  0.01];  % m
-    qSteerCaster =  [   0.95  0.95  0.95  0.95  0.95  0.95  2.8449];  % rad
+    qSteerCaster_Pos =  [   0.95  0.95  0.95  0.95  0.95  0.95  2.8449];  % rad
+    qSteerCaster_Neg =  [   0.95  0.95  0.95  0.95  0.95  0.95  -2.8449];  % rad
     Roll         =  [   0.10  0.10  0.10  0.10  0.10  0.10  0.03];  % m
     tAlign       =  [ 500   500   500   500   500   500   500   ]*2;  % m
     fLong        =  [1200  1200  1200  1200  1200  1200  1200   ]*2;  % m
@@ -87,6 +88,7 @@ durLongFrcWCL = 5;  % Longitudinal, Wheel Center,           Left Only
 
 % Assemble Maneuver
 % Assign same values as defaults for all maneuvers
+ 
 for i=1:length(Instance_List)
     Instance = Instance_List{i};
     mdata.(Instance).Type      = maneuver_type;
@@ -110,7 +112,36 @@ for i=1:length(Instance_List)
         durSettle     0          0     0  0  0  0  0];
 
     JR_timeline = cumsum(JR_seq(:,1));
-
+if(nargin == 0)
+    % Assemble Bump Test
+    %  [duration height  steer fx fy tz fcoy fwcx]
+    BP_seq = [...
+        durSettle     0                0                0  0  0  0  0;
+        durqSteer     0                qSteerCaster_Pos(i)  0  0  0  0  0;
+        durSettle     0                qSteerCaster_Pos(i)  0  0  0  0  0;
+        2*durqSteer   0                qSteerCaster_Neg(i)  0  0  0  0  0;
+        durSettle     0                qSteerCaster_Neg(i)  0  0  0  0  0;
+        durqSteer     0                0                0  0  0  0  0;
+        durSettle     0                0                0  0  0  0  0;
+        durzBump      zBumpHeight(i)   0                0  0  0  0  0;
+        durSettle     zBumpHeight(i)   0                0  0  0  0  0;
+        durqSteer     zBumpHeight(i)   qSteerCaster_Pos(i)  0  0  0  0  0;
+        durSettle     zBumpHeight(i)   qSteerCaster_Pos(i)  0  0  0  0  0;
+        2*durqSteer   zBumpHeight(i)   qSteerCaster_Neg(i)  0  0  0  0  0;
+        durSettle     zBumpHeight(i)   qSteerCaster_Neg(i)  0  0  0  0  0;
+        durqSteer     zBumpHeight(i)   0                0  0  0  0  0;
+        durSettle     zBumpHeight(i)   0                0  0  0  0  0;
+        2*durzBump   -zBumpHeight(i)   0                0  0  0  0  0;
+        durSettle    -zBumpHeight(i)   0                0  0  0  0  0;
+        durqSteer    -zBumpHeight(i)   qSteerCaster_Pos(i)  0  0  0  0  0;
+        durSettle    -zBumpHeight(i)   qSteerCaster_Pos(i)  0  0  0  0  0;
+        2*durqSteer  -zBumpHeight(i)   qSteerCaster_Neg(i)  0  0  0  0  0;
+        durSettle    -zBumpHeight(i)   qSteerCaster_Neg(i)  0  0  0  0  0;
+        durqSteer    -zBumpHeight(i)   0                0  0  0  0  0;
+        durSettle    -zBumpHeight(i)   0                0  0  0  0  0;
+        durzBump      0                0                0  0  0  0  0;
+        durSettle     0                0                0  0  0  0  0];
+else 
     % Assemble Bump Test
     %  [duration height  steer fx fy tz fcoy fwcx]
     BP_seq = [...
@@ -139,7 +170,7 @@ for i=1:length(Instance_List)
         durSettle    -zBumpHeight(i)   0                0  0  0  0  0;
         durzBump      0                0                0  0  0  0  0;
         durSettle     0                0                0  0  0  0  0];
-
+end
     BP_timeline = cumsum(BP_seq(:,1)) + JR_timeline(end);
 
     % Assemble Roll Test

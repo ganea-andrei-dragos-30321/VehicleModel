@@ -31,14 +31,14 @@ mcg = 320;                           % mass at center of G
 L = 1.578;                    % wheelbase 
 a = -Vehicle.Chassis.Body.sCG.Value(1);                       % distance from front axle to CoG
 b = L-a;  
-c_alpha_f = 34000;                                            % front cornering stiffness
-c_alpha_r = 62000;                                            % rear cornering stiffness
+c_alpha_f = 23252*2;                                            % front cornering stiffness
+c_alpha_r = 24436*2;                                            % rear cornering stiffness
 Gr = 1/Vehicle.Powertrain.Driveline.Gearbox.ratio.Value;      % gear ratio for torque
 tr = Vehicle.Chassis.Body.TrackRear.Value;                    % rear track width
  
 
 control_param.FuzzySystem_1 = load('FIS_DYC.mat');
-control_param.FuzzySystem_1 = control_param.FuzzySystem_1.FuzzySystem;
+control_param.FuzzySystem_1 = control_param.FuzzySystem_1.FIS_DYC;
 control_param.FuzzySystem_2 = load('FIS_DYC_2.mat');
 control_param.FuzzySystem_2 = control_param.FuzzySystem_2.FIS_DYC_2;
 control_param.FuzzySystem_3 = load('FIS_DYC_3.mat');
@@ -76,7 +76,7 @@ control_param.CGHeight = 0.3583;
 control_param.Wheelbase = 1.578;
 control_param.Mass = 320;
 control_param.AirDensity = 1.226;
-control_param.CalphaF = 34000;
+control_param.CalphaF = c_alpha_f;
 
 % Slip Refence Table
 control_param.SlipRef = [0.08;0.08;0.09;0.095;0.093;0.092;0.091;0.09;0.09;0.09;0.094;0.098;0.104;0.112;0.126;0.154;0.2;0.12];

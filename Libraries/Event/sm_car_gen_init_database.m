@@ -102,9 +102,9 @@ InitSet.CRG_Mallory_Park_F.Data         = {...
     'sChassis','m',   6,    0,       0};
 
 %% Scene CRG Customizable Event, Standard Lap, Slow Start
-InitSet.CRG_Dej.Type   = 'CRG_Dej';
-InitSet.CRG_Dej.Instance     = '';
-InitSet.CRG_Dej.Data         = {...
+InitSet.CRG_Balkans_End.Type   = 'CRG_Balkans_End';
+InitSet.CRG_Balkans_End.Instance     = '';
+InitSet.CRG_Balkans_End.Data         = {...
     'aChassis','rad', 0,   0.0368,  0;
     'vChassis','m/s', 10,   0,       0;
     'sChassis','m',   0,   0,      0};
@@ -123,24 +123,24 @@ InitSet.CRG_Dej_Wide_F.Data         = {...
     'vChassis','m/s', 0,   0,       0;
     'sChassis','m',   0,   0,      0};
 %% Scene CRG Customizable Event, Standard Lap, Slow Start
-InitSet.CRG_Dej_Teste_F.Type   = 'CRG_Teste_F';
-InitSet.CRG_Dej_Teste_F.Instance     = '';
-InitSet.CRG_Dej_Teste_F.Data         = {...
+InitSet.CRG_Balkans_F.Type   = 'CRG_Balkans_F';
+InitSet.CRG_Balkans_F.Instance     = '';
+InitSet.CRG_Balkans_F.Data         = {...
     'aChassis','rad', 0,   0,       0;
     'vChassis','m/s', 0,   0,       0;
     'sChassis','m',   0,   0,      0};
 
 %% Scene CRG Customizable Event, Standard Lap, Slow Start
-InitSet.CRG_Dej_Teste.Type   = 'CRG_Teste';
-InitSet.CRG_Dej_Teste.Instance     = '';
-InitSet.CRG_Dej_Teste.Data         = {...
+InitSet.CRG_Balkans.Type   = 'CRG_Balkans';
+InitSet.CRG_Balkans.Instance     = '';
+InitSet.CRG_Balkans.Data         = {...
     'aChassis','rad', 0,   0,       0;
     'vChassis','m/s', 0,   0,       0;
     'sChassis','m',   0,   0,      0};
 %% Scene CRG Customizable Event No Elevation, Standard Lap, Slow Start
-InitSet.CRG_Dej_F.Type   = 'CRG_Dej_F';
-InitSet.CRG_Dej_F.Instance     = '';
-InitSet.CRG_Dej_F.Data         = {...
+InitSet.CRG_Balkans_End_F.Type   = 'CRG_Balkans_End_F';
+InitSet.CRG_Balkans_End_F.Instance     = '';
+InitSet.CRG_Balkans_End_F.Data         = {...
     'aChassis','rad', 0,    0,       0;
     'vChassis','m/s', 0,    0,       0;
     'sChassis','m',   0,    0,       0};
@@ -256,6 +256,13 @@ InitSet.Skidpad.Data         = {...
     'aChassis','rad', 0,   0,     0;
     'vChassis','m/s', 1,   0,     0;
     'sChassis','m', -25,   0,     0};
+%% Scene Slalom, Slow Start
+InitSet.Slalom.Type   = 'Slalom';
+InitSet.Slalom.Instance     = '';
+InitSet.Slalom.Data         = {...
+    'aChassis','rad', 0,   0,     0;
+    'vChassis','m/s', 0,   0,     0;
+    'sChassis','m', 5,   0,     0};
 
 %% Scene Constant Radius, Slow Start
 InitSet.Constant_Radius_CL.Type   = 'Constant_Radius_CL';

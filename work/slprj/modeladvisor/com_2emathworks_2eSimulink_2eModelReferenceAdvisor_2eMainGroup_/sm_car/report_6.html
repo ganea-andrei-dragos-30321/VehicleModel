@@ -178,7 +178,7 @@
 -->
 </style>
 
-<script type="text/javascript"> <!-- /* Copyright 2013-2025 The MathWorks, Inc. */
+<script type="text/javascript"> <!-- /* Copyright 2013-2026 The MathWorks, Inc. */
 /* define String.trim() method if not defined (used by filterByText() function) */
 if(!String.prototype.trim) {
   String.prototype.trim = function () {
@@ -305,8 +305,8 @@ function markEmptyFolders(){
 
 function updateVisibleChecks( /* show all flags */ checkbox ){
 	
-	var checkboxes = ["Failed Checkbox", "Passed Checkbox", "Warning Checkbox", "Not Run Checkbox", "Justified Checkbox", "Incomplete Checkbox"];
-	var nodeTypes = ["Failed Check","Passed Check",  "Warning Check", "Not Run Check", "Justified Check", "Incomplete Check"];
+	const checkboxes = ['Failed Checkbox', 'Passed Checkbox', 'Warning Checkbox', 'Not Run Checkbox', 'Justified Checkbox', 'Information Checkbox', 'Incomplete Checkbox'];
+    const nodeTypes = ['Failed Check', 'Passed Check', 'Warning Check', 'Not Run Check', 'Justified Check', 'Information Check', 'Incomplete Check'];
 	var textInput = document.getElementById("TxtFilterInput");
 	
 	
@@ -504,7 +504,7 @@ function setTextContent(element, value) {
 }
 
 function hideControlPanel(control){
-	var panelComponents = ["ControlsCheckFiltering", "ControlsView", "ControlsTOC","TextFilter"];
+	var panelComponents = ["ControlsCheckFiltering", "ControlsView", "ControlsTOC", "TextFilter"];
 	var reportContent = document.querySelector(".ReportContent");
 	var controlPanel = document.getElementById("ControlPanel");
 	var isHidden = false;
@@ -722,13 +722,13 @@ Simulink Model Reference Conversion Advisor Report - <font color="#800000">sm_ca
 <tr>
 <td align="left" valign="top">
 <b>
-Simulink version: <font color="#800000">25.2</font>
+Simulink version: <font color="#800000">26.1</font>
 </b>
 
 </td>
 <td align="right" valign="top">
 <b>
-Model version: <font color="#800000">15.259</font>
+Model version: <font color="#800000">16.5</font>
 </b>
 
 </td>
@@ -743,7 +743,7 @@ System: <font color="#800000">sm_car</font>
 </td>
 <td align="right" valign="top">
 <b>
-Current run: <font color="#800000">01-Jun-2026 21:00:53</font>
+Current run: <font color="#800000">22-Jun-2026 01:48:28</font>
 </b>
 
 </td>
@@ -752,9 +752,9 @@ Current run: <font color="#800000">01-Jun-2026 21:00:53</font>
 
 </table>
 <!-- Compile Status Flag --><!-- Service Status Flag -->
-<!-- mdladv_ignore_start --><div name = "Passed Check"  id = "Passed Check" class="PassedCheck" style="margin-left: 0pt;"><!-- mdladv_ignore_finish -->
-<p><hr /></p>  <a name="CheckRecord_172"></a><div class="CheckHeader" id="Header_com.mathworks.Simulink.ModelReferenceAdvisor.CompleteConversion">
-<!-- mdladv_ignore_start --><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHTSURBVHgBrVO9ThtBEP7mLomDFEWXpEhFbD9BlC5SUGynSkdSpoiOMt2lovXdG0CqpEpIR2cXtPxJSNAgIyoaOKBBAuEzDRYSHmb29hYbRAWjk3a1O9/PzM4B9wy6dRIHAeBFBJpioJInUIfBHeAyQZyldxL4yatwwJgRYGAvGETEPGBLlDFxgubprMM4dPIyAtNv2T0dYid2e9L9mOw+o1FKsdzf0nPP2q4IOFZFHnLEziJRJXiDuDaNF6XnUo0/k5daEMBXcMCaidFQEgUvhi0069P4WJ3QlAADL3IEYu/tKIa5IFLwUtg2a+doG6vpWu7KRzjkgA3BXrSJ3WhT7JY1h6sG3BLwOLYE/GluEt1+TxSkUqaqI2BbatY/s4ot1MofaNEqK7gxN8lduS8aWti1JSDV9ev8d6TZQU4y1XbKjf9fRPmMhvsCMxfOAf0TVuxnh6pkSDSsMrLzHuNWUMeKw06fv2e6axo3jnp5Au2dBVPWtarzkAGDdzqV16+WBCGx/7d4SjYvQeZjvmGAvJ9oHs/mj1GETlZtrCeA9zDTODoSlJuQe/xA8+RPce6PMK+cr6NempfWBJr/7LH/+skjjy4uORWKX/IzfUPc3cBDxhXE6LNA6WFItQAAAABJRU5ErkJggg=="  />&#160;<!-- mdladv_ignore_finish --><span class="CheckHeading" id="Heading_com.mathworks.Simulink.ModelReferenceAdvisor.CompleteConversion">
+<!-- mdladv_ignore_start --><div name = "Warning Check" id = "Warning Check" class="WarningCheck" style="margin-left: 0pt;"> <!-- mdladv_ignore_finish -->
+<p><hr /></p>  <a name="CheckRecord_177"></a><div class="CheckHeader" id="Header_com.mathworks.Simulink.ModelReferenceAdvisor.CompleteConversion">
+<!-- mdladv_ignore_start --><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD3SURBVHgBzZI7EsFQFIb/I4oQRTSUsgOlNlqPGTtgB+yAHRg9Ywka/c0WFGp0aCgYxuvIZcwk8phkRuGr7uPc///P3AP8NVY9vbBqmgirSQRdiIrWApNhL01RTXUQB9FQDel+Wi/5tFmynWInTF2PnIDuSlu6q/kC1FxBHunIXDqRBKQ7GJ5iArX9UngTXJUe/NFJu/ZDBaQ7EZoIgtAStYwZKEA3ZeLcnzcrnLerLw3uuvcfd/vbKIExIsCgcnl6sFwJSHErS0rDOUqjuUeAiMeuFhxDEw2G8RmuVwtyaGIJvNmb02M2+RJ80MDuvxjnNT8wwy94AjZHSy+aGaDFAAAAAElFTkSuQmCC" />&#160;<!-- mdladv_ignore_finish --><span class="CheckHeading" id="Heading_com.mathworks.Simulink.ModelReferenceAdvisor.CompleteConversion">
 ^ Complete conversion</span>
 <!-- mdladv_ignore_start --><!-- mdladv_ignore_finish --><!-- mdladv_ignore_start --><!-- mdladv_ignore_finish --></div>
 <!-- mdladv_ignore_start --><div class="subsection"><!-- mdladv_ignore_finish --><p /><p /><p>
@@ -765,12 +765,23 @@ Passed
 
 </b>
 <br /><b>
+<font color="#C04C0B">
+Warnings:
+</font>
+
+</b>
+<font color="#C04C0B">
+<ul>
+<li>
+Copying these mask parameters from subsystem 'TV FLC V3' to the new model mask is not supported: N
+</li>
+
+</ul>
+
+</font>
+<br /><b>
 Note:
 </b>
-<div><span onclick="collapseAll(this, '591df2ad-66d6-40ae-b14e-1e7061f3f3ce','870e2042-add8-4b25-9a52-5e14b4d97bf9')" onmouseover="this.style.cursor = 'pointer'">
-<img class="CollapseAllControlImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAAhklEQVR42mL8//8/AyUAIICYGCgEAAFEsQEAAUSxAQABxIIu0NTURDBQ6urqGGFsgABiwaagpqYOp+aWliYUPkAAUewFgACi2ACAAGLBKcGCafafP/8wxAACCKcB2BRjAwABRLEXAAKIYgMAAoiFmKjCBwACiJHSzAQQQBR7ASCAKDYAIMAAUtQUow+YsTsAAAAASUVORK5CYII="/>
-</span>
-<div id="591df2ad-66d6-40ae-b14e-1e7061f3f3ce" class="AllCollapse">
 <ul>
 <li>
 Parameter 'InitFcn' has been copied from the top model to the referenced model.
@@ -788,16 +799,11 @@ Parameter 'StartFcn' has been copied from the top model to the referenced model.
 Parameter 'StopFcn' has been copied from the top model to the referenced model.
 </li>
 <li>
-Subsystem '<a href="matlab: hilite_system(Simulink.ID.getHandle('sm_car:3525:347'))">sm_car/Controller/Default/State Estimation/Subsystem</a>' has been converted to a referenced model. <a href="matlab: Simulink.ModelReference.Conversion.ModelRefAdvisorFactory.restore">Click here to restore the original model</a>.
-</li>
-<li>
-All variables created during conversion process were saved to 'sm_car_conversion_data.mat'.
+Subsystem '<a href="matlab: hilite_system(Simulink.ID.getHandle('sm_car:4253:869'))">sm_car/Controller/TrqVec_FLC_V3/Power Control/TV FLC V3</a>' has been converted to a referenced model. <a href="matlab: Simulink.ModelReference.Conversion.ModelRefAdvisorFactory.restore">Restore the original model</a>.
 </li>
 
 </ul>
 
-</div>
-</div>
 </p>
 <!-- mdladv_ignore_start --></div><!-- mdladv_ignore_finish --><!-- mdladv_ignore_start --></div><!-- mdladv_ignore_finish -->
 <span name = "EmbedImages" id="EmbedImages"></span><!-- mdladv_ignore_start -->

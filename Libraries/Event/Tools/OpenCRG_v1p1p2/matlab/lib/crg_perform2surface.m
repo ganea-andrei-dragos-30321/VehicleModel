@@ -170,7 +170,7 @@ end % crg_perform2surface
 
 %% rangeind
 
-function [ ibeg, iend ] = rangeind(a, afct)
+function [ ibeg, iend ] = rangeind(TV, afct)
 % Linear range indices of contiguous elements which satisfy the condition of an anonymous function
 %
 % [IBEG, IEND] = RANGEIND(A, AFCT)
@@ -226,14 +226,14 @@ end
 
 ibeg = [];
 iend = [];
-numela = numel(a);
+numela = numel(TV);
 if numela > 0
-    if size(a,1) == 1    % is row vector => conform to find
+    if size(TV,1) == 1    % is row vector => conform to find
         tf = zeros(1,numela+2);
     else
         tf = zeros(numela+2,1);
     end
-    ind = afct(a) + 1;
+    ind = afct(TV) + 1;
     tf(ind) = 1;
     dtf  = diff(tf);
     ibeg = find( dtf > 0 );

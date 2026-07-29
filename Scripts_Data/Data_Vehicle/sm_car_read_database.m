@@ -30,9 +30,6 @@ Vehicle.config = 'Achilles_DWishbone';
 % Subframe connections assembly
 Vehicle = sm_car_assemble_Subframe(Vehicle, 'Rigid_1Rev');
 
-% Steering assembly ( Temporarry )
-Vehicle = sm_car_assemble_Steering('ARTTU.xlsx', Vehicle);
-
 Vehicle = sm_car_assemble_Misc(Vehicle);
 Vehicle.Brakes = Vehicle.Brakes.Brakes;
 

@@ -173,7 +173,7 @@ function [lat2_out, lon2_out, baz_out] = wgs84invdist(varargin)
 %------------------------------------------------------------------------------
 % WGS-84 defining parameters.
 %------------------------------------------------------------------------------
-  a = 6378137.0;
+  TV = 6378137.0;
   f = 1.0 / 298.257223563;
 
 %------------------------------------------------------------------------------
@@ -234,7 +234,7 @@ function [lat2_out, lon2_out, baz_out] = wgs84invdist(varargin)
   c = one - x;
   c = (x .* x / four + one) ./ c;
   d = (three_eighths * x .* x - one) .* x;
-  tu = s ./ a ./ c / r;
+  tu = s ./ TV ./ c / r;
   y = tu;
 
   repeat = 1;

@@ -3,15 +3,14 @@ FILE_TYPE                = 'tir'
 FILE_VERSION             = 3.0
 FILE_FORMAT              = 'ASCII'
 !
-! MATLAB version: 25.2.0.3042426 (R2025b) Update 1
+! MATLAB version: 26.1.0.3276743 (R2026a) Update 3
 ! Extended Tire Features for Vehicle Dynamics Blockset
 !
-! Copyright 2025 The MathWorks, Inc.
+! Copyright 2026 The MathWorks, Inc.
 !
-! Date written: 24-Dec-2025 13:22:31
+! Date written: 01-Jul-2026 20:58:09
 !
-! Model name: Hoosier 20.5x7-13 R20
-! Tire size: 20.5x7-13
+! Model name: Hoosier_R20B_20p5x7_R13_7in_12psi
 !
 $----------------------------------------------------------------units
 [UNITS]
@@ -52,7 +51,7 @@ $-------------------------------------------------------------vertical
 [VERTICAL]
 FNOMIN                   = 1112              $Nominal wheel load
 VERTICAL_STIFFNESS       = 80776.3           $Tire vertical stiffness
-VERTICAL_DAMPING         = 105                $Tire vertical damping
+VERTICAL_DAMPING         = 105               $Tire vertical damping
 MC_CONTOUR_A             = 0                 $Motorcycle contour ellipse A
 MC_CONTOUR_B             = 0                 $Motorcycle contour ellipse B
 BREFF                    = 8.38379           $Low load stiffness effective rolling radius
@@ -108,7 +107,7 @@ ALPMIN                   = -0.2174           $Minimum valid slip angle
 ALPMAX                   = 0.2165            $Maximum valid slip angle
 $----------------------------------------------inclination_angle_range
 [INCLINATION_ANGLE_RANGE]
-CAMMIN                   = -0.0004           $Minimum valid camber angle
+CAMMIN                   = -0.0704           $Minimum valid camber angle
 CAMMAX                   = 0.0704            $Maximum valid camber angle
 $-------------------------------------------------vertical_force_range
 [VERTICAL_FORCE_RANGE]

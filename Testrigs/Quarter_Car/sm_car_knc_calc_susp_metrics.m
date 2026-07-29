@@ -912,6 +912,8 @@ else
     % Sample toe angle during increasing steer and decreasing steer
     toeZ0QstUp = simlog_toe(testIndsQStUp(iunUp));
     toeZ0QstDn = simlog_toe(testIndsQStDown(iunDn));
+    camberZ0QstUp = simlog_camber(testIndsQStUp(iunUp));
+    camberZ0QstDn = simlog_camber(testIndsQStDown(iunDn));
 
     % Find range of steering angle sampled during increase and decrease
     qStMax     = min(max(qStQstUp),max(qStQstDn));
@@ -921,11 +923,25 @@ else
     qStrSamplePts = linspace(qStMin,qStMax,100);
     toeZ0QstUpSamp = interp1(qStQstUp,toeZ0QstUp,qStrSamplePts);
     toeZ0QstDnSamp = interp1(qStQstDn,toeZ0QstDn,qStrSamplePts);
-    % Average both curves to obtain toe angle without hysteresis
+    camberZ0QstUpSamp = interp1(qStQstUp,camberZ0QstUp,qStrSamplePts);
+    camberZ0QstDnSamp = interp1(qStQstDn,camberZ0QstDn,qStrSamplePts);
+    if(isscalar(simlog_camberR))
+        camberRZ0Avg = nan(size(qStrSamplePts));
+    else
+        camberRZ0QstUp = simlog_camberR(testIndsQStUp(iunUp));
+        camberRZ0QstDn = simlog_camberR(testIndsQStDown(iunDn));
+        camberRZ0QstUpSamp = interp1(qStQstUp,camberRZ0QstUp,qStrSamplePts);
+        camberRZ0QstDnSamp = interp1(qStQstDn,camberRZ0QstDn,qStrSamplePts);
+        camberRZ0Avg = mean([camberRZ0QstUpSamp;camberRZ0QstDnSamp]);
+    end
+    % Average both curves to obtain angles without hysteresis
     toeZ0Avg = mean([toeZ0QstUpSamp;toeZ0QstDnSamp]);
+    camberZ0Avg = mean([camberZ0QstUpSamp;camberZ0QstDnSamp]);
 
     % Obtain steering ratio
     steerZ0StrRat    = interp1(toeZ0Avg,qStrSamplePts, qToeStrRatio);
+    steerWheelZ0Avg  = qStrSamplePts*(sign(steerZ0StrRat/qToeStrRatio));
+    camberRZ0        = interp1(qStrSamplePts,camberRZ0Avg,0,'linear','extrap');
 
     % Ratio omits signs so it is applicable to left or right wheel
     steerRatio = abs(steerZ0StrRat/qToeStrRatio);
@@ -1166,6 +1182,40 @@ else
     LongCompStrBrk = NaN;
     LongCompStrTrk = NaN;
     wcLongCompBrk  = NaN;
+end
+
+%% Debug Plots
+if(showPlots && length(simlog_aWheel)>1)
+    % Reuse figure if it exists, else create new figure
+    fig_handle_name =   'h9_knc_toe_camber_steer';
+
+    handle_var = evalin('base',['who(''' fig_handle_name ''')']);
+    if(isempty(handle_var))
+        evalin('base',[fig_handle_name ' = figure(''Name'', ''' fig_handle_name ''');']);
+    elseif ~isgraphics(evalin('base',handle_var{:}))
+        evalin('base',[fig_handle_name ' = figure(''Name'', ''' fig_handle_name ''');']);
+    end
+    figure(evalin('base',fig_handle_name))
+    clf(evalin('base',fig_handle_name))
+
+    subplot(121)
+    plot(camberZ0Avg,steerWheelZ0Avg,'DisplayName','')
+    hold on
+    plot(camberZ0,0,'rx')
+    hold off
+    title('Left Wheel Camber Curve')
+    xlabel ('Camber (deg)')
+    ylabel ('Steering Wheel Angle (deg)')
+    grid on
+    subplot(122)
+    plot(camberRZ0Avg,steerWheelZ0Avg)
+    hold on
+    plot(camberRZ0,0,'rx')
+    hold off
+    title('Right Wheel Camber Curve')
+    xlabel ('Camber (deg)')
+    ylabel ('Steering Wheel Angle (deg)')
+    grid on
 end
 
 %% Summarize Results
