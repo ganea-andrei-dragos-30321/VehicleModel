@@ -1,4 +1,4 @@
-function traj_coeff = CRG_Create_Balkans_end
+function traj_coeff = CRG_Create_Balkans_End
 % CRG_Create_Custom    Create CRG file from centerline data
 %
 % If no outputs are requested, creates CRG and geometry files
@@ -8,7 +8,7 @@ function traj_coeff = CRG_Create_Balkans_end
 % If output is requested, provides default trajectory coefficients
 %
 % Copyright 2020-2024 The MathWorks, Inc.
-file_data = readtable("CRG_Balkans_end_centerline.xlsx");
+file_data = readtable("CRG_Balkans_End_centerline.xlsx");
 if width(file_data)<5
     dist_m(1,1) = 0;
     for i=2:height(file_data)

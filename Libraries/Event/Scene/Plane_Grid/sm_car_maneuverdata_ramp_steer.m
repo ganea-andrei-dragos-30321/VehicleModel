@@ -90,7 +90,7 @@ for i=1:length(Instance_List)
     mdata.(Instance).Accel.t.Units         = 'sec';
     mdata.(Instance).Accel.t.Comments      = '';
 
-    mdata.(Instance).Accel.rPedal.Value    = [0.6 0.6];
+    mdata.(Instance).Accel.rPedal.Value    = [0.9 0.9];
     mdata.(Instance).Accel.rPedal.Units    = '0-1';
     mdata.(Instance).Accel.rPedal.Comments = '';
 

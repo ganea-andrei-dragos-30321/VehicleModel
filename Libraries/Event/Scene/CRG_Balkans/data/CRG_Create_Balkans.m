@@ -34,20 +34,20 @@ if(nargout == 0)
     road_opts.yb = 0;
     road_opts.za = 0.0;
     road_opts.zb = 0;
-    road_opts.reverse = 1;
+    road_opts.reverse = 0;
     road_opts.datasrc = 'xyz';  % xyz or gps
     sm_car_centerline_to_crg('CRG_Balkans',road_opts)
 end
 
 %% Create driver trajectory
 traj_coeff.blend_distance = 10;     % m
-traj_coeff.diff_exp       = 1.12;    % Curvature exponent
-traj_coeff.diff_smooth    = 16;     % Diff smoothing number of points
-traj_coeff.curv_smooth    = 4;    % Curvature smoothing number of points
-traj_coeff.lim_smooth     = 50;    % Limit smoothing number of points
-traj_coeff.target_shape_smooth = 5;  % Number of points for smoothing
+traj_coeff.diff_exp       = 1.3;   % was 1.4, lower = more slowing in medium/high curvature
+traj_coeff.diff_smooth    = 8;     % Diff smoothing number of points
+traj_coeff.curv_smooth    = 12;    % Curvature smoothing number of points
+traj_coeff.lim_smooth     = 15;    % was 100, lower = releases speed sooner after corners
+traj_coeff.target_shape_smooth = 2; % was 8, lower = less exit-speed delay
 traj_coeff.vmax           = 21;   % Max speed, m/s
-traj_coeff.vmin           = 4;    % Min speed, m/s
+traj_coeff.vmin           = 3;    % Min speed, m/s
 traj_coeff.decimation     = 1;      % Decimation for interpolation
 
 if(nargout == 0)
