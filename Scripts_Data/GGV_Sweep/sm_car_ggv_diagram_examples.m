@@ -22,8 +22,8 @@
 
 %% Generate GGV Diagram for Formula Student Vehicle
 Vehicle.Chassis.Tire.class.Value = 'MFMbody';
-%[simOut1, simInput1, filename_ggv1] = sm_car_sweep_ggv_pts( ...
-%    'sm_car',Vehicle,16,linspace(2,20,8),false,false,false);
+[simOut1, simInput1, filename_ggv1] = sm_car_sweep_ggv_pts( ...
+    'sm_car',Vehicle,16,linspace(2,20,8),false,false,false);
 Vehicle.Chassis.Aero.CD.Value = 0.8;
 Vehicle.Chassis.Aero.CL.Value = -0.9;
 Vehicle.Chassis.Aero.sPressureCentre.Value = [-0.8 0 0.26];
